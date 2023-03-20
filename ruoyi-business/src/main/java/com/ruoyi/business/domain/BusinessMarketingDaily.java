@@ -25,8 +25,5 @@ public class BusinessMarketingDaily {
     @Excel(name = "power_day")
     private String powerDay;
 
-    /** 导出部门单个对象 */
-    @Excel(name = "部门名称", targetAttr = "deptName", type = Type.EXPORT)
-    private SysDept dept;
 
 }

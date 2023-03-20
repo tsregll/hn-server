@@ -34,8 +34,8 @@ public class BusinessMarketingDailyController {
     {
         ExcelUtil<BusinessMarketingDaily> util = new ExcelUtil<BusinessMarketingDaily>(BusinessMarketingDaily.class);
         List<BusinessMarketingDaily> BusinessMarketingDaily = util.importExcel(file.getInputStream());
-        String operName = ShiroUtils.getSysUser().getLoginName();
-        String message = BusinessMarketingDailyService.importData(BusinessMarketingDaily, updateSupport, operName);
+        //String operName = ShiroUtils.getSysUser().getLoginName();
+        String message = BusinessMarketingDailyService.importData(BusinessMarketingDaily, updateSupport);
         return AjaxResult.success(message);
     }
 

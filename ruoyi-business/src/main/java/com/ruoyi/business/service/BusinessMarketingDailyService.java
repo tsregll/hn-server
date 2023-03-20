@@ -6,8 +6,7 @@ import com.ruoyi.business.domain.BusinessMarketingDaily;
 
 public interface BusinessMarketingDailyService {
 
-    static String importData(List<BusinessMarketingDaily> businessMarketingDaily, boolean updateSupport,
-            String operName) {
+    static String importData(List<BusinessMarketingDaily> businessMarketingDaily, boolean updateSupport) {
         return null;
     }
 
