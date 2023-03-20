@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessStatisticsGeneratingCapacityMapper">
+    
+    <resultMap type="BusinessStatisticsGeneratingCapacity" id="BusinessStatisticsGeneratingCapacityResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="enteringDate"    column="entering_date"    />
+        <result property="statisticsType"    column="Statistics_type"    />
+        <result property="statisticsAll"    column="statistics_all"    />
+        <result property="statisticsLastMonth"    column="statistics_last_month"    />
+        <result property="statisticsYear"    column="statistics_year"    />
+        <result property="statisticsLastYear"    column="statistics_last_year"    />
+        <result property="contrastMonth"    column="contrast_month"    />
+        <result property="contrastLastMonth"    column="contrast_last_month"    />
+        <result property="contrastYear"    column="contrast_year"    />
+    </resultMap>
+
+    <sql id="selectBusinessStatisticsGeneratingCapacityVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, entering_date, Statistics_type, statistics_all, statistics_last_month, statistics_year, statistics_last_year, contrast_month, contrast_last_month, contrast_year from business_statistics_generating_capacity
+    </sql>
+
+    <select id="selectBusinessStatisticsGeneratingCapacityList" parameterType="BusinessStatisticsGeneratingCapacity" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        <where>  
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="statisticsType != null  and statisticsType != ''"> and Statistics_type = #{statisticsType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date</if>
+        </where>
+    </select>
+    <select id="selectBusinessStatisticsGeneratingCapacityListOrderByDateTime" parameterType="BusinessStatisticsGeneratingCapacity" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="statisticsType != null  and statisticsType != ''"> and Statistics_type = #{statisticsType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,Statistics_type </if>
+        </where>
+    </select>
+
+    <select id="selectByTimeStatisticsGeneratingCapacityList" parameterType="BusinessStatisticsGeneratingCapacity" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        <where>
+            <if test="beginTime != null  and beginTime != ''"> and entering_date >=#{beginTime}</if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND entering_date &lt;= #{endTime}
+            </if>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="statisticsType != null  and statisticsType != ''"> and Statistics_type = #{statisticsType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,Statistics_type </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessStatisticsGeneratingCapacityById" parameterType="Long" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessStatisticsGeneratingCapacity" parameterType="BusinessStatisticsGeneratingCapacity" useGeneratedKeys="true" keyProperty="id">
+        insert into business_statistics_generating_capacity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date,</if>
+            <if test="statisticsType != null and statisticsType != ''">Statistics_type,</if>
+            <if test="statisticsAll != null and statisticsAll != ''">statistics_all,</if>
+            <if test="statisticsLastMonth != null">statistics_last_month,</if>
+            <if test="statisticsYear != null">statistics_year,</if>
+            <if test="statisticsLastYear != null">statistics_last_year,</if>
+            <if test="contrastMonth != null">contrast_month,</if>
+            <if test="contrastLastMonth != null">contrast_last_month,</if>
+            <if test="contrastYear != null">contrast_year,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">#{enteringDate},</if>
+            <if test="statisticsType != null and statisticsType != ''">#{statisticsType},</if>
+            <if test="statisticsAll != null and statisticsAll != ''">#{statisticsAll},</if>
+            <if test="statisticsLastMonth != null">#{statisticsLastMonth},</if>
+            <if test="statisticsYear != null">#{statisticsYear},</if>
+            <if test="statisticsLastYear != null">#{statisticsLastYear},</if>
+            <if test="contrastMonth != null">#{contrastMonth},</if>
+            <if test="contrastLastMonth != null">#{contrastLastMonth},</if>
+            <if test="contrastYear != null">#{contrastYear},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessStatisticsGeneratingCapacity" parameterType="BusinessStatisticsGeneratingCapacity">
+        update business_statistics_generating_capacity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date = #{enteringDate},</if>
+            <if test="statisticsType != null and statisticsType != ''">Statistics_type = #{statisticsType},</if>
+            <if test="statisticsAll != null and statisticsAll != ''">statistics_all = #{statisticsAll},</if>
+            <if test="statisticsLastMonth != null">statistics_last_month = #{statisticsLastMonth},</if>
+            <if test="statisticsYear != null">statistics_year = #{statisticsYear},</if>
+            <if test="statisticsLastYear != null">statistics_last_year = #{statisticsLastYear},</if>
+            <if test="contrastMonth != null">contrast_month = #{contrastMonth},</if>
+            <if test="contrastLastMonth != null">contrast_last_month = #{contrastLastMonth},</if>
+            <if test="contrastYear != null">contrast_year = #{contrastYear},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessStatisticsGeneratingCapacityById" parameterType="Long">
+        delete from business_statistics_generating_capacity where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessStatisticsGeneratingCapacityByIds" parameterType="String">
+        delete from business_statistics_generating_capacity where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByYearOrType" parameterType="BusinessStatisticsGeneratingCapacity" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="statisticsType != null  and statisticsType != ''"> and Statistics_type = #{statisticsType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date </if>
+        </where>
+    </select>
+    <select id="selectByMonth" parameterType="BusinessStatisticsGeneratingCapacity" resultMap="BusinessStatisticsGeneratingCapacityResult">
+        <include refid="selectBusinessStatisticsGeneratingCapacityVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 order by Statistics_type </if>
+        </where>
+    </select>
+</mapper>

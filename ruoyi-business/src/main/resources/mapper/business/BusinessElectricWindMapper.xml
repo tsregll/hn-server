@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessElectricWindMapper">
+
+    <resultMap type="BusinessElectricWind" id="BusinessElectricWindResult">
+        <result property="id"    column="id"    />
+        <result property="year"    column="year"    />
+        <result property="rate"    column="rate"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="generateCapacity"    column="generate_capacity"    />
+        <result property="generateCapacitySbd"    column="generate_capacity_sbd"    />
+        <result property="generateCapacityGd"    column="generate_capacity_gd"    />
+        <result property="generateCapacityLp"    column="generate_capacity_lp"    />
+        <result property="generateCapacityMq"    column="generate_capacity_mq"    />
+        <result property="generateCapacityBh"    column="generate_capacity_bh"    />
+        <result property="generateCapacityHly"    column="generate_capacity_hly"    />
+        <result property="totalPrice"    column="total_price"    />
+        <result property="totalPriceSbd"    column="total_price_sbd"    />
+        <result property="totalPriceGd"    column="total_price_gd"    />
+        <result property="totalPriceLp"    column="total_price_lp"    />
+        <result property="totalPriceMq"    column="total_price_mq"    />
+        <result property="totalPriceBh"    column="total_price_bh"    />
+        <result property="totalPriceHly"    column="total_price_hly"    />
+        <result property="eva"    column="eva"    />
+        <result property="evaSbd"    column="eva_sbd"    />
+        <result property="evaGd"    column="eva_gd"    />
+        <result property="evaLp"    column="eva_lp"    />
+        <result property="evaMq"    column="eva_mq"    />
+        <result property="evaBh"    column="eva_bh"    />
+        <result property="evaHly"    column="eva_hly"    />
+    </resultMap>
+
+    <sql id="selectBusinessElectricWindVo">
+        select id, year, rate, status, del_flag, create_by, create_time, update_by, update_time, remark, generate_capacity, generate_capacity_sbd, generate_capacity_gd, generate_capacity_lp, generate_capacity_mq, generate_capacity_bh, generate_capacity_hly, total_price, total_price_sbd, total_price_gd, total_price_lp, total_price_mq, total_price_bh, total_price_hly, eva, eva_sbd, eva_gd, eva_lp, eva_mq, eva_bh, eva_hly from business_electric_wind
+    </sql>
+
+    <select id="selectBusinessElectricWindList" parameterType="BusinessElectricWind" resultMap="BusinessElectricWindResult">
+        <include refid="selectBusinessElectricWindVo"/>
+        <where>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="generateCapacity != null  and generateCapacity != ''"> and generate_capacity = #{generateCapacity}</if>
+            <if test="generateCapacitySbd != null  and generateCapacitySbd != ''"> and generate_capacity_sbd = #{generateCapacitySbd}</if>
+            <if test="generateCapacityGd != null  and generateCapacityGd != ''"> and generate_capacity_gd = #{generateCapacityGd}</if>
+            <if test="generateCapacityLp != null  and generateCapacityLp != ''"> and generate_capacity_lp = #{generateCapacityLp}</if>
+            <if test="generateCapacityMq != null  and generateCapacityMq != ''"> and generate_capacity_mq = #{generateCapacityMq}</if>
+            <if test="generateCapacityBh != null  and generateCapacityBh != ''"> and generate_capacity_bh = #{generateCapacityBh}</if>
+            <if test="generateCapacityHly != null  and generateCapacityHly != ''"> and generate_capacity_hly = #{generateCapacityHly}</if>
+            <if test="totalPrice != null "> and total_price = #{totalPrice}</if>
+            <if test="totalPriceSbd != null "> and total_price_sbd = #{totalPriceSbd}</if>
+            <if test="totalPriceGd != null "> and total_price_gd = #{totalPriceGd}</if>
+            <if test="totalPriceLp != null "> and total_price_lp = #{totalPriceLp}</if>
+            <if test="totalPriceMq != null "> and total_price_mq = #{totalPriceMq}</if>
+            <if test="totalPriceBh != null "> and total_price_bh = #{totalPriceBh}</if>
+            <if test="totalPriceHly != null "> and total_price_hly = #{totalPriceHly}</if>
+            <if test="eva != null "> and eva = #{eva}</if>
+            <if test="evaSbd != null "> and eva_sbd = #{evaSbd}</if>
+            <if test="evaGd != null "> and eva_gd = #{evaGd}</if>
+            <if test="evaLp != null "> and eva_lp = #{evaLp}</if>
+            <if test="evaMq != null "> and eva_mq = #{evaMq}</if>
+            <if test="evaBh != null "> and eva_bh = #{evaBh}</if>
+            <if test="evaHly != null "> and eva_hly = #{evaHly}</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessElectricWindById" parameterType="Long" resultMap="BusinessElectricWindResult">
+        <include refid="selectBusinessElectricWindVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessElectricWind" parameterType="BusinessElectricWind" useGeneratedKeys="true" keyProperty="id">
+        insert into business_electric_wind
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="rate != null">rate,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="generateCapacity != null">generate_capacity,</if>
+            <if test="generateCapacitySbd != null">generate_capacity_sbd,</if>
+            <if test="generateCapacityGd != null">generate_capacity_gd,</if>
+            <if test="generateCapacityLp != null">generate_capacity_lp,</if>
+            <if test="generateCapacityMq != null">generate_capacity_mq,</if>
+            <if test="generateCapacityBh != null">generate_capacity_bh,</if>
+            <if test="generateCapacityHly != null">generate_capacity_hly,</if>
+            <if test="totalPrice != null">total_price,</if>
+            <if test="totalPriceSbd != null">total_price_sbd,</if>
+            <if test="totalPriceGd != null">total_price_gd,</if>
+            <if test="totalPriceLp != null">total_price_lp,</if>
+            <if test="totalPriceMq != null">total_price_mq,</if>
+            <if test="totalPriceBh != null">total_price_bh,</if>
+            <if test="totalPriceHly != null">total_price_hly,</if>
+            <if test="eva != null">eva,</if>
+            <if test="evaSbd != null">eva_sbd,</if>
+            <if test="evaGd != null">eva_gd,</if>
+            <if test="evaLp != null">eva_lp,</if>
+            <if test="evaMq != null">eva_mq,</if>
+            <if test="evaBh != null">eva_bh,</if>
+            <if test="evaHly != null">eva_hly,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="rate != null">#{rate},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="generateCapacity != null">#{generateCapacity},</if>
+            <if test="generateCapacitySbd != null">#{generateCapacitySbd},</if>
+            <if test="generateCapacityGd != null">#{generateCapacityGd},</if>
+            <if test="generateCapacityLp != null">#{generateCapacityLp},</if>
+            <if test="generateCapacityMq != null">#{generateCapacityMq},</if>
+            <if test="generateCapacityBh != null">#{generateCapacityBh},</if>
+            <if test="generateCapacityHly != null">#{generateCapacityHly},</if>
+            <if test="totalPrice != null">#{totalPrice},</if>
+            <if test="totalPriceSbd != null">#{totalPriceSbd},</if>
+            <if test="totalPriceGd != null">#{totalPriceGd},</if>
+            <if test="totalPriceLp != null">#{totalPriceLp},</if>
+            <if test="totalPriceMq != null">#{totalPriceMq},</if>
+            <if test="totalPriceBh != null">#{totalPriceBh},</if>
+            <if test="totalPriceHly != null">#{totalPriceHly},</if>
+            <if test="eva != null">#{eva},</if>
+            <if test="evaSbd != null">#{evaSbd},</if>
+            <if test="evaGd != null">#{evaGd},</if>
+            <if test="evaLp != null">#{evaLp},</if>
+            <if test="evaMq != null">#{evaMq},</if>
+            <if test="evaBh != null">#{evaBh},</if>
+            <if test="evaHly != null">#{evaHly},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBusinessElectricWind" parameterType="BusinessElectricWind">
+        update business_electric_wind
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="rate != null">rate = #{rate},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="generateCapacity != null">generate_capacity = #{generateCapacity},</if>
+            <if test="generateCapacitySbd != null">generate_capacity_sbd = #{generateCapacitySbd},</if>
+            <if test="generateCapacityGd != null">generate_capacity_gd = #{generateCapacityGd},</if>
+            <if test="generateCapacityLp != null">generate_capacity_lp = #{generateCapacityLp},</if>
+            <if test="generateCapacityMq != null">generate_capacity_mq = #{generateCapacityMq},</if>
+            <if test="generateCapacityBh != null">generate_capacity_bh = #{generateCapacityBh},</if>
+            <if test="generateCapacityHly != null">generate_capacity_hly = #{generateCapacityHly},</if>
+            <if test="totalPrice != null">total_price = #{totalPrice},</if>
+            <if test="totalPriceSbd != null">total_price_sbd = #{totalPriceSbd},</if>
+            <if test="totalPriceGd != null">total_price_gd = #{totalPriceGd},</if>
+            <if test="totalPriceLp != null">total_price_lp = #{totalPriceLp},</if>
+            <if test="totalPriceMq != null">total_price_mq = #{totalPriceMq},</if>
+            <if test="totalPriceBh != null">total_price_bh = #{totalPriceBh},</if>
+            <if test="totalPriceHly != null">total_price_hly = #{totalPriceHly},</if>
+            <if test="eva != null">eva = #{eva},</if>
+            <if test="evaSbd != null">eva_sbd = #{evaSbd},</if>
+            <if test="evaGd != null">eva_gd = #{evaGd},</if>
+            <if test="evaLp != null">eva_lp = #{evaLp},</if>
+            <if test="evaMq != null">eva_mq = #{evaMq},</if>
+            <if test="evaBh != null">eva_bh = #{evaBh},</if>
+            <if test="evaHly != null">eva_hly = #{evaHly},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessElectricWindById" parameterType="Long">
+        delete from business_electric_wind where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessElectricWindByIds" parameterType="String">
+        delete from business_electric_wind where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

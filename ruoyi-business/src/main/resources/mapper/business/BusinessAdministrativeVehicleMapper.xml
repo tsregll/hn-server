@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessAdministrativeVehicleMapper">
+    
+    <resultMap type="BusinessAdministrativeVehicle" id="BusinessAdministrativeVehicleResult">
+        <result property="id"    column="id"    />
+        <result property="purchaseDate"    column="purchase_date"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="vehicleBrand"    column="vehicle_brand"    />
+        <result property="vehicleType"    column="vehicle_type"    />
+        <result property="vehicleEmissions"    column="vehicle_emissions"    />
+        <result property="vehicleImage"    column="vehicle_image"    />
+        <result property="refuelCardNumber"    column="refuel_card_number"    />
+        <result property="etcCardNumber"    column="etc_card_number"    />
+        <result property="vehicleMileage"    column="vehicle_mileage"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessAdministrativeVehicleVo">
+        select id, purchase_date, license_plate_number, vehicle_brand, vehicle_type, vehicle_emissions, vehicle_image, refuel_card_number, etc_card_number, vehicle_mileage, status, del_flag, create_by, create_time, update_by, update_time, remark from business_administrative_vehicle
+    </sql>
+
+    <select id="selectBusinessAdministrativeVehicleList" parameterType="BusinessAdministrativeVehicle" resultMap="BusinessAdministrativeVehicleResult">
+        <include refid="selectBusinessAdministrativeVehicleVo"/>
+        <where>  
+            <if test="purchaseDate != null "> and purchase_date = #{purchaseDate}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number like concat('%', #{licensePlateNumber}, '%')</if>
+            <if test="vehicleBrand != null  and vehicleBrand != ''"> and vehicle_brand = #{vehicleBrand}</if>
+            <if test="vehicleType != null  and vehicleType != ''"> and vehicle_type = #{vehicleType}</if>
+        </where>
+        order by vehicle_mileage desc
+    </select>
+
+    <select id="selectOrderByMileageAdministrativeVehicleList" parameterType="BusinessAdministrativeVehicle" resultMap="BusinessAdministrativeVehicleResult">
+        select id, purchase_date, license_plate_number, vehicle_brand, vehicle_type, vehicle_emissions,
+        vehicle_image, refuel_card_number, etc_card_number, sum(vehicle_mileage) as vehicle_mileage, status, del_flag, create_by, create_time, update_by, update_time, remark
+        from business_administrative_vehicle
+        <where>
+            <if test="purchaseDate != null "> and purchase_date = #{purchaseDate}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number like concat('%', #{licensePlateNumber}, '%')</if>
+            <if test="vehicleBrand != null  and vehicleBrand != ''"> and vehicle_brand = #{vehicleBrand}</if>
+            <if test="vehicleType != null  and vehicleType != ''"> and vehicle_type = #{vehicleType}</if>
+        </where>
+        group by license_plate_number
+        order by vehicle_mileage desc
+    </select>
+    
+    <select id="selectBusinessAdministrativeVehicleById" parameterType="Long" resultMap="BusinessAdministrativeVehicleResult">
+        <include refid="selectBusinessAdministrativeVehicleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessAdministrativeVehicle" parameterType="BusinessAdministrativeVehicle" useGeneratedKeys="true" keyProperty="id">
+        insert into business_administrative_vehicle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="purchaseDate != null">purchase_date,</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">license_plate_number,</if>
+            <if test="vehicleBrand != null and vehicleBrand != ''">vehicle_brand,</if>
+            <if test="vehicleType != null and vehicleType != ''">vehicle_type,</if>
+            <if test="vehicleEmissions != null">vehicle_emissions,</if>
+            <if test="vehicleImage != null">vehicle_image,</if>
+            <if test="refuelCardNumber != null">refuel_card_number,</if>
+            <if test="etcCardNumber != null">etc_card_number,</if>
+            <if test="vehicleMileage != null">vehicle_mileage,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="purchaseDate != null">#{purchaseDate},</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">#{licensePlateNumber},</if>
+            <if test="vehicleBrand != null and vehicleBrand != ''">#{vehicleBrand},</if>
+            <if test="vehicleType != null and vehicleType != ''">#{vehicleType},</if>
+            <if test="vehicleEmissions != null">#{vehicleEmissions},</if>
+            <if test="vehicleImage != null">#{vehicleImage},</if>
+            <if test="refuelCardNumber != null">#{refuelCardNumber},</if>
+            <if test="etcCardNumber != null">#{etcCardNumber},</if>
+            <if test="vehicleMileage != null">#{vehicleMileage},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessAdministrativeVehicle" parameterType="BusinessAdministrativeVehicle">
+        update business_administrative_vehicle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="purchaseDate != null">purchase_date = #{purchaseDate},</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">license_plate_number = #{licensePlateNumber},</if>
+            <if test="vehicleBrand != null and vehicleBrand != ''">vehicle_brand = #{vehicleBrand},</if>
+            <if test="vehicleType != null and vehicleType != ''">vehicle_type = #{vehicleType},</if>
+            <if test="vehicleEmissions != null">vehicle_emissions = #{vehicleEmissions},</if>
+            <if test="vehicleImage != null">vehicle_image = #{vehicleImage},</if>
+            <if test="refuelCardNumber != null">refuel_card_number = #{refuelCardNumber},</if>
+            <if test="etcCardNumber != null">etc_card_number = #{etcCardNumber},</if>
+            <if test="vehicleMileage != null">vehicle_mileage = #{vehicleMileage},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessAdministrativeVehicleById" parameterType="Long">
+        delete from business_administrative_vehicle where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessAdministrativeVehicleByIds" parameterType="String">
+        delete from business_administrative_vehicle where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

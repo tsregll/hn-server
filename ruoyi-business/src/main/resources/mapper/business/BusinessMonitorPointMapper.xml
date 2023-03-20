@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessMonitorPointMapper">
+    
+    <resultMap type="BusinessMonitorPoint" id="BusinessMonitorPointResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="ip"    column="ip"    />
+        <result property="port"    column="port"    />
+        <result property="userName"    column="user_name"    />
+        <result property="password"    column="password"    />
+        <result property="pointLng"    column="point_lng"    />
+        <result property="pointLat"    column="point_lat"    />
+        <result property="addr"    column="addr"    />
+        <result property="orgId"    column="org_id"    />
+        <result property="orgName"    column="org_name"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="serialNumber"    column="serial_number"    />
+        <result property="macAddr"    column="mac_addr"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessMonitorPointVo">
+        select id, name, ip, port, user_name, password, point_lng, point_lat, addr, org_id, org_name, channel_id, serial_number, mac_addr, order_num, del_flag, status, create_by, create_time, update_by, update_time, remark from business_monitor_point
+    </sql>
+
+    <select id="selectBusinessMonitorPointList" parameterType="BusinessMonitorPoint" resultMap="BusinessMonitorPointResult">
+        <include refid="selectBusinessMonitorPointVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessMonitorPointById" parameterType="Long" resultMap="BusinessMonitorPointResult">
+        <include refid="selectBusinessMonitorPointVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessMonitorPoint" parameterType="BusinessMonitorPoint">
+        insert into business_monitor_point
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="ip != null">ip,</if>
+            <if test="port != null">port,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="password != null">password,</if>
+            <if test="pointLng != null">point_lng,</if>
+            <if test="pointLat != null">point_lat,</if>
+            <if test="addr != null">addr,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="orgName != null">org_name,</if>
+            <if test="channelId != null">channel_id,</if>
+            <if test="serialNumber != null">serial_number,</if>
+            <if test="macAddr != null">mac_addr,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="port != null">#{port},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="password != null">#{password},</if>
+            <if test="pointLng != null">#{pointLng},</if>
+            <if test="pointLat != null">#{pointLat},</if>
+            <if test="addr != null">#{addr},</if>
+            <if test="orgId != null">#{orgId},</if>
+            <if test="orgName != null">#{orgName},</if>
+            <if test="channelId != null">#{channelId},</if>
+            <if test="serialNumber != null">#{serialNumber},</if>
+            <if test="macAddr != null">#{macAddr},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessMonitorPoint" parameterType="BusinessMonitorPoint">
+        update business_monitor_point
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="pointLng != null">point_lng = #{pointLng},</if>
+            <if test="pointLat != null">point_lat = #{pointLat},</if>
+            <if test="addr != null">addr = #{addr},</if>
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="orgName != null">org_name = #{orgName},</if>
+            <if test="channelId != null">channel_id = #{channelId},</if>
+            <if test="serialNumber != null">serial_number = #{serialNumber},</if>
+            <if test="macAddr != null">mac_addr = #{macAddr},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessMonitorPointById" parameterType="Long">
+        delete from business_monitor_point where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessMonitorPointByIds" parameterType="String">
+        delete from business_monitor_point where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

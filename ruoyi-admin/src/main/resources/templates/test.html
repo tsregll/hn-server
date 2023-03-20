@@ -1,0 +1,24 @@
+
+<table>
+    <th>
+        <td>序号</td>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>年龄</td>
+        <td>备注</td>
+    </th>
+    <tr>
+        <td>序号</td>
+        <td>${name}</td>
+        <td>${sex}</td>
+        <td>${age}</td>
+        <td>${memo}</td>
+    </tr>
+    <#list list as item>
+        <td>item_index</td>
+        <td>${item.name}</td>
+        <td>${item.sex}</td>
+        <td>${item.age}</td>
+        <td>${item.memo}</td>
+    </#list>
+</table>

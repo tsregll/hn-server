@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessPlanningDevelopmentMapper">
+
+    <resultMap type="BusinessPlanningDevelopment" id="BusinessPlanningDevelopmentResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="projectEarlyStatus"    column="project_early_status"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="projectInstalledCapacity"    column="project_installed_capacity"    />
+        <result property="projectRegionDistrict"    column="project_region_district"    />
+        <result property="projectResponsibilityUnit"    column="project_responsibility_unit"    />
+        <result property="projectDevelopmentType"    column="project_development_type"    />
+        <result property="projectDevelopmentModalities"    column="project_development_modalities"    />
+        <result property="projectResponsiblePerson"    column="project_responsible_person"    />
+        <result property="projectStartDate"    column="project_start_date"    />
+        <result property="projectProposedStartDate"    column="project_proposed_start_date"    />
+        <result property="projectFirstConnectionDate"    column="project_first_connection_date"    />
+        <result property="projectProductionAllCapacity"    column="project_production_all_capacity"    />
+        <result property="projectIntroduce"    column="project_introduce"    />
+        <result property="projectXAxis"    column="project_x_axis"    />
+        <result property="projectYAxis"    column="project_y_axis"    />
+        <result property="projectFullCommissioningDate"    column="project_full_commissioning_date"    />
+        <result property="projectReachTheStandardDate"    column="project_reach_the_standard_date"    />
+        <result property="projectFinalAcceptanceDate"    column="project_final_acceptance_date"    />
+        <result property="projectFinish"    column="project_finish"    />
+    </resultMap>
+
+    <sql id="selectBusinessPlanningDevelopmentVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, project_name, project_status, project_early_status, project_type, project_installed_capacity, project_region_district, project_responsibility_unit, project_development_type, project_development_modalities, project_responsible_person, project_start_date, project_proposed_start_date, project_first_connection_date, project_production_all_capacity, project_introduce, project_x_axis, project_y_axis, project_full_commissioning_date, project_reach_the_standard_date, project_final_acceptance_date, project_finish from business_planning_development
+    </sql>
+
+    <select id="selectBusinessPlanningDevelopmentList" parameterType="BusinessPlanningDevelopment" resultMap="BusinessPlanningDevelopmentResult">
+        <include refid="selectBusinessPlanningDevelopmentVo"/>
+        <where>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectRegionDistrict != null  and projectRegionDistrict != ''"> and project_region_district = #{projectRegionDistrict}</if>
+            <if test="projectResponsibilityUnit != null  and projectResponsibilityUnit != ''"> and project_responsibility_unit = #{projectResponsibilityUnit}</if>
+            <if test="projectResponsiblePerson != null  and projectResponsiblePerson != ''"> and project_responsible_person = #{projectResponsiblePerson}</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessPlanningDevelopmentById" parameterType="Long" resultMap="BusinessPlanningDevelopmentResult">
+        <include refid="selectBusinessPlanningDevelopmentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessPlanningDevelopment" parameterType="BusinessPlanningDevelopment" useGeneratedKeys="true" keyProperty="id">
+        insert into business_planning_development
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status,</if>
+            <if test="projectEarlyStatus != null">project_early_status,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="projectInstalledCapacity != null">project_installed_capacity,</if>
+            <if test="projectRegionDistrict != null">project_region_district,</if>
+            <if test="projectResponsibilityUnit != null">project_responsibility_unit,</if>
+            <if test="projectDevelopmentType != null">project_development_type,</if>
+            <if test="projectDevelopmentModalities != null">project_development_modalities,</if>
+            <if test="projectResponsiblePerson != null">project_responsible_person,</if>
+            <if test="projectStartDate != null">project_start_date,</if>
+            <if test="projectProposedStartDate != null">project_proposed_start_date,</if>
+            <if test="projectFirstConnectionDate != null">project_first_connection_date,</if>
+            <if test="projectProductionAllCapacity != null">project_production_all_capacity,</if>
+            <if test="projectIntroduce != null">project_introduce,</if>
+            <if test="projectXAxis != null and projectXAxis != ''">project_x_axis,</if>
+            <if test="projectYAxis != null and projectYAxis != ''">project_y_axis,</if>
+            <if test="projectFullCommissioningDate != null">project_full_commissioning_date,</if>
+            <if test="projectReachTheStandardDate != null">project_reach_the_standard_date,</if>
+            <if test="projectFinalAcceptanceDate != null">project_final_acceptance_date,</if>
+            <if test="projectFinish != null and projectFinish != ''">project_finish,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="projectStatus != null and projectStatus != ''">#{projectStatus},</if>
+            <if test="projectEarlyStatus != null">#{projectEarlyStatus},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="projectInstalledCapacity != null">#{projectInstalledCapacity},</if>
+            <if test="projectRegionDistrict != null">#{projectRegionDistrict},</if>
+            <if test="projectResponsibilityUnit != null">#{projectResponsibilityUnit},</if>
+            <if test="projectDevelopmentType != null">#{projectDevelopmentType},</if>
+            <if test="projectDevelopmentModalities != null">#{projectDevelopmentModalities},</if>
+            <if test="projectResponsiblePerson != null">#{projectResponsiblePerson},</if>
+            <if test="projectStartDate != null">#{projectStartDate},</if>
+            <if test="projectProposedStartDate != null">#{projectProposedStartDate},</if>
+            <if test="projectFirstConnectionDate != null">#{projectFirstConnectionDate},</if>
+            <if test="projectProductionAllCapacity != null">#{projectProductionAllCapacity},</if>
+            <if test="projectIntroduce != null">#{projectIntroduce},</if>
+            <if test="projectXAxis != null and projectXAxis != ''">#{projectXAxis},</if>
+            <if test="projectYAxis != null and projectYAxis != ''">#{projectYAxis},</if>
+            <if test="projectFullCommissioningDate != null">#{projectFullCommissioningDate},</if>
+            <if test="projectReachTheStandardDate != null">#{projectReachTheStandardDate},</if>
+            <if test="projectFinalAcceptanceDate != null">#{projectFinalAcceptanceDate},</if>
+            <if test="projectFinish != null and projectFinish != ''">#{projectFinish},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBusinessPlanningDevelopment" parameterType="BusinessPlanningDevelopment">
+        update business_planning_development
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status = #{projectStatus},</if>
+            <if test="projectEarlyStatus != null">project_early_status = #{projectEarlyStatus},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="projectInstalledCapacity != null">project_installed_capacity = #{projectInstalledCapacity},</if>
+            <if test="projectRegionDistrict != null">project_region_district = #{projectRegionDistrict},</if>
+            <if test="projectResponsibilityUnit != null">project_responsibility_unit = #{projectResponsibilityUnit},</if>
+            <if test="projectDevelopmentType != null">project_development_type = #{projectDevelopmentType},</if>
+            <if test="projectDevelopmentModalities != null">project_development_modalities = #{projectDevelopmentModalities},</if>
+            <if test="projectResponsiblePerson != null">project_responsible_person = #{projectResponsiblePerson},</if>
+            <if test="projectStartDate != null">project_start_date = #{projectStartDate},</if>
+            <if test="projectProposedStartDate != null">project_proposed_start_date = #{projectProposedStartDate},</if>
+            <if test="projectFirstConnectionDate != null">project_first_connection_date = #{projectFirstConnectionDate},</if>
+            <if test="projectProductionAllCapacity != null">project_production_all_capacity = #{projectProductionAllCapacity},</if>
+            <if test="projectIntroduce != null">project_introduce = #{projectIntroduce},</if>
+            <if test="projectXAxis != null and projectXAxis != ''">project_x_axis = #{projectXAxis},</if>
+            <if test="projectYAxis != null and projectYAxis != ''">project_y_axis = #{projectYAxis},</if>
+            <if test="projectFullCommissioningDate != null">project_full_commissioning_date = #{projectFullCommissioningDate},</if>
+            <if test="projectReachTheStandardDate != null">project_reach_the_standard_date = #{projectReachTheStandardDate},</if>
+            <if test="projectFinalAcceptanceDate != null">project_final_acceptance_date = #{projectFinalAcceptanceDate},</if>
+            <if test="projectFinish != null and projectFinish != ''">project_finish = #{projectFinish},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessPlanningDevelopmentById" parameterType="Long">
+        delete from business_planning_development where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessPlanningDevelopmentByIds" parameterType="String">
+        delete from business_planning_development where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectListOrderByProjectType" parameterType="BusinessPlanningDevelopment" resultMap="BusinessPlanningDevelopmentResult">
+        <include refid="selectBusinessPlanningDevelopmentVo"/>
+        <where>
+            <if test="projectRegionDistrict != null  and projectRegionDistrict != ''"> and project_region_district = #{projectRegionDistrict}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="'' == ''"> and 1=1 order by project_type</if>
+        </where>
+    </select>
+
+    <select id="selectFileNotFiveDevelopmentList" parameterType="BusinessPlanningDevelopment" resultMap="BusinessPlanningDevelopmentResult">
+        select
+            pd.project_name,pd.id
+        from
+            business_planning_development pd
+        where
+            project_status = #{projectStatus}
+          and pd.id in (
+              select project_number from business_planning_development_project_file GROUP BY project_number HAVING count(*) &lt; 5
+        );
+    </select>
+
+</mapper>

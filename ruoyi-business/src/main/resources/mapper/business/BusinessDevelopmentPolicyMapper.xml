@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentPolicyMapper">
+    
+    <resultMap type="BusinessDevelopmentPolicy" id="BusinessDevelopmentPolicyResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="policyTitle"    column="policy_title"    />
+        <result property="policyContent"    column="policy_content"    />
+        <result property="policyTime"    column="policy_time"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentPolicyVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, default_time, operator, operator_number, policy_title, policy_time from business_development_policy
+    </sql>
+
+    <sql id="selectBusinessDevelopmentPolicyVo2">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, default_time, operator, operator_number, policy_title,policy_content, policy_time from business_development_policy
+    </sql>
+
+    <select id="selectBusinessDevelopmentPolicyList" parameterType="BusinessDevelopmentPolicy" resultMap="BusinessDevelopmentPolicyResult">
+        <include refid="selectBusinessDevelopmentPolicyVo"/>
+        <where>  
+            <if test="policyTitle != null  and policyTitle != ''"> and policy_title like concat('%', #{policyTitle}, '%')</if>
+            <if test="policyTime != null  and policyTime != ''"> and policy_time LIKE #{policyTime}</if>
+            <if test="beginTime != null  and beginTime != ''"> and policy_time &gt;= #{beginTime}</if>
+            <if test="endTime != null  and endTime != ''"> and policy_time &lt;= #{endTime}</if>
+        </where>
+        order by policy_time desc
+    </select>
+    
+    <select id="selectBusinessDevelopmentPolicyById" parameterType="Long" resultMap="BusinessDevelopmentPolicyResult">
+        <include refid="selectBusinessDevelopmentPolicyVo2"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentPolicy" parameterType="BusinessDevelopmentPolicy" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_policy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number,</if>
+            <if test="policyTitle != null and policyTitle != ''">policy_title,</if>
+            <if test="policyContent != null and policyContent != ''">policy_content,</if>
+            <if test="policyTime != null and policyTime != ''">policy_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="defaultTime != null and defaultTime != ''">#{defaultTime},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">#{operatorNumber},</if>
+            <if test="policyTitle != null and policyTitle != ''">#{policyTitle},</if>
+            <if test="policyContent != null and policyContent != ''">#{policyContent},</if>
+            <if test="policyTime != null and policyTime != ''">#{policyTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentPolicy" parameterType="BusinessDevelopmentPolicy">
+        update business_development_policy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time = #{defaultTime},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number = #{operatorNumber},</if>
+            <if test="policyTitle != null and policyTitle != ''">policy_title = #{policyTitle},</if>
+            <if test="policyContent != null and policyContent != ''">policy_content = #{policyContent},</if>
+            <if test="policyTime != null and policyTime != ''">policy_time = #{policyTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentPolicyById" parameterType="Long">
+        delete from business_development_policy where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentPolicyByIds" parameterType="String">
+        delete from business_development_policy where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

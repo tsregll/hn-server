@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessAuditFormMapper">
+    
+    <resultMap type="BusinessAuditForm" id="BusinessAuditFormResult">
+        <result property="id"    column="id"    />
+        <result property="deptUserId"    column="dept_user_id"    />
+        <result property="deptUserName"    column="dept_user_name"    />
+        <result property="deptAuditTime"    column="dept_audit_time"    />
+        <result property="chargeUserId"    column="charge_user_id"    />
+        <result property="chargeUserName"    column="charge_user_name"    />
+        <result property="chargeAuditTime"    column="charge_audit_time"    />
+        <result property="keyUserId"    column="key_user_id"    />
+        <result property="keyUserName"    column="key_user_name"    />
+        <result property="keyAuditTime"    column="key_audit_time"    />
+        <result property="msg"    column="msg"    />
+        <result property="submitUserId"    column="submit_user_id"    />
+        <result property="submitUserName"    column="submit_user_name"    />
+        <result property="dataId"    column="data_id"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessAuditFormVo">
+        select id, dept_user_id, dept_user_name, dept_audit_time, charge_user_id, charge_user_name, charge_audit_time, key_user_id, key_user_name, key_audit_time, msg, submit_user_id, submit_user_name, data_id, data_type, status, del_flag, create_by, create_time, update_by, update_time, remark from business_audit_form
+    </sql>
+
+    <select id="selectBusinessAuditFormList" parameterType="BusinessAuditForm" resultMap="BusinessAuditFormResult">
+        <include refid="selectBusinessAuditFormVo"/>
+        <where>  
+            <if test="deptUserId != null "> and dept_user_id = #{deptUserId}</if>
+            <if test="deptUserName != null  and deptUserName != ''"> and dept_user_name like concat('%', #{deptUserName}, '%')</if>
+            <if test="deptAuditTime != null "> and dept_audit_time = #{deptAuditTime}</if>
+            <if test="chargeUserId != null "> and charge_user_id = #{chargeUserId}</if>
+            <if test="chargeUserName != null  and chargeUserName != ''"> and charge_user_name like concat('%', #{chargeUserName}, '%')</if>
+            <if test="chargeAuditTime != null "> and charge_audit_time = #{chargeAuditTime}</if>
+            <if test="keyUserId != null "> and key_user_id = #{keyUserId}</if>
+            <if test="keyUserName != null  and keyUserName != ''"> and key_user_name like concat('%', #{keyUserName}, '%')</if>
+            <if test="keyAuditTime != null "> and key_audit_time = #{keyAuditTime}</if>
+            <if test="msg != null  and msg != ''"> and msg = #{msg}</if>
+            <if test="submitUserId != null "> and submit_user_id = #{submitUserId}</if>
+            <if test="submitUserName != null  and submitUserName != ''"> and submit_user_name like concat('%', #{submitUserName}, '%')</if>
+            <if test="dataId != null "> and data_id = #{dataId}</if>
+            <if test="dataType != null  and dataType != ''"> and data_type = #{dataType}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="myAuditingByRokeKey" resultMap="BusinessAuditFormResult">
+        <include refid="selectBusinessAuditFormVo"/>
+        <where>
+            <if test="roleKey != null and roleKey == 'deptLeader'">
+                and dept_user_id = #{userId} and status = '1' and dept_audit_time is null
+             </if>
+            <if test="roleKey != null and roleKey == 'chargeLeader'">
+                and charge_user_id = #{userId} and status = '2' and charge_audit_time is null
+            </if>
+            <if test="roleKey != null and roleKey == 'keyLeader'">
+                and key_user_id = #{userId} and status = '3' and key_audit_time is null
+            </if>
+        </where>
+
+    </select>
+
+    <select id="myAuditedByRokeKey" resultMap="BusinessAuditFormResult">
+        <include refid="selectBusinessAuditFormVo"/>
+        <where>
+            <if test="roleKey != null and roleKey == 'deptLeader'">
+                and dept_user_id = #{userId} and dept_audit_time is not null
+            </if>
+            <if test="roleKey != null and roleKey == 'chargeLeader'">
+                and charge_user_id = #{userId} and charge_audit_time is not null
+            </if>
+            <if test="roleKey != null and roleKey == 'keyLeader'">
+                and key_user_id = #{userId} and key_audit_time is not null
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessAuditFormById" parameterType="Long" resultMap="BusinessAuditFormResult">
+        <include refid="selectBusinessAuditFormVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectBusinessAuditFormByDataId" parameterType="Long" resultMap="BusinessAuditFormResult">
+        <include refid="selectBusinessAuditFormVo"/>
+        where data_id = #{dataId}
+    </select>
+        
+    <insert id="insertBusinessAuditForm" parameterType="BusinessAuditForm" useGeneratedKeys="true" keyProperty="id">
+        insert into business_audit_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptUserId != null">dept_user_id,</if>
+            <if test="deptUserName != null">dept_user_name,</if>
+            <if test="deptAuditTime != null">dept_audit_time,</if>
+            <if test="chargeUserId != null">charge_user_id,</if>
+            <if test="chargeUserName != null">charge_user_name,</if>
+            <if test="chargeAuditTime != null">charge_audit_time,</if>
+            <if test="keyUserId != null">key_user_id,</if>
+            <if test="keyUserName != null">key_user_name,</if>
+            <if test="keyAuditTime != null">key_audit_time,</if>
+            <if test="msg != null">msg,</if>
+            <if test="submitUserId != null">submit_user_id,</if>
+            <if test="submitUserName != null">submit_user_name,</if>
+            <if test="dataId != null">data_id,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptUserId != null">#{deptUserId},</if>
+            <if test="deptUserName != null">#{deptUserName},</if>
+            <if test="deptAuditTime != null">#{deptAuditTime},</if>
+            <if test="chargeUserId != null">#{chargeUserId},</if>
+            <if test="chargeUserName != null">#{chargeUserName},</if>
+            <if test="chargeAuditTime != null">#{chargeAuditTime},</if>
+            <if test="keyUserId != null">#{keyUserId},</if>
+            <if test="keyUserName != null">#{keyUserName},</if>
+            <if test="keyAuditTime != null">#{keyAuditTime},</if>
+            <if test="msg != null">#{msg},</if>
+            <if test="submitUserId != null">#{submitUserId},</if>
+            <if test="submitUserName != null">#{submitUserName},</if>
+            <if test="dataId != null">#{dataId},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessAuditForm" parameterType="BusinessAuditForm">
+        update business_audit_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptUserId != null">dept_user_id = #{deptUserId},</if>
+            <if test="deptUserName != null">dept_user_name = #{deptUserName},</if>
+            <if test="deptAuditTime != null">dept_audit_time = #{deptAuditTime},</if>
+            <if test="chargeUserId != null">charge_user_id = #{chargeUserId},</if>
+            <if test="chargeUserName != null">charge_user_name = #{chargeUserName},</if>
+            <if test="chargeAuditTime != null">charge_audit_time = #{chargeAuditTime},</if>
+            <if test="keyUserId != null">key_user_id = #{keyUserId},</if>
+            <if test="keyUserName != null">key_user_name = #{keyUserName},</if>
+            <if test="keyAuditTime != null">key_audit_time = #{keyAuditTime},</if>
+            <if test="msg != null">msg = #{msg},</if>
+            <if test="submitUserId != null">submit_user_id = #{submitUserId},</if>
+            <if test="submitUserName != null">submit_user_name = #{submitUserName},</if>
+            <if test="dataId != null">data_id = #{dataId},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessAuditFormById" parameterType="Long">
+        delete from business_audit_form where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessAuditFormByIds" parameterType="String">
+        delete from business_audit_form where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessFuheMapper">
+
+    <insert id="uploadData">
+        INSERT INTO business_fuhe
+        SET uploadDate=#{params.uploadDate},
+            uploadType=#{params.uploadType},
+            `type`=#{params.type}
+    </insert>
+
+    <update id="insertData">
+        UPDATE business_fuhe
+        SET ${time}=#{data.load}
+        WHERE uploadDate=#{uploadDate} AND `type`=#{type}
+    </update>
+
+    <select id="selectData" resultType="String">
+        SELECT uploadType
+        FROM business_fuhe
+        WHERE uploadType=#{params.uploadType} AND uploadDate=#{params.uploadDate} AND `type`=#{params.type}
+    </select>
+
+
+    <select id="GetfuheduibiData0" parameterType="com.ruoyi.business.domain.BusinessFuheDuibiDTO" resultType="java.util.Map">
+        SELECT 00_15,00_30,00_45,01_00,01_15,01_30,01_45,02_00,02_15,02_30,02_45,03_00,03_15,03_30,03_45,04_00,04_15,04_30,04_45,05_00,05_15,05_30,05_45,06_00,06_15,06_30,06_45,07_00,07_15,07_30,07_45,08_00,08_15,08_30,08_45,09_00,09_15,09_30,09_45,10_00,10_15,10_30,10_45,11_00,11_15,11_30,11_45,12_00,12_15,12_30,12_45,13_00,13_15,13_30,13_45,14_00,14_15,14_30,14_45,15_00,15_15,15_30,15_45,16_00,16_15,16_30,16_45,17_00,17_15,17_30,17_45,18_00,18_15,18_30,18_45,19_00,19_15,19_30,19_45,20_00,20_15,20_30,20_45,21_00,21_15,21_30,21_45,22_00,22_15,22_30,22_45,23_00,23_15,23_30,23_45,24_00
+        FROM business_fuhe
+        WHERE uploadDate=#{params.selectDate} AND uploadType=#{params.selectStation} AND `type`=0
+    </select>
+
+    <select id="GetfuheduibiData1" parameterType="com.ruoyi.business.domain.BusinessFuheDuibiDTO" resultType="java.util.Map">
+        SELECT 00_15,00_30,00_45,01_00,01_15,01_30,01_45,02_00,02_15,02_30,02_45,03_00,03_15,03_30,03_45,04_00,04_15,04_30,04_45,05_00,05_15,05_30,05_45,06_00,06_15,06_30,06_45,07_00,07_15,07_30,07_45,08_00,08_15,08_30,08_45,09_00,09_15,09_30,09_45,10_00,10_15,10_30,10_45,11_00,11_15,11_30,11_45,12_00,12_15,12_30,12_45,13_00,13_15,13_30,13_45,14_00,14_15,14_30,14_45,15_00,15_15,15_30,15_45,16_00,16_15,16_30,16_45,17_00,17_15,17_30,17_45,18_00,18_15,18_30,18_45,19_00,19_15,19_30,19_45,20_00,20_15,20_30,20_45,21_00,21_15,21_30,21_45,22_00,22_15,22_30,22_45,23_00,23_15,23_30,23_45,24_00
+        FROM business_fuhe
+        WHERE uploadDate=#{params.selectDate} AND uploadType=#{params.selectStation} AND `type`=1
+    </select>
+
+
+
+</mapper>

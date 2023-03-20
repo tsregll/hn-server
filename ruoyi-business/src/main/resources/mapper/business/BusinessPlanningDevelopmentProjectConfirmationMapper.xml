@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessPlanningDevelopmentProjectConfirmationMapper">
+    
+    <resultMap type="BusinessPlanningDevelopmentProjectConfirmation" id="BusinessPlanningDevelopmentProjectConfirmationResult">
+        <result property="id"    column="vid"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="projectDevelopmentWay"    column="project_development_way"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="capacity"    column="capacity"    />
+        <result property="area"    column="area"    />
+        <result property="projectDepartment"    column="project_department"    />
+        <result property="projectAbsorptiveDetails"    column="project_absorptive_details"    />
+        <result property="isResearch"    column="is_research"    />
+        <result property="projectIsCheck"    column="project_is_check"    />
+        <result property="checkTime"    column="check_time"    />
+        <result property="projectIsEnablement"    column="project_is_enablement"    />
+        <result property="enablementTime"    column="enablement_time"    />
+        <result property="projectIsInvestment"    column="project_is_investment"    />
+        <result property="investmentTime"    column="investment_time"    />
+    </resultMap>
+
+    <sql id="selectBusinessPlanningDevelopmentProjectConfirmationVo">
+        select vid, status, del_flag, create_by, create_time, update_by, update_time, remark, default_time, operator, operator_number, project_type, project_development_way, project_name, capacity, area, project_department, project_absorptive_details, is_research, project_is_check, check_time, project_is_enablement, enablement_time, project_is_investment, investment_time from business_planning_development_project_confirmation
+    </sql>
+
+    <select id="selectBusinessPlanningDevelopmentProjectConfirmationList" parameterType="BusinessPlanningDevelopmentProjectConfirmation" resultMap="BusinessPlanningDevelopmentProjectConfirmationResult">
+        <include refid="selectBusinessPlanningDevelopmentProjectConfirmationVo"/>
+        <where>  
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectDevelopmentWay != null  and projectDevelopmentWay != ''"> and project_development_way = #{projectDevelopmentWay}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="capacity != null  and capacity != ''"> and capacity = #{capacity}</if>
+            <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
+            <if test="projectDepartment != null  and projectDepartment != ''"> and project_department = #{projectDepartment}</if>
+            <if test="projectAbsorptiveDetails != null  and projectAbsorptiveDetails != ''"> and project_absorptive_details = #{projectAbsorptiveDetails}</if>
+            <if test="isResearch != null  and isResearch != ''"> and is_research = #{isResearch}</if>
+            <if test="projectIsCheck != null  and projectIsCheck != ''"> and project_is_check = #{projectIsCheck}</if>
+            <if test="projectIsEnablement != null  and projectIsEnablement != ''"> and project_is_enablement = #{projectIsEnablement}</if>
+            <if test="projectIsInvestment != null  and projectIsInvestment != ''"> and project_is_investment = #{projectIsInvestment}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessProjectConfirmationTotalList" parameterType="BusinessPlanningDevelopmentProjectConfirmation" resultMap="BusinessPlanningDevelopmentProjectConfirmationResult">
+        select  sum(capacity) as capacity
+        from business_planning_development_project_confirmation
+        <where>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectDevelopmentWay != null  and projectDevelopmentWay != ''"> and project_development_way = #{projectDevelopmentWay}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="capacity != null  and capacity != ''"> and capacity = #{capacity}</if>
+            <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
+            <if test="projectDepartment != null  and projectDepartment != ''"> and project_department = #{projectDepartment}</if>
+            <if test="projectAbsorptiveDetails != null  and projectAbsorptiveDetails != ''"> and project_absorptive_details = #{projectAbsorptiveDetails}</if>
+            <if test="isResearch != null  and isResearch != ''"> and is_research = #{isResearch}</if>
+            <if test="projectIsCheck != null  and projectIsCheck != ''"> and project_is_check = #{projectIsCheck}</if>
+            <if test="projectIsEnablement != null  and projectIsEnablement != ''"> and project_is_enablement = #{projectIsEnablement}</if>
+            <if test="projectIsInvestment != null  and projectIsInvestment != ''"> and project_is_investment = #{projectIsInvestment}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessPlanningDevelopmentProjectConfirmationById" parameterType="Long" resultMap="BusinessPlanningDevelopmentProjectConfirmationResult">
+        <include refid="selectBusinessPlanningDevelopmentProjectConfirmationVo"/>
+        where vid = #{id}
+    </select>
+        
+    <insert id="insertBusinessPlanningDevelopmentProjectConfirmation" parameterType="BusinessPlanningDevelopmentProjectConfirmation" useGeneratedKeys="true" keyProperty="id">
+        insert into business_planning_development_project_confirmation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="defaultTime != null">default_time,</if>
+            <if test="operator != null">operator,</if>
+            <if test="operatorNumber != null">operator_number,</if>
+            <if test="projectType != null and projectType != ''">project_type,</if>
+            <if test="projectDevelopmentWay != null and projectDevelopmentWay != ''">project_development_way,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="capacity != null">capacity,</if>
+            <if test="area != null">area,</if>
+            <if test="projectDepartment != null">project_department,</if>
+            <if test="projectAbsorptiveDetails != null">project_absorptive_details,</if>
+            <if test="isResearch != null">is_research,</if>
+            <if test="projectIsCheck != null">project_is_check,</if>
+            <if test="checkTime != null">check_time,</if>
+            <if test="projectIsEnablement != null">project_is_enablement,</if>
+            <if test="enablementTime != null">enablement_time,</if>
+            <if test="projectIsInvestment != null">project_is_investment,</if>
+            <if test="investmentTime != null">investment_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="defaultTime != null">#{defaultTime},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="operatorNumber != null">#{operatorNumber},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="projectDevelopmentWay != null and projectDevelopmentWay != ''">#{projectDevelopmentWay},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="capacity != null">#{capacity},</if>
+            <if test="area != null">#{area},</if>
+            <if test="projectDepartment != null">#{projectDepartment},</if>
+            <if test="projectAbsorptiveDetails != null">#{projectAbsorptiveDetails},</if>
+            <if test="isResearch != null">#{isResearch},</if>
+            <if test="projectIsCheck != null">#{projectIsCheck},</if>
+            <if test="checkTime != null">#{checkTime},</if>
+            <if test="projectIsEnablement != null">#{projectIsEnablement},</if>
+            <if test="enablementTime != null">#{enablementTime},</if>
+            <if test="projectIsInvestment != null">#{projectIsInvestment},</if>
+            <if test="investmentTime != null">#{investmentTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessPlanningDevelopmentProjectConfirmation" parameterType="BusinessPlanningDevelopmentProjectConfirmation">
+        update business_planning_development_project_confirmation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="defaultTime != null">default_time = #{defaultTime},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="operatorNumber != null">operator_number = #{operatorNumber},</if>
+            <if test="projectType != null and projectType != ''">project_type = #{projectType},</if>
+            <if test="projectDevelopmentWay != null and projectDevelopmentWay != ''">project_development_way = #{projectDevelopmentWay},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="capacity != null">capacity = #{capacity},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="projectDepartment != null">project_department = #{projectDepartment},</if>
+            <if test="projectAbsorptiveDetails != null">project_absorptive_details = #{projectAbsorptiveDetails},</if>
+            <if test="isResearch != null">is_research = #{isResearch},</if>
+            <if test="projectIsCheck != null">project_is_check = #{projectIsCheck},</if>
+            <if test="checkTime != null">check_time = #{checkTime},</if>
+            <if test="projectIsEnablement != null">project_is_enablement = #{projectIsEnablement},</if>
+            <if test="enablementTime != null">enablement_time = #{enablementTime},</if>
+            <if test="projectIsInvestment != null">project_is_investment = #{projectIsInvestment},</if>
+            <if test="investmentTime != null">investment_time = #{investmentTime},</if>
+        </trim>
+        where vid = #{id}
+    </update>
+
+    <delete id="deleteBusinessPlanningDevelopmentProjectConfirmationById" parameterType="Long">
+        delete from business_planning_development_project_confirmation where vid = #{id}
+    </delete>
+
+    <delete id="deleteBusinessPlanningDevelopmentProjectConfirmationByIds" parameterType="String">
+        delete from business_planning_development_project_confirmation where vid in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

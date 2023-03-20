@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessCompanyAnalysisMapper">
+    
+    <resultMap type="BusinessCompanyAnalysis" id="BusinessCompanyAnalysisResult">
+        <result property="id"    column="id"    />
+        <result property="year"    column="year"    />
+        <result property="generateNumber"    column="generate_number"    />
+        <result property="equipmentCapacity"    column="equipment_capacity"    />
+        <result property="powerCapacity"    column="power_capacity"    />
+        <result property="dayOfHour"    column="day_of_hour"    />
+        <result property="runCapacity"    column="run_capacity"    />
+        <result property="netCapacity"    column="net_capacity"    />
+        <result property="avgCapacity"    column="avg_capacity"    />
+        <result property="avgUseHour"    column="avg_use_hour"    />
+        <result property="ohterRateCapacity"    column="ohter_rate_capacity"    />
+        <result property="outsourcingCapacity"    column="outsourcing_capacity"    />
+        <result property="otherCapacity"    column="other_capacity"    />
+        <result property="windCapacity"    column="wind_capacity"    />
+        <result property="powerPlantCapacity"    column="power_plant_capacity"    />
+        <result property="totalUseRate"    column="total_use_rate"    />
+        <result property="plantRate"    column="plant_rate"    />
+        <result property="runHour"    column="run_hour"    />
+        <result property="spareHour"    column="spare_hour"    />
+        <result property="stopRunHour"    column="stop_run_hour"    />
+        <result property="unstopRunHour"    column="unstop_run_hour"    />
+        <result property="equalUseHour"    column="equal_use_hour"    />
+        <result property="equalUseCoefficient"    column="equal_use_coefficient"    />
+        <result property="powerCoefficient"    column="power_coefficient"    />
+        <result property="avgUseRate"    column="avg_use_rate"    />
+        <result property="avgPower"    column="avg_power"    />
+        <result property="unstopRunNumber"    column="unstop_run_number"    />
+        <result property="safeRunDays"    column="safe_run_days"    />
+        <result property="avgWindSpeed"    column="avg_wind_speed"    />
+        <result property="maxLoad"    column="max_load"    />
+        <result property="abandonedWindPower"    column="abandoned_wind_power"    />
+        <result property="gridTrussReason"    column="grid_truss_reason"    />
+        <result property="unitFailure"    column="unit_failure"    />
+        <result property="ohterReason"    column="ohter_reason"    />
+        <result property="abandonedWindRate"    column="abandoned_wind_rate"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessCompanyAnalysisVo">
+        select id, year, generate_number, equipment_capacity, power_capacity, day_of_hour, run_capacity, net_capacity, avg_capacity, avg_use_hour, ohter_rate_capacity, outsourcing_capacity, other_capacity, wind_capacity, power_plant_capacity, total_use_rate, plant_rate, run_hour, spare_hour, stop_run_hour, unstop_run_hour, equal_use_hour, equal_use_coefficient, power_coefficient, avg_use_rate, avg_power, unstop_run_number, safe_run_days, avg_wind_speed, max_load, abandoned_wind_power, grid_truss_reason, unit_failure, ohter_reason, abandoned_wind_rate, status, del_flag, create_by, create_time, update_by, update_time, remark from business_company_analysis
+    </sql>
+
+    <select id="selectBusinessCompanyAnalysisList" parameterType="BusinessCompanyAnalysis" resultMap="BusinessCompanyAnalysisResult">
+        <include refid="selectBusinessCompanyAnalysisVo"/>
+        <where>  
+            <if test="year != null "> and year = #{year}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessCompanyAnalysisById" parameterType="Long" resultMap="BusinessCompanyAnalysisResult">
+        <include refid="selectBusinessCompanyAnalysisVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessCompanyAnalysis" parameterType="BusinessCompanyAnalysis" useGeneratedKeys="true" keyProperty="id">
+        insert into business_company_analysis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="generateNumber != null">generate_number,</if>
+            <if test="equipmentCapacity != null">equipment_capacity,</if>
+            <if test="powerCapacity != null">power_capacity,</if>
+            <if test="dayOfHour != null">day_of_hour,</if>
+            <if test="runCapacity != null">run_capacity,</if>
+            <if test="netCapacity != null">net_capacity,</if>
+            <if test="avgCapacity != null">avg_capacity,</if>
+            <if test="avgUseHour != null">avg_use_hour,</if>
+            <if test="ohterRateCapacity != null">ohter_rate_capacity,</if>
+            <if test="outsourcingCapacity != null">outsourcing_capacity,</if>
+            <if test="otherCapacity != null">other_capacity,</if>
+            <if test="windCapacity != null">wind_capacity,</if>
+            <if test="powerPlantCapacity != null">power_plant_capacity,</if>
+            <if test="totalUseRate != null">total_use_rate,</if>
+            <if test="plantRate != null">plant_rate,</if>
+            <if test="runHour != null">run_hour,</if>
+            <if test="spareHour != null">spare_hour,</if>
+            <if test="stopRunHour != null">stop_run_hour,</if>
+            <if test="unstopRunHour != null">unstop_run_hour,</if>
+            <if test="equalUseHour != null">equal_use_hour,</if>
+            <if test="equalUseCoefficient != null">equal_use_coefficient,</if>
+            <if test="powerCoefficient != null">power_coefficient,</if>
+            <if test="avgUseRate != null">avg_use_rate,</if>
+            <if test="avgPower != null">avg_power,</if>
+            <if test="unstopRunNumber != null">unstop_run_number,</if>
+            <if test="safeRunDays != null">safe_run_days,</if>
+            <if test="avgWindSpeed != null">avg_wind_speed,</if>
+            <if test="maxLoad != null">max_load,</if>
+            <if test="abandonedWindPower != null">abandoned_wind_power,</if>
+            <if test="gridTrussReason != null">grid_truss_reason,</if>
+            <if test="unitFailure != null">unit_failure,</if>
+            <if test="ohterReason != null">ohter_reason,</if>
+            <if test="abandonedWindRate != null">abandoned_wind_rate,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="generateNumber != null">#{generateNumber},</if>
+            <if test="equipmentCapacity != null">#{equipmentCapacity},</if>
+            <if test="powerCapacity != null">#{powerCapacity},</if>
+            <if test="dayOfHour != null">#{dayOfHour},</if>
+            <if test="runCapacity != null">#{runCapacity},</if>
+            <if test="netCapacity != null">#{netCapacity},</if>
+            <if test="avgCapacity != null">#{avgCapacity},</if>
+            <if test="avgUseHour != null">#{avgUseHour},</if>
+            <if test="ohterRateCapacity != null">#{ohterRateCapacity},</if>
+            <if test="outsourcingCapacity != null">#{outsourcingCapacity},</if>
+            <if test="otherCapacity != null">#{otherCapacity},</if>
+            <if test="windCapacity != null">#{windCapacity},</if>
+            <if test="powerPlantCapacity != null">#{powerPlantCapacity},</if>
+            <if test="totalUseRate != null">#{totalUseRate},</if>
+            <if test="plantRate != null">#{plantRate},</if>
+            <if test="runHour != null">#{runHour},</if>
+            <if test="spareHour != null">#{spareHour},</if>
+            <if test="stopRunHour != null">#{stopRunHour},</if>
+            <if test="unstopRunHour != null">#{unstopRunHour},</if>
+            <if test="equalUseHour != null">#{equalUseHour},</if>
+            <if test="equalUseCoefficient != null">#{equalUseCoefficient},</if>
+            <if test="powerCoefficient != null">#{powerCoefficient},</if>
+            <if test="avgUseRate != null">#{avgUseRate},</if>
+            <if test="avgPower != null">#{avgPower},</if>
+            <if test="unstopRunNumber != null">#{unstopRunNumber},</if>
+            <if test="safeRunDays != null">#{safeRunDays},</if>
+            <if test="avgWindSpeed != null">#{avgWindSpeed},</if>
+            <if test="maxLoad != null">#{maxLoad},</if>
+            <if test="abandonedWindPower != null">#{abandonedWindPower},</if>
+            <if test="gridTrussReason != null">#{gridTrussReason},</if>
+            <if test="unitFailure != null">#{unitFailure},</if>
+            <if test="ohterReason != null">#{ohterReason},</if>
+            <if test="abandonedWindRate != null">#{abandonedWindRate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessCompanyAnalysis" parameterType="BusinessCompanyAnalysis">
+        update business_company_analysis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="generateNumber != null">generate_number = #{generateNumber},</if>
+            <if test="equipmentCapacity != null">equipment_capacity = #{equipmentCapacity},</if>
+            <if test="powerCapacity != null">power_capacity = #{powerCapacity},</if>
+            <if test="dayOfHour != null">day_of_hour = #{dayOfHour},</if>
+            <if test="runCapacity != null">run_capacity = #{runCapacity},</if>
+            <if test="netCapacity != null">net_capacity = #{netCapacity},</if>
+            <if test="avgCapacity != null">avg_capacity = #{avgCapacity},</if>
+            <if test="avgUseHour != null">avg_use_hour = #{avgUseHour},</if>
+            <if test="ohterRateCapacity != null">ohter_rate_capacity = #{ohterRateCapacity},</if>
+            <if test="outsourcingCapacity != null">outsourcing_capacity = #{outsourcingCapacity},</if>
+            <if test="otherCapacity != null">other_capacity = #{otherCapacity},</if>
+            <if test="windCapacity != null">wind_capacity = #{windCapacity},</if>
+            <if test="powerPlantCapacity != null">power_plant_capacity = #{powerPlantCapacity},</if>
+            <if test="totalUseRate != null">total_use_rate = #{totalUseRate},</if>
+            <if test="plantRate != null">plant_rate = #{plantRate},</if>
+            <if test="runHour != null">run_hour = #{runHour},</if>
+            <if test="spareHour != null">spare_hour = #{spareHour},</if>
+            <if test="stopRunHour != null">stop_run_hour = #{stopRunHour},</if>
+            <if test="unstopRunHour != null">unstop_run_hour = #{unstopRunHour},</if>
+            <if test="equalUseHour != null">equal_use_hour = #{equalUseHour},</if>
+            <if test="equalUseCoefficient != null">equal_use_coefficient = #{equalUseCoefficient},</if>
+            <if test="powerCoefficient != null">power_coefficient = #{powerCoefficient},</if>
+            <if test="avgUseRate != null">avg_use_rate = #{avgUseRate},</if>
+            <if test="avgPower != null">avg_power = #{avgPower},</if>
+            <if test="unstopRunNumber != null">unstop_run_number = #{unstopRunNumber},</if>
+            <if test="safeRunDays != null">safe_run_days = #{safeRunDays},</if>
+            <if test="avgWindSpeed != null">avg_wind_speed = #{avgWindSpeed},</if>
+            <if test="maxLoad != null">max_load = #{maxLoad},</if>
+            <if test="abandonedWindPower != null">abandoned_wind_power = #{abandonedWindPower},</if>
+            <if test="gridTrussReason != null">grid_truss_reason = #{gridTrussReason},</if>
+            <if test="unitFailure != null">unit_failure = #{unitFailure},</if>
+            <if test="ohterReason != null">ohter_reason = #{ohterReason},</if>
+            <if test="abandonedWindRate != null">abandoned_wind_rate = #{abandonedWindRate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessCompanyAnalysisById" parameterType="Long">
+        delete from business_company_analysis where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessCompanyAnalysisByIds" parameterType="String">
+        delete from business_company_analysis where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessStatisticsVehicleMapper">
+
+    <resultMap id="BusinessStatisticsVehicleForAllMap" type="java.util.Map">
+        <result property="id" column="id"/>
+        <result property="licensePlateNumber" column="license_plate_number"/>
+        <result property="sumVehicleMileage" column="sum_vehicle_mileage"/>
+    </resultMap>
+    <select id="BusinessStatisticsVehicleForAll" resultMap="BusinessStatisticsVehicleForAllMap">
+        select bvm.vehicleid id,bvm.license_plate_number,sum(bvm.vehicle_mileage) sum_vehicle_mileage from business_vehicle_mileage bvm
+        left join business_administrative_vehicle bav on bav.id=bvm.vehicleid
+        group by bvm.vehicleid
+        order by sum_vehicle_mileage desc
+    </select>
+
+    <resultMap id="BusinessStatisticsVehicleForOneMap" type="java.util.Map">
+        <result property="vehicleMonth" column="vehiclemonth"/>
+        <result property="VehicleMileage" column="vehicle_mileage"/>
+        <result property="vehicleImage" column="vehicle_image"/>
+    </resultMap>
+    <select id="BusinessStatisticsVehicleForOne" resultMap="BusinessStatisticsVehicleForOneMap">
+        select bvm.vehiclemonth,bvm.vehicle_mileage,bav.vehicle_image from business_vehicle_mileage bvm
+        left join business_administrative_vehicle bav on bav.id=bvm.vehicleid
+        where bvm.vehicleyear= (select year(NOW())-#{year})
+        and bvm.vehicleid=#{id}
+    </select>
+
+    <select id="businessStatisticsVehicleForOne" resultMap="BusinessStatisticsVehicleForOneMap">
+        SELECT bvm.vehiclemonth,bvm.vehicle_mileage,bav.vehicle_image
+        FROM business_vehicle_mileage bvm
+        LEFT JOIN business_administrative_vehicle bav
+        ON bav.license_plate_number LIKE CONCAT('%', bvm.license_plate_number, '%')
+        where bvm.vehicleyear= (select year(NOW())-#{year})
+        and bav.id=#{id}
+    </select>
+
+    <resultMap id="BusinessStatisticsVehicleForYearMap" type="java.util.Map">
+        <result property="id" column="id"/>
+        <result property="licensePlateNumber" column="license_plate_number"/>
+        <result property="vehicleYear" column="vehicleyear"/>
+        <result property="sumYearVehicleMileage" column="sum_year_vehicle_mileage"/>
+    </resultMap>
+    <select id="BusinessStatisticsVehicleForYear" resultMap="BusinessStatisticsVehicleForYearMap">
+        select bvm.vehicleid id,bav.license_plate_number,bvm.vehicleyear,SUM(bvm.vehicle_mileage) sum_year_vehicle_mileage from business_vehicle_mileage bvm
+        left join business_administrative_vehicle bav on bav.id=bvm.vehicleid
+        where bvm.vehicleyear=(select year(NOW())-#{year})
+        group by bvm.vehicleid,bvm.vehicleyear
+    </select>
+
+    <resultMap id="selectVidMap" type="java.util.Map">
+        <result property="id" column="id"/>
+        <result property="licensePlateNumber" column="license_plate_number"/>
+    </resultMap>
+    <select id="selectVid" resultMap="selectVidMap">
+        select id ,license_plate_number from business_administrative_vehicle
+    </select>
+
+    <resultMap id="selectVnumberMap" type="java.util.Map">
+        <result property="licensePlateNumber" column="license_plate_number"/>
+        <result property="sumYearVehicleMileage" column="sum_year_vehicle_mileage"/>
+    </resultMap>
+
+    <select id="selectVnumber" resultMap="selectVnumberMap">
+        SELECT bvm.license_plate_number,SUM(bvm.vehicle_mileage) sum_vehicle_mileage FROM business_vehicle_mileage bvm
+        LEFT JOIN business_administrative_vehicle bav ON bav.id=bvm.vehicleid
+        GROUP BY bvm.vehicleid
+        ORDER BY sum_vehicle_mileage DESC LIMIT 5
+    </select>
+    <resultMap id="selectForYearMap" type="java.util.Map">
+        <result property="sumYearVehicleMileage" column="sum_year_vehicle_mileage"/>
+    </resultMap>
+    <select id="selectForYear" resultMap="selectForYearMap">
+        SELECT  SUM(vehicle_mileage)  as sum_year_vehicle_mileage
+            FROM business_vehicle_mileage
+        WHERE vehicleid=#{vid} AND vehicleyear=(select year(NOW())-#{year})
+    </select>
+
+    <select id="selectForYear2" resultMap="selectForYearMap">
+        SELECT SUM(bvm.vehicle_mileage) AS sum_year_vehicle_mileage
+        FROM business_vehicle_mileage bvm
+        LEFT JOIN business_administrative_vehicle bav ON bav.license_plate_number LIKE CONCAT('%',bvm.license_plate_number,'%')
+        WHERE vehicleyear = (SELECT YEAR(NOW()) -#{year})
+        AND bvm.license_plate_number LIKE CONCAT('%',#{vnumber},'%' )
+    </select>
+</mapper>

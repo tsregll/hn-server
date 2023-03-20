@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessVehicleMileageMapper">
+    
+    <resultMap type="BusinessVehicleMileage" id="BusinessVehicleMileageResult">
+        <result property="id"    column="id"    />
+        <result property="vehicleid"    column="vehicleid"    />
+        <result property="vehicleyear"    column="vehicleyear"    />
+        <result property="vehiclemonth"    column="vehiclemonth"    />
+        <result property="vehicleMileage"    column="vehicle_mileage"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="kmBeginningOfMonth"    column="km_beginning_of_month"    />
+        <result property="kmEndindOfMonth"    column="km_endind_of_month"    />
+        <result property="fuelVolume"    column="fuel_volume"    />
+        <result property="refuelingAmount"    column="refueling_amount"    />
+        <result property="actualFuelConsumption"    column="actual_fuel_consumption"    />
+        <result property="maintenancePremium"    column="maintenance_premium"    />
+        <result property="insurancePremium"    column="insurance_premium"    />
+        <result property="toll"    column="toll"    />
+        <result property="parkingRate"    column="parking_rate"    />
+        <result property="parkingFee"    column="parking_fee"    />
+        <result property="carWashFee"    column="car_wash_fee"    />
+        <result property="otherExpenses"    column="other_expenses"    />
+        <result property="subtotal"    column="subtotal"    />
+        <result property="totalCost"    column="total_cost"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessVehicleMileageVo">
+        select id, vehicleid, vehicleyear, vehiclemonth, vehicle_mileage, license_plate_number, km_beginning_of_month, km_endind_of_month, fuel_volume, refueling_amount, actual_fuel_consumption, maintenance_premium, insurance_premium, toll, parking_rate, parking_fee, car_wash_fee, other_expenses, subtotal, total_cost, create_by, create_time, update_by, update_time, remark from business_vehicle_mileage
+    </sql>
+
+    <select id="selectBusinessVehicleMileageList" parameterType="BusinessVehicleMileage" resultMap="BusinessVehicleMileageResult">
+        <include refid="selectBusinessVehicleMileageVo"/>
+        <where>  
+            <if test="vehicleyear != null  and vehicleyear != ''"> and vehicleyear = #{vehicleyear}</if>
+            <if test="vehiclemonth != null  and vehiclemonth != ''"> and vehiclemonth = #{vehiclemonth}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number = #{licensePlateNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessVehicleMileageById" parameterType="Long" resultMap="BusinessVehicleMileageResult">
+        <include refid="selectBusinessVehicleMileageVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessVehicleMileage" parameterType="BusinessVehicleMileage" useGeneratedKeys="true" keyProperty="id">
+        insert into business_vehicle_mileage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vehicleid != null">vehicleid,</if>
+            <if test="vehicleyear != null and vehicleyear != ''">vehicleyear,</if>
+            <if test="vehiclemonth != null and vehiclemonth != ''">vehiclemonth,</if>
+            <if test="vehicleMileage != null">vehicle_mileage,</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">license_plate_number,</if>
+            <if test="kmBeginningOfMonth != null">km_beginning_of_month,</if>
+            <if test="kmEndindOfMonth != null">km_endind_of_month,</if>
+            <if test="fuelVolume != null">fuel_volume,</if>
+            <if test="refuelingAmount != null">refueling_amount,</if>
+            <if test="actualFuelConsumption != null">actual_fuel_consumption,</if>
+            <if test="maintenancePremium != null">maintenance_premium,</if>
+            <if test="insurancePremium != null">insurance_premium,</if>
+            <if test="toll != null">toll,</if>
+            <if test="parkingRate != null">parking_rate,</if>
+            <if test="parkingFee != null">parking_fee,</if>
+            <if test="carWashFee != null">car_wash_fee,</if>
+            <if test="otherExpenses != null">other_expenses,</if>
+            <if test="subtotal != null">subtotal,</if>
+            <if test="totalCost != null">total_cost,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vehicleid != null">#{vehicleid},</if>
+            <if test="vehicleyear != null and vehicleyear != ''">#{vehicleyear},</if>
+            <if test="vehiclemonth != null and vehiclemonth != ''">#{vehiclemonth},</if>
+            <if test="vehicleMileage != null">#{vehicleMileage},</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">#{licensePlateNumber},</if>
+            <if test="kmBeginningOfMonth != null">#{kmBeginningOfMonth},</if>
+            <if test="kmEndindOfMonth != null">#{kmEndindOfMonth},</if>
+            <if test="fuelVolume != null">#{fuelVolume},</if>
+            <if test="refuelingAmount != null">#{refuelingAmount},</if>
+            <if test="actualFuelConsumption != null">#{actualFuelConsumption},</if>
+            <if test="maintenancePremium != null">#{maintenancePremium},</if>
+            <if test="insurancePremium != null">#{insurancePremium},</if>
+            <if test="toll != null">#{toll},</if>
+            <if test="parkingRate != null">#{parkingRate},</if>
+            <if test="parkingFee != null">#{parkingFee},</if>
+            <if test="carWashFee != null">#{carWashFee},</if>
+            <if test="otherExpenses != null">#{otherExpenses},</if>
+            <if test="subtotal != null">#{subtotal},</if>
+            <if test="totalCost != null">#{totalCost},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessVehicleMileage" parameterType="BusinessVehicleMileage">
+        update business_vehicle_mileage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vehicleid != null">vehicleid = #{vehicleid},</if>
+            <if test="vehicleyear != null and vehicleyear != ''">vehicleyear = #{vehicleyear},</if>
+            <if test="vehiclemonth != null and vehiclemonth != ''">vehiclemonth = #{vehiclemonth},</if>
+            <if test="vehicleMileage != null">vehicle_mileage = #{vehicleMileage},</if>
+            <if test="licensePlateNumber != null and licensePlateNumber != ''">license_plate_number = #{licensePlateNumber},</if>
+            <if test="kmBeginningOfMonth != null">km_beginning_of_month = #{kmBeginningOfMonth},</if>
+            <if test="kmEndindOfMonth != null">km_endind_of_month = #{kmEndindOfMonth},</if>
+            <if test="fuelVolume != null">fuel_volume = #{fuelVolume},</if>
+            <if test="refuelingAmount != null">refueling_amount = #{refuelingAmount},</if>
+            <if test="actualFuelConsumption != null">actual_fuel_consumption = #{actualFuelConsumption},</if>
+            <if test="maintenancePremium != null">maintenance_premium = #{maintenancePremium},</if>
+            <if test="insurancePremium != null">insurance_premium = #{insurancePremium},</if>
+            <if test="toll != null">toll = #{toll},</if>
+            <if test="parkingRate != null">parking_rate = #{parkingRate},</if>
+            <if test="parkingFee != null">parking_fee = #{parkingFee},</if>
+            <if test="carWashFee != null">car_wash_fee = #{carWashFee},</if>
+            <if test="otherExpenses != null">other_expenses = #{otherExpenses},</if>
+            <if test="subtotal != null">subtotal = #{subtotal},</if>
+            <if test="totalCost != null">total_cost = #{totalCost},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessVehicleMileageById" parameterType="Long">
+        delete from business_vehicle_mileage where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessVehicleMileageByIds" parameterType="String">
+        delete from business_vehicle_mileage where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectBusinessVehicleMileage" parameterType="BusinessVehicleMileage" resultMap="BusinessVehicleMileageResult">
+        <include refid="selectBusinessVehicleMileageVo"/>
+        <where>
+            vehicleyear = #{vehicleyear}
+            and vehiclemonth = #{vehiclemonth}
+            and license_plate_number = #{licensePlateNumber}
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessXnyMapper">
+
+    <select id="getProject" resultType="com.ruoyi.business.vo.BusinessXnyProjectVo" parameterType="String">
+        SELECT * FROM business_xny_project where projectYear = #{selectYear}
+    </select>
+
+
+    <insert id="insertProject">
+        INSERT INTO business_xny_project VALUES (#{businessXnyProjectVo.projectId},#{businessXnyProjectVo.projectName},#{businessXnyProjectVo.projectType},#{businessXnyProjectVo.projectYear},#{businessXnyProjectVo.projectLocation},#{businessXnyProjectVo.projectCapcity},#{businessXnyProjectVo.node1_0},#{businessXnyProjectVo.node1_1},#{businessXnyProjectVo.node2_0},#{businessXnyProjectVo.node2_1},#{businessXnyProjectVo.node3_0},#{businessXnyProjectVo.node3_1},#{businessXnyProjectVo.node4_0},#{businessXnyProjectVo.node4_1},#{businessXnyProjectVo.node5_0},#{businessXnyProjectVo.node5_1},#{businessXnyProjectVo.node6_0},#{businessXnyProjectVo.node6_1},#{businessXnyProjectVo.node7_0},#{businessXnyProjectVo.node7_1},#{businessXnyProjectVo.node8_0},#{businessXnyProjectVo.node8_1},#{businessXnyProjectVo.node9_0},#{businessXnyProjectVo.node9_1},#{businessXnyProjectVo.node10_0},#{businessXnyProjectVo.node10_1},#{businessXnyProjectVo.node11_0},#{businessXnyProjectVo.node11_1},#{businessXnyProjectVo.node12_0},#{businessXnyProjectVo.node12_1},#{businessXnyProjectVo.node13_0},#{businessXnyProjectVo.node13_1},#{businessXnyProjectVo.node14_0},#{businessXnyProjectVo.node14_1},#{businessXnyProjectVo.node15_0},#{businessXnyProjectVo.node15_1},#{businessXnyProjectVo.node16_0},#{businessXnyProjectVo.node16_1},#{businessXnyProjectVo.node17_0},#{businessXnyProjectVo.node17_1},#{businessXnyProjectVo.node18_0},#{businessXnyProjectVo.node18_1},#{businessXnyProjectVo.node19_0},#{businessXnyProjectVo.node19_1},#{businessXnyProjectVo.node20_0},#{businessXnyProjectVo.node20_1},#{businessXnyProjectVo.node21_0},#{businessXnyProjectVo.node21_1},#{businessXnyProjectVo.node22_0},#{businessXnyProjectVo.node22_1},#{businessXnyProjectVo.node23_0},#{businessXnyProjectVo.node23_1},#{businessXnyProjectVo.node24_0},#{businessXnyProjectVo.node24_1},#{businessXnyProjectVo.node25_0},#{businessXnyProjectVo.node25_1},#{businessXnyProjectVo.node26_0},#{businessXnyProjectVo.node26_1},#{businessXnyProjectVo.node27_0},#{businessXnyProjectVo.node27_1},#{businessXnyProjectVo.node28_0},#{businessXnyProjectVo.node28_1},#{businessXnyProjectVo.node29_0},#{businessXnyProjectVo.node29_1},#{businessXnyProjectVo.node30_0},#{businessXnyProjectVo.node30_1},#{businessXnyProjectVo.node31_0},#{businessXnyProjectVo.node31_1},#{businessXnyProjectVo.node32_0},#{businessXnyProjectVo.node32_1},#{businessXnyProjectVo.node33_0},#{businessXnyProjectVo.node33_1},#{businessXnyProjectVo.node34_0},#{businessXnyProjectVo.node34_1},#{businessXnyProjectVo.node35_0},#{businessXnyProjectVo.node35_1},#{businessXnyProjectVo.node36_0},#{businessXnyProjectVo.node36_1},#{businessXnyProjectVo.beizhu})
+    </insert>
+
+    <update id="truncateTable">
+        truncate table business_xny_project
+    </update>
+
+</mapper>

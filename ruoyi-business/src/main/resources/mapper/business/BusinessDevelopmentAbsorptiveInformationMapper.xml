@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentAbsorptiveInformationMapper">
+    
+    <resultMap type="BusinessDevelopmentAbsorptiveInformation" id="BusinessDevelopmentAbsorptiveInformationResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="absorptiveTitle"    column="absorptive_title"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="earlyWarningTime"    column="early_warning_time"    />
+        <result property="absorptiveMap"    column="absorptive_map"    />
+        <result property="mapDiscription"    column="map_discription"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentAbsorptiveInformationVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, absorptive_title, project_type, early_warning_time, absorptive_map, map_discription, remark from business_development_absorptive_information
+    </sql>
+
+    <select id="selectBusinessDevelopmentAbsorptiveInformationList" parameterType="BusinessDevelopmentAbsorptiveInformation" resultMap="BusinessDevelopmentAbsorptiveInformationResult">
+        <include refid="selectBusinessDevelopmentAbsorptiveInformationVo"/>
+        <where>
+            <if test="remark != null  and remark != ''"> and remark LIKE #{remark}</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="earlyWarningTime != null  and earlyWarningTime != ''"> and early_warning_time LIKE #{earlyWarningTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessDevelopmentAbsorptiveInformationById" parameterType="Long" resultMap="BusinessDevelopmentAbsorptiveInformationResult">
+        <include refid="selectBusinessDevelopmentAbsorptiveInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentAbsorptiveInformation" parameterType="BusinessDevelopmentAbsorptiveInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_absorptive_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number,</if>
+            <if test="absorptiveTitle != null and absorptiveTitle != ''">absorptive_title,</if>
+            <if test="projectType != null and projectType != ''">project_type,</if>
+            <if test="earlyWarningTime != null and earlyWarningTime != ''">early_warning_time,</if>
+            <if test="absorptiveMap != null and absorptiveMap != ''">absorptive_map,</if>
+            <if test="mapDiscription != null and mapDiscription != ''">map_discription,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">#{defaultTime},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">#{operatorNumber},</if>
+            <if test="absorptiveTitle != null and absorptiveTitle != ''">#{absorptiveTitle},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="earlyWarningTime != null and earlyWarningTime != ''">#{earlyWarningTime},</if>
+            <if test="absorptiveMap != null and absorptiveMap != ''">#{absorptiveMap},</if>
+            <if test="mapDiscription != null and mapDiscription != ''">#{mapDiscription},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentAbsorptiveInformation" parameterType="BusinessDevelopmentAbsorptiveInformation">
+        update business_development_absorptive_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time = #{defaultTime},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number = #{operatorNumber},</if>
+            <if test="absorptiveTitle != null and absorptiveTitle != ''">absorptive_title = #{absorptiveTitle},</if>
+            <if test="projectType != null and projectType != ''">project_type = #{projectType},</if>
+            <if test="earlyWarningTime != null and earlyWarningTime != ''">early_warning_time = #{earlyWarningTime},</if>
+            <if test="absorptiveMap != null and absorptiveMap != ''">absorptive_map = #{absorptiveMap},</if>
+            <if test="mapDiscription != null and mapDiscription != ''">map_discription = #{mapDiscription},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentAbsorptiveInformationById" parameterType="Long">
+        delete from business_development_absorptive_information where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentAbsorptiveInformationByIds" parameterType="String">
+        delete from business_development_absorptive_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

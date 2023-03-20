@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessStatisticsYueyangElectricityMapper">
+    
+    <resultMap type="BusinessStatisticsYueyangElectricity" id="BusinessStatisticsYueyangElectricityResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="preparationDate"    column="preparation_date"    />
+        <result property="key0"    column="key0"    />
+        <result property="key1"    column="key1"    />
+        <result property="key2"    column="key2"    />
+        <result property="key3"    column="key3"    />
+        <result property="key4"    column="key4"    />
+        <result property="key5"    column="key5"    />
+        <result property="key6"    column="key6"    />
+        <result property="key7"    column="key7"    />
+        <result property="key8"    column="key8"    />
+        <result property="key9"    column="key9"    />
+        <result property="key10"    column="key10"    />
+        <result property="key11"    column="key11"    />
+        <result property="key12"    column="key12"    />
+        <result property="key13"    column="key13"    />
+        <result property="key14"    column="key14"    />
+        <result property="key15"    column="key15"    />
+        <result property="key16"    column="key16"    />
+        <result property="key17"    column="key17"    />
+        <result property="key18"    column="key18"    />
+        <result property="key19"    column="key19"    />
+        <result property="key20"    column="key20"    />
+        <result property="key21"    column="key21"    />
+        <result property="key22"    column="key22"    />
+        <result property="key23"    column="key23"    />
+        <result property="key24"    column="key24"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessStatisticsYueyangElectricityVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, preparation_date, key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, key10, key11, key12, key13, key14, key15, key16, key17, key18, key19, key20, key21, key22, key23, key24, remark from business_statistics_yueyang_electricity
+    </sql>
+
+    <select id="selectBusinessStatisticsYueyangElectricityList" parameterType="BusinessStatisticsYueyangElectricity" resultMap="BusinessStatisticsYueyangElectricityResult">
+        <include refid="selectBusinessStatisticsYueyangElectricityVo"/>
+        <where>  
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="preparationDate != null  and preparationDate != ''"> and preparation_date like concat('%', #{preparationDate}, '%')</if>
+            <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+                AND preparation_date>= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND preparation_date&lt;= #{endTime}
+            </if>
+            <if test="key0 != null  and key0 != ''"> and key0 = #{key0}</if>
+            <if test="key1 != null  and key1 != ''"> and key1 = #{key1}</if>
+            <if test="key2 != null  and key2 != ''"> and key2 = #{key2}</if>
+            <if test="key3 != null  and key3 != ''"> and key3 = #{key3}</if>
+            <if test="key4 != null  and key4 != ''"> and key4 = #{key4}</if>
+            <if test="key5 != null  and key5 != ''"> and key5 = #{key5}</if>
+            <if test="key6 != null  and key6 != ''"> and key6 = #{key6}</if>
+            <if test="key7 != null  and key7 != ''"> and key7 = #{key7}</if>
+            <if test="key8 != null  and key8 != ''"> and key8 = #{key8}</if>
+            <if test="key9 != null  and key9 != ''"> and key9 = #{key9}</if>
+            <if test="key10 != null  and key10 != ''"> and key10 = #{key10}</if>
+            <if test="key11 != null  and key11 != ''"> and key11 = #{key11}</if>
+            <if test="key12 != null  and key12 != ''"> and key12 = #{key12}</if>
+            <if test="key13 != null  and key13 != ''"> and key13 = #{key13}</if>
+            <if test="key14 != null  and key14 != ''"> and key14 = #{key14}</if>
+            <if test="key15 != null  and key15 != ''"> and key15 = #{key15}</if>
+            <if test="key16 != null  and key16 != ''"> and key16 = #{key16}</if>
+            <if test="key17 != null  and key17 != ''"> and key17 = #{key17}</if>
+            <if test="key18 != null  and key18 != ''"> and key18 = #{key18}</if>
+            <if test="key19 != null  and key19 != ''"> and key19 = #{key19}</if>
+            <if test="key20 != null  and key20 != ''"> and key20 = #{key20}</if>
+            <if test="key21 != null  and key21 != ''"> and key21 = #{key21}</if>
+            <if test="key22 != null  and key22 != ''"> and key22 = #{key22}</if>
+            <if test="key23 != null  and key23 != ''"> and key23 = #{key23}</if>
+            <if test="key24 != null  and key24 != ''"> and key24 = #{key24}</if>
+        </where>
+        order by preparation_date desc
+    </select>
+    
+    <select id="selectBusinessStatisticsYueyangElectricityById" parameterType="Long" resultMap="BusinessStatisticsYueyangElectricityResult">
+        <include refid="selectBusinessStatisticsYueyangElectricityVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessStatisticsYueyangElectricity" parameterType="BusinessStatisticsYueyangElectricity" useGeneratedKeys="true" keyProperty="id">
+        insert into business_statistics_yueyang_electricity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number,</if>
+            <if test="preparationDate != null and preparationDate != ''">preparation_date,</if>
+            <if test="key0 != null and key0 != ''">key0,</if>
+            <if test="key1 != null and key1 != ''">key1,</if>
+            <if test="key2 != null and key2 != ''">key2,</if>
+            <if test="key3 != null and key3 != ''">key3,</if>
+            <if test="key4 != null and key4 != ''">key4,</if>
+            <if test="key5 != null and key5 != ''">key5,</if>
+            <if test="key6 != null and key6 != ''">key6,</if>
+            <if test="key7 != null and key7 != ''">key7,</if>
+            <if test="key8 != null and key8 != ''">key8,</if>
+            <if test="key9 != null and key9 != ''">key9,</if>
+            <if test="key10 != null and key10 != ''">key10,</if>
+            <if test="key11 != null and key11 != ''">key11,</if>
+            <if test="key12 != null and key12 != ''">key12,</if>
+            <if test="key13 != null and key13 != ''">key13,</if>
+            <if test="key14 != null and key14 != ''">key14,</if>
+            <if test="key15 != null and key15 != ''">key15,</if>
+            <if test="key16 != null and key16 != ''">key16,</if>
+            <if test="key17 != null and key17 != ''">key17,</if>
+            <if test="key18 != null and key18 != ''">key18,</if>
+            <if test="key19 != null and key19 != ''">key19,</if>
+            <if test="key20 != null and key20 != ''">key20,</if>
+            <if test="key21 != null and key21 != ''">key21,</if>
+            <if test="key22 != null and key22 != ''">key22,</if>
+            <if test="key23 != null and key23 != ''">key23,</if>
+            <if test="key24 != null and key24 != ''">key24,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">#{defaultTime},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">#{operatorNumber},</if>
+            <if test="preparationDate != null and preparationDate != ''">#{preparationDate},</if>
+            <if test="key0 != null and key0 != ''">#{key0},</if>
+            <if test="key1 != null and key1 != ''">#{key1},</if>
+            <if test="key2 != null and key2 != ''">#{key2},</if>
+            <if test="key3 != null and key3 != ''">#{key3},</if>
+            <if test="key4 != null and key4 != ''">#{key4},</if>
+            <if test="key5 != null and key5 != ''">#{key5},</if>
+            <if test="key6 != null and key6 != ''">#{key6},</if>
+            <if test="key7 != null and key7 != ''">#{key7},</if>
+            <if test="key8 != null and key8 != ''">#{key8},</if>
+            <if test="key9 != null and key9 != ''">#{key9},</if>
+            <if test="key10 != null and key10 != ''">#{key10},</if>
+            <if test="key11 != null and key11 != ''">#{key11},</if>
+            <if test="key12 != null and key12 != ''">#{key12},</if>
+            <if test="key13 != null and key13 != ''">#{key13},</if>
+            <if test="key14 != null and key14 != ''">#{key14},</if>
+            <if test="key15 != null and key15 != ''">#{key15},</if>
+            <if test="key16 != null and key16 != ''">#{key16},</if>
+            <if test="key17 != null and key17 != ''">#{key17},</if>
+            <if test="key18 != null and key18 != ''">#{key18},</if>
+            <if test="key19 != null and key19 != ''">#{key19},</if>
+            <if test="key20 != null and key20 != ''">#{key20},</if>
+            <if test="key21 != null and key21 != ''">#{key21},</if>
+            <if test="key22 != null and key22 != ''">#{key22},</if>
+            <if test="key23 != null and key23 != ''">#{key23},</if>
+            <if test="key24 != null and key24 != ''">#{key24},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessStatisticsYueyangElectricity" parameterType="BusinessStatisticsYueyangElectricity">
+        update business_statistics_yueyang_electricity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time = #{defaultTime},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number = #{operatorNumber},</if>
+            <if test="preparationDate != null and preparationDate != ''">preparation_date = #{preparationDate},</if>
+            <if test="key0 != null and key0 != ''">key0 = #{key0},</if>
+            <if test="key1 != null and key1 != ''">key1 = #{key1},</if>
+            <if test="key2 != null and key2 != ''">key2 = #{key2},</if>
+            <if test="key3 != null and key3 != ''">key3 = #{key3},</if>
+            <if test="key4 != null and key4 != ''">key4 = #{key4},</if>
+            <if test="key5 != null and key5 != ''">key5 = #{key5},</if>
+            <if test="key6 != null and key6 != ''">key6 = #{key6},</if>
+            <if test="key7 != null and key7 != ''">key7 = #{key7},</if>
+            <if test="key8 != null and key8 != ''">key8 = #{key8},</if>
+            <if test="key9 != null and key9 != ''">key9 = #{key9},</if>
+            <if test="key10 != null and key10 != ''">key10 = #{key10},</if>
+            <if test="key11 != null and key11 != ''">key11 = #{key11},</if>
+            <if test="key12 != null and key12 != ''">key12 = #{key12},</if>
+            <if test="key13 != null and key13 != ''">key13 = #{key13},</if>
+            <if test="key14 != null and key14 != ''">key14 = #{key14},</if>
+            <if test="key15 != null and key15 != ''">key15 = #{key15},</if>
+            <if test="key16 != null and key16 != ''">key16 = #{key16},</if>
+            <if test="key17 != null and key17 != ''">key17 = #{key17},</if>
+            <if test="key18 != null and key18 != ''">key18 = #{key18},</if>
+            <if test="key19 != null and key19 != ''">key19 = #{key19},</if>
+            <if test="key20 != null and key20 != ''">key20 = #{key20},</if>
+            <if test="key21 != null and key21 != ''">key21 = #{key21},</if>
+            <if test="key22 != null and key22 != ''">key22 = #{key22},</if>
+            <if test="key23 != null and key23 != ''">key23 = #{key23},</if>
+            <if test="key24 != null and key24 != ''">key24 = #{key24},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessStatisticsYueyangElectricityById" parameterType="Long">
+        delete from business_statistics_yueyang_electricity where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessStatisticsYueyangElectricityByIds" parameterType="String">
+        delete from business_statistics_yueyang_electricity where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

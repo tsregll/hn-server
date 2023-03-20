@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessFiveGroupIndustryMapper">
+    
+    <resultMap type="BusinessFiveGroupIndustry" id="BusinessFiveGroupIndustryResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="industryYear"    column="industry_year"    />
+        <result property="industryQuarter"    column="industry_quarter"    />
+        <result property="industryGroup"    column="industry_group"    />
+        <result property="industryMd"    column="industry_MD"    />
+        <result property="industrySd"    column="industry_SD"    />
+        <result property="industryFd"    column="industry_FD"    />
+        <result property="industryGf"    column="industry_GF"    />
+        <result property="industryQt"    column="industry_QT"    />
+        <result property="industryHj"    column="industry_HJ"    />
+        <result property="queryTime"    column="query_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessFiveGroupIndustryVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, industry_year, industry_quarter, industry_group, industry_MD, industry_SD, industry_FD, industry_GF, industry_QT, industry_HJ, query_time, remark from business_five_group_industry
+    </sql>
+
+    <select id="selectBusinessFiveGroupIndustryList" parameterType="BusinessFiveGroupIndustry" resultMap="BusinessFiveGroupIndustryResult">
+        <include refid="selectBusinessFiveGroupIndustryVo"/>
+        <where>  
+            <if test="industryYear != null  and industryYear != ''"> and industry_year like concat('%', #{industryYear}, '%')</if>
+            <if test="industryQuarter != null  and industryQuarter != ''"> and industry_quarter like concat('%', #{industryQuarter}, '%')</if>
+            <if test="industryGroup != null  and industryGroup != ''"> and industry_group = #{industryGroup}</if>
+            <if test="industryMd != null  and industryMd != ''"> and industry_MD = #{industryMd}</if>
+            <if test="industrySd != null  and industrySd != ''"> and industry_SD = #{industrySd}</if>
+            <if test="industryFd != null  and industryFd != ''"> and industry_FD = #{industryFd}</if>
+            <if test="industryGf != null  and industryGf != ''"> and industry_GF = #{industryGf}</if>
+            <if test="industryQt != null  and industryQt != ''"> and industry_QT = #{industryQt}</if>
+            <if test="industryHj != null  and industryHj != ''"> and industry_HJ = #{industryHj}</if>
+            <if test="queryTime != null  and queryTime != ''"> and query_time like concat('%', #{queryTime}, '%')</if>
+            <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+                AND query_time&gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND query_time&lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectBusinessFiveGroupIndustryOrderByQueryTimeList" parameterType="BusinessFiveGroupIndustry" resultMap="BusinessFiveGroupIndustryResult">
+        <include refid="selectBusinessFiveGroupIndustryVo"/>
+        <where>
+            <if test="industryYear != null  and industryYear != ''"> and industry_year like concat('%', #{industryYear}, '%')</if>
+            <if test="industryQuarter != null  and industryQuarter != ''"> and industry_quarter like concat('%', #{industryQuarter}, '%')</if>
+            <if test="industryGroup != null  and industryGroup != ''"> and industry_group = #{industryGroup}</if>
+            <if test="industryMd != null  and industryMd != ''"> and industry_MD = #{industryMd}</if>
+            <if test="industrySd != null  and industrySd != ''"> and industry_SD = #{industrySd}</if>
+            <if test="industryFd != null  and industryFd != ''"> and industry_FD = #{industryFd}</if>
+            <if test="industryGf != null  and industryGf != ''"> and industry_GF = #{industryGf}</if>
+            <if test="industryQt != null  and industryQt != ''"> and industry_QT = #{industryQt}</if>
+            <if test="industryHj != null  and industryHj != ''"> and industry_HJ = #{industryHj}</if>
+            <if test="queryTime != null  and queryTime != ''"> and query_time like concat('%', #{queryTime}, '%')</if>
+            <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+                AND query_time&gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND query_time&lt;= #{endTime}
+            </if>
+        </where>
+        order by query_time desc
+    </select>
+
+    <select id="selectBusinessFiveGroupIndustryByGroupList" parameterType="BusinessFiveGroupIndustry" resultMap="BusinessFiveGroupIndustryResult">
+        <include refid="selectBusinessFiveGroupIndustryVo"/>
+        <where>
+            <if test="industryYear != null  and industryYear != ''"> and industry_year like concat('%', #{industryYear}, '%')</if>
+            <if test="industryQuarter != null  and industryQuarter != ''"> and industry_quarter like concat('%', #{industryQuarter}, '%')</if>
+            <if test="industryGroup != null  and industryGroup != ''"> and industry_group = #{industryGroup}</if>
+            <if test="industryMd != null  and industryMd != ''"> and industry_MD = #{industryMd}</if>
+            <if test="industrySd != null  and industrySd != ''"> and industry_SD = #{industrySd}</if>
+            <if test="industryFd != null  and industryFd != ''"> and industry_FD = #{industryFd}</if>
+            <if test="industryGf != null  and industryGf != ''"> and industry_GF = #{industryGf}</if>
+            <if test="industryQt != null  and industryQt != ''"> and industry_QT = #{industryQt}</if>
+            <if test="industryHj != null  and industryHj != ''"> and industry_HJ = #{industryHj}</if>
+            <if test="queryTime != null  and queryTime != ''"> and query_time like concat('%', #{queryTime}, '%')</if>
+            <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+                AND query_time&gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND query_time&lt;= #{endTime}
+            </if>
+        </where>
+        order by industry_group asc
+    </select>
+    
+    <select id="selectBusinessFiveGroupIndustryById" parameterType="Long" resultMap="BusinessFiveGroupIndustryResult">
+        <include refid="selectBusinessFiveGroupIndustryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessFiveGroupIndustry" parameterType="BusinessFiveGroupIndustry" useGeneratedKeys="true" keyProperty="id">
+        insert into business_five_group_industry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="industryYear != null and industryYear != ''">industry_year,</if>
+            <if test="industryQuarter != null and industryQuarter != ''">industry_quarter,</if>
+            <if test="industryGroup != null and industryGroup != ''">industry_group,</if>
+            <if test="industryMd != null and industryMd != ''">industry_MD,</if>
+            <if test="industrySd != null and industrySd != ''">industry_SD,</if>
+            <if test="industryFd != null and industryFd != ''">industry_FD,</if>
+            <if test="industryGf != null and industryGf != ''">industry_GF,</if>
+            <if test="industryQt != null and industryQt != ''">industry_QT,</if>
+            <if test="industryHj != null and industryHj != ''">industry_HJ,</if>
+            <if test="queryTime != null">query_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="industryYear != null and industryYear != ''">#{industryYear},</if>
+            <if test="industryQuarter != null and industryQuarter != ''">#{industryQuarter},</if>
+            <if test="industryGroup != null and industryGroup != ''">#{industryGroup},</if>
+            <if test="industryMd != null and industryMd != ''">#{industryMd},</if>
+            <if test="industrySd != null and industrySd != ''">#{industrySd},</if>
+            <if test="industryFd != null and industryFd != ''">#{industryFd},</if>
+            <if test="industryGf != null and industryGf != ''">#{industryGf},</if>
+            <if test="industryQt != null and industryQt != ''">#{industryQt},</if>
+            <if test="industryHj != null and industryHj != ''">#{industryHj},</if>
+            <if test="queryTime != null">#{queryTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessFiveGroupIndustry" parameterType="BusinessFiveGroupIndustry">
+        update business_five_group_industry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="industryYear != null and industryYear != ''">industry_year = #{industryYear},</if>
+            <if test="industryQuarter != null and industryQuarter != ''">industry_quarter = #{industryQuarter},</if>
+            <if test="industryGroup != null and industryGroup != ''">industry_group = #{industryGroup},</if>
+            <if test="industryMd != null and industryMd != ''">industry_MD = #{industryMd},</if>
+            <if test="industrySd != null and industrySd != ''">industry_SD = #{industrySd},</if>
+            <if test="industryFd != null and industryFd != ''">industry_FD = #{industryFd},</if>
+            <if test="industryGf != null and industryGf != ''">industry_GF = #{industryGf},</if>
+            <if test="industryQt != null and industryQt != ''">industry_QT = #{industryQt},</if>
+            <if test="industryHj != null and industryHj != ''">industry_HJ = #{industryHj},</if>
+            <if test="queryTime != null">query_time = #{queryTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessFiveGroupIndustryById" parameterType="Long">
+        delete from business_five_group_industry where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessFiveGroupIndustryByIds" parameterType="String">
+        delete from business_five_group_industry where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

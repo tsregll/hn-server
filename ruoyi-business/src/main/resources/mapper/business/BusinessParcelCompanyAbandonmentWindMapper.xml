@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessParcelCompanyAbandonmentWindMapper">
+    
+    <resultMap type="BusinessParcelCompanyAbandonmentWind" id="BusinessParcelCompanyAbandonmentWindResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="abandonmentDate"    column="abandonment_date"    />
+        <result property="abandonmentCompany"    column="abandonment_company"    />
+        <result property="installationVolume"    column="installation_volume"    />
+        <result property="electricityVolume"    column="electricity_volume"    />
+        <result property="abandonmentVolume"    column="abandonment_volume"    />
+        <result property="abandonmentRate"    column="abandonment_rate"    />
+    </resultMap>
+
+    <sql id="selectBusinessParcelCompanyAbandonmentWindVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, abandonment_date, abandonment_company, installation_volume, electricity_volume, abandonment_volume, abandonment_rate from business_parcel_company_abandonment_wind
+    </sql>
+
+    <select id="selectBusinessParcelCompanyAbandonmentWindList" parameterType="BusinessParcelCompanyAbandonmentWind" resultMap="BusinessParcelCompanyAbandonmentWindResult">
+        <include refid="selectBusinessParcelCompanyAbandonmentWindVo"/>
+        <where>
+            <if test="abandonmentDate != null  and abandonmentDate != ''"> and abandonment_date like concat('%', #{abandonmentDate}, '%')</if>
+            <if test="abandonmentCompany != null  and abandonmentCompany != ''"> and abandonment_company = #{abandonmentCompany}</if>
+            <if test="'' == ''"> and 1=1 order by abandonment_date desc,abandonment_company desc</if>
+        </where>
+    </select>
+
+    <select id="selectByTimesParcelCompanyAbandonmentWindList" parameterType="BusinessParcelCompanyAbandonmentWind" resultMap="BusinessParcelCompanyAbandonmentWindResult">
+        <include refid="selectBusinessParcelCompanyAbandonmentWindVo"/>
+        <where>
+            <if test="beginTime != null  and beginTime != ''"> and abandonment_date >=#{beginTime}</if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND abandonment_date&lt;= #{endTime}
+            </if>
+            <if test="abandonmentCompany != null  and abandonmentCompany != ''"> and abandonment_company = #{abandonmentCompany}</if>
+            <if test="'' == ''"> and 1=1 order by abandonment_date desc,abandonment_company desc</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessParcelCompanyAbandonmentWindById" parameterType="Long" resultMap="BusinessParcelCompanyAbandonmentWindResult">
+        <include refid="selectBusinessParcelCompanyAbandonmentWindVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessParcelCompanyAbandonmentWind" parameterType="BusinessParcelCompanyAbandonmentWind" useGeneratedKeys="true" keyProperty="id">
+        insert into business_parcel_company_abandonment_wind
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="abandonmentDate != null and abandonmentDate != ''">abandonment_date,</if>
+            <if test="abandonmentCompany != null and abandonmentCompany != ''">abandonment_company,</if>
+            <if test="installationVolume != null">installation_volume,</if>
+            <if test="electricityVolume != null">electricity_volume,</if>
+            <if test="abandonmentVolume != null and abandonmentVolume != ''">abandonment_volume,</if>
+            <if test="abandonmentRate != null">abandonment_rate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="abandonmentDate != null and abandonmentDate != ''">#{abandonmentDate},</if>
+            <if test="abandonmentCompany != null and abandonmentCompany != ''">#{abandonmentCompany},</if>
+            <if test="installationVolume != null">#{installationVolume},</if>
+            <if test="electricityVolume != null">#{electricityVolume},</if>
+            <if test="abandonmentVolume != null and abandonmentVolume != ''">#{abandonmentVolume},</if>
+            <if test="abandonmentRate != null">#{abandonmentRate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessParcelCompanyAbandonmentWind" parameterType="BusinessParcelCompanyAbandonmentWind">
+        update business_parcel_company_abandonment_wind
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="abandonmentDate != null and abandonmentDate != ''">abandonment_date = #{abandonmentDate},</if>
+            <if test="abandonmentCompany != null and abandonmentCompany != ''">abandonment_company = #{abandonmentCompany},</if>
+            <if test="installationVolume != null">installation_volume = #{installationVolume},</if>
+            <if test="electricityVolume != null">electricity_volume = #{electricityVolume},</if>
+            <if test="abandonmentVolume != null and abandonmentVolume != ''">abandonment_volume = #{abandonmentVolume},</if>
+            <if test="abandonmentRate != null">abandonment_rate = #{abandonmentRate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessParcelCompanyAbandonmentWindById" parameterType="Long">
+        delete from business_parcel_company_abandonment_wind where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessParcelCompanyAbandonmentWindByIds" parameterType="String">
+        delete from business_parcel_company_abandonment_wind where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

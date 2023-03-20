@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentProjectConstructingNodeMapper">
+    
+    <resultMap type="BusinessDevelopmentProjectConstructingNode" id="BusinessDevelopmentProjectConstructingNodeResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="nodeName"    column="node_name"    />
+        <result property="planingTime"    column="planing_time"    />
+        <result property="standardOne"    column="standard_one"    />
+        <result property="statusOne"    column="status_one"    />
+        <result property="standardTwo"    column="standard_two"    />
+        <result property="statusTwo"    column="status_two"    />
+        <result property="standardThree"    column="standard_three"    />
+        <result property="statusThree"    column="status_three"    />
+        <result property="standardFour"    column="standard_four"    />
+        <result property="statusFour"    column="status_four"    />
+        <result property="standardFive"    column="standard_five"    />
+        <result property="statusFive"    column="status_five"    />
+        <result property="standardSix"    column="standard_six"    />
+        <result property="statusSix"    column="status_six"    />
+        <result property="standardSeven"    column="standard_seven"    />
+        <result property="statusSeven"    column="status_seven"    />
+        <result property="standardEight"    column="standard_eight"    />
+        <result property="statusEight"    column="status_eight"    />
+        <result property="standardNine"    column="standard_nine"    />
+        <result property="statusNine"    column="status_nine"    />
+        <result property="standardTen"    column="standard_ten"    />
+        <result property="statusTen"    column="status_ten"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentProjectConstructingNodeVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, node_name, planing_time, standard_one, status_one, standard_two, status_two, standard_three, status_three, standard_four, status_four, standard_five, status_five, standard_six, status_six, standard_seven, status_seven, standard_eight, status_eight, standard_nine, status_nine, standard_ten, status_ten, remark from business_development_project_constructing_node
+    </sql>
+
+    <select id="selectBusinessDevelopmentProjectConstructingNodeList" parameterType="BusinessDevelopmentProjectConstructingNode" resultMap="BusinessDevelopmentProjectConstructingNodeResult">
+        <include refid="selectBusinessDevelopmentProjectConstructingNodeVo"/>
+        <where>  
+            <if test="nodeName != null  and nodeName != ''"> and node_name = #{nodeName}</if>
+            <if test="planingTime != null  and planingTime != ''"> and planing_time like concat('%', #{planingTime}, '%')</if>
+            <if test="standardOne != null  and standardOne != ''"> and standard_one = #{standardOne}</if>
+            <if test="statusOne != null  and statusOne != ''"> and status_one = #{statusOne}</if>
+            <if test="standardTwo != null  and standardTwo != ''"> and standard_two = #{standardTwo}</if>
+            <if test="statusTwo != null  and statusTwo != ''"> and status_two = #{statusTwo}</if>
+            <if test="standardThree != null  and standardThree != ''"> and standard_three = #{standardThree}</if>
+            <if test="statusThree != null  and statusThree != ''"> and status_three = #{statusThree}</if>
+            <if test="standardFour != null  and standardFour != ''"> and standard_four = #{standardFour}</if>
+            <if test="statusFour != null  and statusFour != ''"> and status_four = #{statusFour}</if>
+            <if test="standardFive != null  and standardFive != ''"> and standard_five = #{standardFive}</if>
+            <if test="statusFive != null  and statusFive != ''"> and status_five = #{statusFive}</if>
+            <if test="standardSix != null  and standardSix != ''"> and standard_six = #{standardSix}</if>
+            <if test="statusSix != null  and statusSix != ''"> and status_six = #{statusSix}</if>
+            <if test="standardSeven != null  and standardSeven != ''"> and standard_seven = #{standardSeven}</if>
+            <if test="statusSeven != null  and statusSeven != ''"> and status_seven = #{statusSeven}</if>
+            <if test="standardEight != null  and standardEight != ''"> and standard_eight = #{standardEight}</if>
+            <if test="statusEight != null  and statusEight != ''"> and status_eight = #{statusEight}</if>
+            <if test="standardNine != null  and standardNine != ''"> and standard_nine = #{standardNine}</if>
+            <if test="statusNine != null  and statusNine != ''"> and status_nine = #{statusNine}</if>
+            <if test="standardTen != null  and standardTen != ''"> and standard_ten = #{standardTen}</if>
+            <if test="statusTen != null  and statusTen != ''"> and status_ten = #{statusTen}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectBusinessDevelopmentProjectConstructingNodeById" parameterType="Long" resultMap="BusinessDevelopmentProjectConstructingNodeResult">
+        <include refid="selectBusinessDevelopmentProjectConstructingNodeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentProjectConstructingNode" parameterType="BusinessDevelopmentProjectConstructingNode" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_project_constructing_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="nodeName != null and nodeName != ''">node_name,</if>
+            <if test="planingTime != null and planingTime != ''">planing_time,</if>
+            <if test="standardOne != null">standard_one,</if>
+            <if test="statusOne != null">status_one,</if>
+            <if test="standardTwo != null">standard_two,</if>
+            <if test="statusTwo != null">status_two,</if>
+            <if test="standardThree != null">standard_three,</if>
+            <if test="statusThree != null">status_three,</if>
+            <if test="standardFour != null">standard_four,</if>
+            <if test="statusFour != null">status_four,</if>
+            <if test="standardFive != null">standard_five,</if>
+            <if test="statusFive != null">status_five,</if>
+            <if test="standardSix != null">standard_six,</if>
+            <if test="statusSix != null">status_six,</if>
+            <if test="standardSeven != null">standard_seven,</if>
+            <if test="statusSeven != null">status_seven,</if>
+            <if test="standardEight != null">standard_eight,</if>
+            <if test="statusEight != null">status_eight,</if>
+            <if test="standardNine != null">standard_nine,</if>
+            <if test="statusNine != null">status_nine,</if>
+            <if test="standardTen != null">standard_ten,</if>
+            <if test="statusTen != null">status_ten,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="nodeName != null and nodeName != ''">#{nodeName},</if>
+            <if test="planingTime != null and planingTime != ''">#{planingTime},</if>
+            <if test="standardOne != null">#{standardOne},</if>
+            <if test="statusOne != null">#{statusOne},</if>
+            <if test="standardTwo != null">#{standardTwo},</if>
+            <if test="statusTwo != null">#{statusTwo},</if>
+            <if test="standardThree != null">#{standardThree},</if>
+            <if test="statusThree != null">#{statusThree},</if>
+            <if test="standardFour != null">#{standardFour},</if>
+            <if test="statusFour != null">#{statusFour},</if>
+            <if test="standardFive != null">#{standardFive},</if>
+            <if test="statusFive != null">#{statusFive},</if>
+            <if test="standardSix != null">#{standardSix},</if>
+            <if test="statusSix != null">#{statusSix},</if>
+            <if test="standardSeven != null">#{standardSeven},</if>
+            <if test="statusSeven != null">#{statusSeven},</if>
+            <if test="standardEight != null">#{standardEight},</if>
+            <if test="statusEight != null">#{statusEight},</if>
+            <if test="standardNine != null">#{standardNine},</if>
+            <if test="statusNine != null">#{statusNine},</if>
+            <if test="standardTen != null">#{standardTen},</if>
+            <if test="statusTen != null">#{statusTen},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentProjectConstructingNode" parameterType="BusinessDevelopmentProjectConstructingNode">
+        update business_development_project_constructing_node
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="nodeName != null and nodeName != ''">node_name = #{nodeName},</if>
+            <if test="planingTime != null">planing_time = #{planingTime},</if>
+            <if test="standardOne != null">standard_one = #{standardOne},</if>
+            <if test="statusOne != null">status_one = #{statusOne},</if>
+            <if test="standardTwo != null">standard_two = #{standardTwo},</if>
+            <if test="statusTwo != null">status_two = #{statusTwo},</if>
+            <if test="standardThree != null">standard_three = #{standardThree},</if>
+            <if test="statusThree != null">status_three = #{statusThree},</if>
+            <if test="standardFour != null">standard_four = #{standardFour},</if>
+            <if test="statusFour != null">status_four = #{statusFour},</if>
+            <if test="standardFive != null">standard_five = #{standardFive},</if>
+            <if test="statusFive != null">status_five = #{statusFive},</if>
+            <if test="standardSix != null">standard_six = #{standardSix},</if>
+            <if test="statusSix != null">status_six = #{statusSix},</if>
+            <if test="standardSeven != null">standard_seven = #{standardSeven},</if>
+            <if test="statusSeven != null">status_seven = #{statusSeven},</if>
+            <if test="standardEight != null">standard_eight = #{standardEight},</if>
+            <if test="statusEight != null">status_eight = #{statusEight},</if>
+            <if test="standardNine != null">standard_nine = #{standardNine},</if>
+            <if test="statusNine != null">status_nine = #{statusNine},</if>
+            <if test="standardTen != null">standard_ten = #{standardTen},</if>
+            <if test="statusTen != null">status_ten = #{statusTen},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentProjectConstructingNodeById" parameterType="Long">
+        delete from business_development_project_constructing_node where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentProjectConstructingNodeByIds" parameterType="String">
+        delete from business_development_project_constructing_node where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

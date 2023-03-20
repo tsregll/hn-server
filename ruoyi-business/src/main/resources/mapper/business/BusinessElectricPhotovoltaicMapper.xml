@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessElectricPhotovoltaicMapper">
+
+    <resultMap type="BusinessElectricPhotovoltaic" id="BusinessElectricPhotovoltaicResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="year"    column="year"    />
+        <result property="generateCapacity"    column="generate_capacity"    />
+        <result property="heatSupply"    column="heat_supply"    />
+        <result property="rate"    column="rate"    />
+        <result property="totalPrice"    column="total_price"    />
+        <result property="eva"    column="eva"    />
+        <result property="generateCapacityXg"    column="generate_capacity_xg"    />
+        <result property="generateCapacityLg"    column="generate_capacity_lg"    />
+        <result property="generateCapacityHs"    column="generate_capacity_hs"    />
+        <result property="integratedElectricity"    column="integrated_electricity"    />
+    </resultMap>
+
+    <sql id="selectBusinessElectricPhotovoltaicVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, year, generate_capacity, heat_supply, rate, total_price, eva, generate_capacity_xg, generate_capacity_lg, generate_capacity_hs, integrated_electricity from business_electric_photovoltaic
+    </sql>
+
+    <select id="selectBusinessElectricPhotovoltaicList" parameterType="BusinessElectricPhotovoltaic" resultMap="BusinessElectricPhotovoltaicResult">
+        <include refid="selectBusinessElectricPhotovoltaicVo"/>
+        <where>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="generateCapacity != null  and generateCapacity != ''"> and generate_capacity = #{generateCapacity}</if>
+            <if test="heatSupply != null  and heatSupply != ''"> and heat_supply = #{heatSupply}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="totalPrice != null "> and total_price = #{totalPrice}</if>
+            <if test="eva != null "> and eva = #{eva}</if>
+            <if test="generateCapacityXg != null  and generateCapacityXg != ''"> and generate_capacity_xg = #{generateCapacityXg}</if>
+            <if test="generateCapacityLg != null  and generateCapacityLg != ''"> and generate_capacity_lg = #{generateCapacityLg}</if>
+            <if test="generateCapacityHs != null  and generateCapacityHs != ''"> and generate_capacity_hs = #{generateCapacityHs}</if>
+            <if test="integratedElectricity != null  and integratedElectricity != ''"> and integrated_electricity = #{integratedElectricity}</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessElectricPhotovoltaicById" parameterType="Long" resultMap="BusinessElectricPhotovoltaicResult">
+        <include refid="selectBusinessElectricPhotovoltaicVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessElectricPhotovoltaic" parameterType="BusinessElectricPhotovoltaic" useGeneratedKeys="true" keyProperty="id">
+        insert into business_electric_photovoltaic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="year != null">year,</if>
+            <if test="generateCapacity != null">generate_capacity,</if>
+            <if test="heatSupply != null">heat_supply,</if>
+            <if test="rate != null">rate,</if>
+            <if test="totalPrice != null">total_price,</if>
+            <if test="eva != null">eva,</if>
+            <if test="generateCapacityXg != null">generate_capacity_xg,</if>
+            <if test="generateCapacityLg != null">generate_capacity_lg,</if>
+            <if test="generateCapacityHs != null">generate_capacity_hs,</if>
+            <if test="integratedElectricity != null">integrated_electricity,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="year != null">#{year},</if>
+            <if test="generateCapacity != null">#{generateCapacity},</if>
+            <if test="heatSupply != null">#{heatSupply},</if>
+            <if test="rate != null">#{rate},</if>
+            <if test="totalPrice != null">#{totalPrice},</if>
+            <if test="eva != null">#{eva},</if>
+            <if test="generateCapacityXg != null">#{generateCapacityXg},</if>
+            <if test="generateCapacityLg != null">#{generateCapacityLg},</if>
+            <if test="generateCapacityHs != null">#{generateCapacityHs},</if>
+            <if test="integratedElectricity != null">#{integratedElectricity},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBusinessElectricPhotovoltaic" parameterType="BusinessElectricPhotovoltaic">
+        update business_electric_photovoltaic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="year != null">year = #{year},</if>
+            <if test="generateCapacity != null">generate_capacity = #{generateCapacity},</if>
+            <if test="heatSupply != null">heat_supply = #{heatSupply},</if>
+            <if test="rate != null">rate = #{rate},</if>
+            <if test="totalPrice != null">total_price = #{totalPrice},</if>
+            <if test="eva != null">eva = #{eva},</if>
+            <if test="generateCapacityXg != null">generate_capacity_xg = #{generateCapacityXg},</if>
+            <if test="generateCapacityLg != null">generate_capacity_lg = #{generateCapacityLg},</if>
+            <if test="generateCapacityHs != null">generate_capacity_hs = #{generateCapacityHs},</if>
+            <if test="integratedElectricity != null">integrated_electricity = #{integratedElectricity},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessElectricPhotovoltaicById" parameterType="Long">
+        delete from business_electric_photovoltaic where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessElectricPhotovoltaicByIds" parameterType="String">
+        delete from business_electric_photovoltaic where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessHnElectrifiedGridMapper">
+    
+    <resultMap type="BusinessHnElectrifiedGrid" id="BusinessHnElectrifiedGridResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="enteringDate"    column="entering_date"    />
+        <result property="industryType"    column="industry_type"    />
+        <result property="monthIndustry"    column="month_industry"    />
+        <result property="lastMonthIndustry"    column="last_month_industry"    />
+        <result property="lastMonthContrast"    column="last_month_contrast"    />
+        <result property="monthElectricity"    column="month_electricity"    />
+        <result property="yearAllElectricity"    column="year_all_electricity"    />
+        <result property="lastYearAllContrast"    column="last_year_all_contrast"    />
+        <result property="yearContrast"    column="year__contrast"    />
+    </resultMap>
+
+    <sql id="selectBusinessHnElectrifiedGridVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, entering_date, industry_type, month_industry, last_month_industry, last_month_contrast, month_electricity, year_all_electricity, last_year_all_contrast, year__contrast from business_hn_electrified_grid
+    </sql>
+
+    <select id="selectBusinessHnElectrifiedGridList" parameterType="BusinessHnElectrifiedGrid" resultMap="BusinessHnElectrifiedGridResult">
+        <include refid="selectBusinessHnElectrifiedGridVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessHnElectrifiedGridListOrderByDateTime" parameterType="BusinessHnElectrifiedGrid" resultMap="BusinessHnElectrifiedGridResult">
+        <include refid="selectBusinessHnElectrifiedGridVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,industry_type </if>
+        </where>
+    </select>
+
+    <select id="selectByTimeHnElectrifiedGridList" parameterType="BusinessHnElectrifiedGrid" resultMap="BusinessHnElectrifiedGridResult">
+        <include refid="selectBusinessHnElectrifiedGridVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="beginTime != null  and beginTime != ''"> and entering_date >=#{beginTime}</if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND entering_date &lt;= #{endTime}
+            </if>
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,industry_type </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessHnElectrifiedGridById" parameterType="Long" resultMap="BusinessHnElectrifiedGridResult">
+        <include refid="selectBusinessHnElectrifiedGridVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessHnElectrifiedGrid" parameterType="BusinessHnElectrifiedGrid" useGeneratedKeys="true" keyProperty="id">
+        insert into business_hn_electrified_grid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date,</if>
+            <if test="industryType != null and industryType != ''">industry_type,</if>
+            <if test="monthIndustry != null and monthIndustry != ''">month_industry,</if>
+            <if test="lastMonthIndustry != null">last_month_industry,</if>
+            <if test="lastMonthContrast != null">last_month_contrast,</if>
+            <if test="monthElectricity != null">month_electricity,</if>
+            <if test="yearAllElectricity != null">year_all_electricity,</if>
+            <if test="lastYearAllContrast != null">last_year_all_contrast,</if>
+            <if test="yearContrast != null">year__contrast,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">#{enteringDate},</if>
+            <if test="industryType != null and industryType != ''">#{industryType},</if>
+            <if test="monthIndustry != null and monthIndustry != ''">#{monthIndustry},</if>
+            <if test="lastMonthIndustry != null">#{lastMonthIndustry},</if>
+            <if test="lastMonthContrast != null">#{lastMonthContrast},</if>
+            <if test="monthElectricity != null">#{monthElectricity},</if>
+            <if test="yearAllElectricity != null">#{yearAllElectricity},</if>
+            <if test="lastYearAllContrast != null">#{lastYearAllContrast},</if>
+            <if test="yearContrast != null">#{yearContrast},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessHnElectrifiedGrid" parameterType="BusinessHnElectrifiedGrid">
+        update business_hn_electrified_grid
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date = #{enteringDate},</if>
+            <if test="industryType != null and industryType != ''">industry_type = #{industryType},</if>
+            <if test="monthIndustry != null and monthIndustry != ''">month_industry = #{monthIndustry},</if>
+            <if test="lastMonthIndustry != null">last_month_industry = #{lastMonthIndustry},</if>
+            <if test="lastMonthContrast != null">last_month_contrast = #{lastMonthContrast},</if>
+            <if test="monthElectricity != null">month_electricity = #{monthElectricity},</if>
+            <if test="yearAllElectricity != null">year_all_electricity = #{yearAllElectricity},</if>
+            <if test="lastYearAllContrast != null">last_year_all_contrast = #{lastYearAllContrast},</if>
+            <if test="yearContrast != null">year__contrast = #{yearContrast},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessHnElectrifiedGridById" parameterType="Long">
+        delete from business_hn_electrified_grid where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessHnElectrifiedGridByIds" parameterType="String">
+        delete from business_hn_electrified_grid where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

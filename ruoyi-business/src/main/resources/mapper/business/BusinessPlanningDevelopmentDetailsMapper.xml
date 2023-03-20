@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessPlanningDevelopmentDetailsMapper">
+    
+    <resultMap type="BusinessPlanningDevelopmentDetails" id="BusinessPlanningDevelopmentDetailsResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projectNumber"    column="project_number"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="projectDetailsName"    column="project_details_name"    />
+        <result property="projectDetailsStatus"    column="project_details_status"    />
+        <result property="projectApprovalCapacity"    column="project_approval_capacity"    />
+        <result property="projectFileName"    column="project_file_name"    />
+        <result property="projectFileAddress"    column="project_file_address"    />
+        <result property="projectFileType"    column="project_file_type"    />
+        <result property="projectFinishDate"    column="project_finish_date"    />
+        <result property="projectBackup"    column="project_backup"    />
+
+        <result property="projectFinishTime"    column="project_finish_time"    />
+        <result property="projectPreparationTime"    column="project_preparation_time"    />
+    </resultMap>
+
+    <sql id="selectBusinessPlanningDevelopmentDetailsVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, project_number, project_status, project_details_name, project_details_status, project_approval_capacity, project_file_name, project_file_address, project_file_type, project_finish_date, project_backup,project_finish_time,project_preparation_time from business_planning_development_details
+    </sql>
+
+    <select id="selectBusinessPlanningDevelopmentDetailsList" parameterType="BusinessPlanningDevelopmentDetails" resultMap="BusinessPlanningDevelopmentDetailsResult">
+        <include refid="selectBusinessPlanningDevelopmentDetailsVo"/>
+        <where>  
+            <if test="projectNumber != null  and projectNumber != ''"> and project_number = #{projectNumber}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="projectDetailsName != null  and projectDetailsName != ''"> and project_details_name like concat('%', #{projectDetailsName}, '%')</if>
+            <if test="projectDetailsStatus != null  and projectDetailsStatus != ''"> and project_details_status = #{projectDetailsStatus}</if>
+            <if test="projectApprovalCapacity != null  and projectApprovalCapacity != ''"> and project_approval_capacity = #{projectApprovalCapacity}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessPlanningDevelopmentDetailsById" parameterType="Long" resultMap="BusinessPlanningDevelopmentDetailsResult">
+        <include refid="selectBusinessPlanningDevelopmentDetailsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessPlanningDevelopmentDetails" parameterType="BusinessPlanningDevelopmentDetails" useGeneratedKeys="true" keyProperty="id">
+        insert into business_planning_development_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projectNumber != null">project_number,</if>
+            <if test="projectStatus != null">project_status,</if>
+            <if test="projectDetailsName != null and projectDetailsName != ''">project_details_name,</if>
+            <if test="projectDetailsStatus != null and projectDetailsStatus != ''">project_details_status,</if>
+            <if test="projectApprovalCapacity != null">project_approval_capacity,</if>
+            <if test="projectFileName != null">project_file_name,</if>
+            <if test="projectFileAddress != null">project_file_address,</if>
+            <if test="projectFileType != null">project_file_type,</if>
+            <if test="projectFinishDate != null">project_finish_date,</if>
+            <if test="projectBackup != null">project_backup,</if>
+            <if test="projectFinishTime != null">project_finish_time,</if>
+            <if test="projectPreparationTime != null">project_preparation_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projectNumber != null">#{projectNumber},</if>
+            <if test="projectStatus != null">#{projectStatus},</if>
+            <if test="projectDetailsName != null and projectDetailsName != ''">#{projectDetailsName},</if>
+            <if test="projectDetailsStatus != null and projectDetailsStatus != ''">#{projectDetailsStatus},</if>
+            <if test="projectApprovalCapacity != null">#{projectApprovalCapacity},</if>
+            <if test="projectFileName != null">#{projectFileName},</if>
+            <if test="projectFileAddress != null">#{projectFileAddress},</if>
+            <if test="projectFileType != null">#{projectFileType},</if>
+            <if test="projectFinishDate != null">#{projectFinishDate},</if>
+            <if test="projectBackup != null">#{projectBackup},</if>
+            <if test="projectFinishTime != null">#{projectFinishTime},</if>
+            <if test="projectPreparationTime != null">#{projectPreparationTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessPlanningDevelopmentDetails" parameterType="BusinessPlanningDevelopmentDetails">
+        update business_planning_development_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projectNumber != null">project_number = #{projectNumber},</if>
+            <if test="projectStatus != null">project_status = #{projectStatus},</if>
+            <if test="projectDetailsName != null and projectDetailsName != ''">project_details_name = #{projectDetailsName},</if>
+            <if test="projectDetailsStatus != null and projectDetailsStatus != ''">project_details_status = #{projectDetailsStatus},</if>
+            <if test="projectApprovalCapacity != null">project_approval_capacity = #{projectApprovalCapacity},</if>
+            <if test="projectFileName != null">project_file_name = #{projectFileName},</if>
+            <if test="projectFileAddress != null">project_file_address = #{projectFileAddress},</if>
+            <if test="projectFileType != null">project_file_type = #{projectFileType},</if>
+            <if test="projectFinishDate != null">project_finish_date = #{projectFinishDate},</if>
+            <if test="projectBackup != null">project_backup = #{projectBackup},</if>
+            <if test="projectFinishTime != null">project_finish_time = #{projectFinishTime},</if>
+            <if test="projectPreparationTime != null">project_preparation_time = #{projectPreparationTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessPlanningDevelopmentDetailsById" parameterType="Long">
+        delete from business_planning_development_details where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessPlanningDevelopmentDetailsByIds" parameterType="String">
+        delete from business_planning_development_details where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessInstallationStatisticsMapper">
+
+    <resultMap type="BusinessInstallationStatistics" id="BusinessInstallationStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="enteringDate"    column="entering_date"    />
+        <result property="installationType"    column="installation_type"    />
+        <result property="installationAll"    column="installation_all"    />
+        <result property="installationWater"    column="installation_water"    />
+        <result property="installationFire"    column="installation_fire"    />
+        <result property="installationWind"    column="installation_wind"    />
+        <result property="installationLight"    column="installation_light"    />
+    </resultMap>
+
+    <sql id="selectBusinessInstallationStatisticsVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, entering_date, installation_type, installation_all, installation_water, installation_fire, installation_wind, installation_light from business_installation_statistics
+    </sql>
+
+    <select id="selectBusinessInstallationStatisticsList" parameterType="BusinessInstallationStatistics" resultMap="BusinessInstallationStatisticsResult">
+        <include refid="selectBusinessInstallationStatisticsVo"/>
+        <where>  
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="installationType != null  and installationType != ''"> and installation_type = #{installationType}</if>
+            <if test="installationAll != null  and installationAll != ''"> and installation_all = #{installationAll}</if>
+            <if test="installationWater != null  and installationWater != ''"> and installation_water = #{installationWater}</if>
+            <if test="installationFire != null  and installationFire != ''"> and installation_fire = #{installationFire}</if>
+            <if test="installationWind != null  and installationWind != ''"> and installation_wind = #{installationWind}</if>
+            <if test="installationLight != null  and installationLight != ''"> and installation_light = #{installationLight}</if>
+            <if test="'' == ''"> and 1=1 order by installation_type desc,entering_date desc </if>
+        </where>
+    </select>
+    <select id="selectBusinessInstallationStatisticsListOrderByDateTime" parameterType="BusinessInstallationStatistics" resultMap="BusinessInstallationStatisticsResult">
+        <include refid="selectBusinessInstallationStatisticsVo"/>
+        <where>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="installationType != null  and installationType != ''"> and installation_type = #{installationType}</if>
+            <if test="installationAll != null  and installationAll != ''"> and installation_all = #{installationAll}</if>
+            <if test="installationWater != null  and installationWater != ''"> and installation_water = #{installationWater}</if>
+            <if test="installationFire != null  and installationFire != ''"> and installation_fire = #{installationFire}</if>
+            <if test="installationWind != null  and installationWind != ''"> and installation_wind = #{installationWind}</if>
+            <if test="installationLight != null  and installationLight != ''"> and installation_light = #{installationLight}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,installation_type </if>
+        </where>
+    </select>
+
+    <select id="selectByTimeInstallationStatisticsList" parameterType="BusinessInstallationStatistics" resultMap="BusinessInstallationStatisticsResult">
+        <include refid="selectBusinessInstallationStatisticsVo"/>
+        <where>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="beginTime != null  and beginTime != ''"> and entering_date >=#{beginTime}</if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND entering_date &lt;= #{endTime}
+            </if>
+            <if test="installationType != null  and installationType != ''"> and installation_type = #{installationType}</if>
+            <if test="installationAll != null  and installationAll != ''"> and installation_all = #{installationAll}</if>
+            <if test="installationWater != null  and installationWater != ''"> and installation_water = #{installationWater}</if>
+            <if test="installationFire != null  and installationFire != ''"> and installation_fire = #{installationFire}</if>
+            <if test="installationWind != null  and installationWind != ''"> and installation_wind = #{installationWind}</if>
+            <if test="installationLight != null  and installationLight != ''"> and installation_light = #{installationLight}</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc,installation_type </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessInstallationStatisticsById" parameterType="Long" resultMap="BusinessInstallationStatisticsResult">
+        <include refid="selectBusinessInstallationStatisticsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessInstallationStatistics" parameterType="BusinessInstallationStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into business_installation_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date,</if>
+            <if test="installationType != null and installationType != ''">installation_type,</if>
+            <if test="installationAll != null">installation_all,</if>
+            <if test="installationWater != null">installation_water,</if>
+            <if test="installationFire != null">installation_fire,</if>
+            <if test="installationWind != null">installation_wind,</if>
+            <if test="installationLight != null">installation_light,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">#{enteringDate},</if>
+            <if test="installationType != null and installationType != ''">#{installationType},</if>
+            <if test="installationAll != null">#{installationAll},</if>
+            <if test="installationWater != null">#{installationWater},</if>
+            <if test="installationFire != null">#{installationFire},</if>
+            <if test="installationWind != null">#{installationWind},</if>
+            <if test="installationLight != null">#{installationLight},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessInstallationStatistics" parameterType="BusinessInstallationStatistics">
+        update business_installation_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date = #{enteringDate},</if>
+            <if test="installationType != null and installationType != ''">installation_type = #{installationType},</if>
+            <if test="installationAll != null">installation_all = #{installationAll},</if>
+            <if test="installationWater != null">installation_water = #{installationWater},</if>
+            <if test="installationFire != null">installation_fire = #{installationFire},</if>
+            <if test="installationWind != null">installation_wind = #{installationWind},</if>
+            <if test="installationLight != null">installation_light = #{installationLight},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessInstallationStatisticsById" parameterType="Long">
+        delete from business_installation_statistics where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessInstallationStatisticsByIds" parameterType="String">
+        delete from business_installation_statistics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectFiveInstallationStatisticsByYear" parameterType="BusinessInstallationStatistics"  resultMap="BusinessInstallationStatisticsResult">
+        <include refid="selectBusinessInstallationStatisticsVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="installationType != null  and installationType != ''"> and installation_type = #{installationType}</if>
+        </where>
+    </select>
+
+
+    <select id="selectByYearOrType" parameterType="BusinessInstallationStatistics" resultMap="BusinessInstallationStatisticsResult">
+        select
+           sum(installation_all) as installation_all,
+           sum(installation_water) as installation_water,
+           sum(installation_fire) as installation_fire,
+           sum(installation_wind) as installation_wind,
+           sum(installation_light) as installation_light
+        from
+            business_installation_statistics
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="installationType != null  and installationType != ''"> and installation_type = #{installationType}</if>
+        </where>
+    </select>
+</mapper>

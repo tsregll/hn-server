@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessPlanningDevelopmentProjectFileMapper">
+    
+    <resultMap type="BusinessPlanningDevelopmentProjectFile" id="BusinessPlanningDevelopmentProjectFileResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projectDate"    column="project_date"    />
+        <result property="projectNumber"    column="project_number"    />
+        <result property="projectFileName"    column="project_file_name"    />
+        <result property="projectFileType"    column="project_file_type"    />
+        <result property="projectFileAddress"    column="project_file_address"    />
+        <result property="projectFileIllustration"    column="project_file_illustration"    />
+    </resultMap>
+
+    <sql id="selectBusinessPlanningDevelopmentProjectFileVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark,project_date, project_number, project_file_name, project_file_type, project_file_address, project_file_illustration from business_planning_development_project_file
+    </sql>
+
+    <select id="selectBusinessPlanningDevelopmentProjectFileList" parameterType="BusinessPlanningDevelopmentProjectFile" resultMap="BusinessPlanningDevelopmentProjectFileResult">
+        <include refid="selectBusinessPlanningDevelopmentProjectFileVo"/>
+        <where>  
+            <if test="projectNumber != null  and projectNumber != ''"> and project_number = #{projectNumber}</if>
+            <if test="projectFileName != null  and projectFileName != ''"> and project_file_name like concat('%', #{projectFileName}, '%')</if>
+            <if test="projectFileIllustration != null  and projectFileIllustration != ''"> and project_file_illustration = #{projectFileIllustration}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessPlanningDevelopmentProjectFileById" parameterType="Long" resultMap="BusinessPlanningDevelopmentProjectFileResult">
+        <include refid="selectBusinessPlanningDevelopmentProjectFileVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessPlanningDevelopmentProjectFile" parameterType="BusinessPlanningDevelopmentProjectFile" useGeneratedKeys="true" keyProperty="id">
+        insert into business_planning_development_project_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projectDate != null">project_date,</if>
+            <if test="projectNumber != null">project_number,</if>
+            <if test="projectFileName != null">project_file_name,</if>
+            <if test="projectFileType != null">project_file_type,</if>
+            <if test="projectFileAddress != null">project_file_address,</if>
+            <if test="projectFileIllustration != null">project_file_illustration,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projectDate != null">#{projectDate},</if>
+            <if test="projectNumber != null">#{projectNumber},</if>
+            <if test="projectFileName != null">#{projectFileName},</if>
+            <if test="projectFileType != null">#{projectFileType},</if>
+            <if test="projectFileAddress != null">#{projectFileAddress},</if>
+            <if test="projectFileIllustration != null">#{projectFileIllustration},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessPlanningDevelopmentProjectFile" parameterType="BusinessPlanningDevelopmentProjectFile">
+        update business_planning_development_project_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projectDate != null">project_date = #{projectDate},</if>
+            <if test="projectNumber != null">project_number = #{projectNumber},</if>
+            <if test="projectFileName != null">project_file_name = #{projectFileName},</if>
+            <if test="projectFileType != null">project_file_type = #{projectFileType},</if>
+            <if test="projectFileAddress != null">project_file_address = #{projectFileAddress},</if>
+            <if test="projectFileIllustration != null">project_file_illustration = #{projectFileIllustration},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessPlanningDevelopmentProjectFileById" parameterType="Long">
+        delete from business_planning_development_project_file where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessPlanningDevelopmentProjectFileByIds" parameterType="String">
+        delete from business_planning_development_project_file where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

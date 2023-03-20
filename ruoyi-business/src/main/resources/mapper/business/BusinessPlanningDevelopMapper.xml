@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessPlanningDevelopMapper">
+    
+    <resultMap type="BusinessPlanningDevelop" id="BusinessPlanningDevelopResult">
+        <result property="id"    column="id"    />
+        <result property="time"    column="time"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="installedCapacity"    column="installed_capacity"    />
+        <result property="projectAddress"    column="project_address"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="idCa"    column="Id_ca"    />
+        <result property="planningAddresses"    column="planning_addresses"    />
+        <result property="landPretrial"    column="land_pretrial"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="forestry"    column="forestry"    />
+        <result property="environmentalProtection"    column="environmental_protection"    />
+        <result property="waterConservation"    column="water_conservation"    />
+        <result property="accessSystem"    column="access_system"    />
+        <result property="other"    column="other"    />
+        <result property="feasibilityStudy"    column="feasibility_study"    />
+        <result property="investmentDecisions"    column="Investment_decisions"    />
+        <result property="projectApproval"    column="project_approval"    />
+        <result property="buildingIndicators"    column="building_indicators"    />
+        <result property="proposedCommencementTime"    column="proposed_commencement_time"    />
+        <result property="personnel"    column="personnel"    />
+        <result property="accountabilityUnit"    column="accountability_unit"    />
+        <result property="openQuestion"    column="open_question"    />
+    </resultMap>
+
+    <sql id="selectBusinessPlanningDevelopVo">
+        select id, time, project_name, project_type, installed_capacity, project_address, project_status, Id_ca, planning_addresses, land_pretrial, status, del_flag, create_by, create_time, update_by, update_time, remark, forestry, environmental_protection, water_conservation, access_system, other, feasibility_study, Investment_decisions, project_approval, building_indicators, proposed_commencement_time, personnel, accountability_unit, open_question from business_planning_develop
+    </sql>
+
+    <select id="selectBusinessPlanningDevelopList" parameterType="BusinessPlanningDevelop" resultMap="BusinessPlanningDevelopResult">
+        <include refid="selectBusinessPlanningDevelopVo"/>
+        <where>  
+            <if test="time != null "> and time = #{time}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessPlanningDevelopById" parameterType="Long" resultMap="BusinessPlanningDevelopResult">
+        <include refid="selectBusinessPlanningDevelopVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessPlanningDevelop" parameterType="BusinessPlanningDevelop" useGeneratedKeys="true" keyProperty="id">
+        insert into business_planning_develop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">time,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="installedCapacity != null">installed_capacity,</if>
+            <if test="projectAddress != null">project_address,</if>
+            <if test="projectStatus != null">project_status,</if>
+            <if test="idCa != null">Id_ca,</if>
+            <if test="planningAddresses != null">planning_addresses,</if>
+            <if test="landPretrial != null">land_pretrial,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="forestry != null">forestry,</if>
+            <if test="environmentalProtection != null">environmental_protection,</if>
+            <if test="waterConservation != null">water_conservation,</if>
+            <if test="accessSystem != null">access_system,</if>
+            <if test="other != null">other,</if>
+            <if test="feasibilityStudy != null">feasibility_study,</if>
+            <if test="investmentDecisions != null">Investment_decisions,</if>
+            <if test="projectApproval != null">project_approval,</if>
+            <if test="buildingIndicators != null">building_indicators,</if>
+            <if test="proposedCommencementTime != null">proposed_commencement_time,</if>
+            <if test="personnel != null">personnel,</if>
+            <if test="accountabilityUnit != null">accountability_unit,</if>
+            <if test="openQuestion != null">open_question,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">#{time},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="installedCapacity != null">#{installedCapacity},</if>
+            <if test="projectAddress != null">#{projectAddress},</if>
+            <if test="projectStatus != null">#{projectStatus},</if>
+            <if test="idCa != null">#{idCa},</if>
+            <if test="planningAddresses != null">#{planningAddresses},</if>
+            <if test="landPretrial != null">#{landPretrial},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="forestry != null">#{forestry},</if>
+            <if test="environmentalProtection != null">#{environmentalProtection},</if>
+            <if test="waterConservation != null">#{waterConservation},</if>
+            <if test="accessSystem != null">#{accessSystem},</if>
+            <if test="other != null">#{other},</if>
+            <if test="feasibilityStudy != null">#{feasibilityStudy},</if>
+            <if test="investmentDecisions != null">#{investmentDecisions},</if>
+            <if test="projectApproval != null">#{projectApproval},</if>
+            <if test="buildingIndicators != null">#{buildingIndicators},</if>
+            <if test="proposedCommencementTime != null">#{proposedCommencementTime},</if>
+            <if test="personnel != null">#{personnel},</if>
+            <if test="accountabilityUnit != null">#{accountabilityUnit},</if>
+            <if test="openQuestion != null">#{openQuestion},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessPlanningDevelop" parameterType="BusinessPlanningDevelop">
+        update business_planning_develop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="time != null">time = #{time},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="installedCapacity != null">installed_capacity = #{installedCapacity},</if>
+            <if test="projectAddress != null">project_address = #{projectAddress},</if>
+            <if test="projectStatus != null">project_status = #{projectStatus},</if>
+            <if test="idCa != null">Id_ca = #{idCa},</if>
+            <if test="planningAddresses != null">planning_addresses = #{planningAddresses},</if>
+            <if test="landPretrial != null">land_pretrial = #{landPretrial},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="forestry != null">forestry = #{forestry},</if>
+            <if test="environmentalProtection != null">environmental_protection = #{environmentalProtection},</if>
+            <if test="waterConservation != null">water_conservation = #{waterConservation},</if>
+            <if test="accessSystem != null">access_system = #{accessSystem},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="feasibilityStudy != null">feasibility_study = #{feasibilityStudy},</if>
+            <if test="investmentDecisions != null">Investment_decisions = #{investmentDecisions},</if>
+            <if test="projectApproval != null">project_approval = #{projectApproval},</if>
+            <if test="buildingIndicators != null">building_indicators = #{buildingIndicators},</if>
+            <if test="proposedCommencementTime != null">proposed_commencement_time = #{proposedCommencementTime},</if>
+            <if test="personnel != null">personnel = #{personnel},</if>
+            <if test="accountabilityUnit != null">accountability_unit = #{accountabilityUnit},</if>
+            <if test="openQuestion != null">open_question = #{openQuestion},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessPlanningDevelopById" parameterType="Long">
+        delete from business_planning_develop where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessPlanningDevelopByIds" parameterType="String">
+        delete from business_planning_develop where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

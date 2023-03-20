@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessElectricAreaMapper">
+
+    <resultMap type="BusinessElectricArea" id="BusinessElectricAreaResult">
+        <result property="id"    column="id"    />
+        <result property="year"    column="year"    />
+        <result property="generateCapacity"    column="generate_capacity"    />
+        <result property="generateCapacityFire"    column="generate_capacity_fire"    />
+        <result property="generateCapacityWind"    column="generate_capacity_wind"    />
+        <result property="generateCapacityWater"    column="generate_capacity_water"    />
+        <result property="generateCapacityLight"    column="generate_capacity_light"    />
+        <result property="heatSupply"    column="heat_supply"    />
+        <result property="price"    column="price"    />
+        <result property="totalPrice"    column="total_price"    />
+        <result property="eva"    column="eva"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessElectricAreaVo">
+        select id, year, generate_capacity, generate_capacity_fire, generate_capacity_wind, generate_capacity_water, generate_capacity_light, heat_supply, price, total_price, eva, status, del_flag, create_by, create_time, update_by, update_time, remark from business_electric_area
+    </sql>
+    <select id="selectBusinessElectricAreaList" parameterType="BusinessElectricArea" resultMap="BusinessElectricAreaResult">
+        <include refid="selectBusinessElectricAreaVo"/>
+        <where>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="generateCapacity != null  and generateCapacity != ''"> and generate_capacity = #{generateCapacity}</if>
+            <if test="generateCapacityFire != null  and generateCapacityFire != ''"> and generate_capacity_fire = #{generateCapacityFire}</if>
+            <if test="generateCapacityWind != null  and generateCapacityWind != ''"> and generate_capacity_wind = #{generateCapacityWind}</if>
+            <if test="generateCapacityWater != null  and generateCapacityWater != ''"> and generate_capacity_water = #{generateCapacityWater}</if>
+            <if test="generateCapacityLight != null  and generateCapacityLight != ''"> and generate_capacity_light = #{generateCapacityLight}</if>
+            <if test="heatSupply != null  and heatSupply != ''"> and heat_supply = #{heatSupply}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="totalPrice != null "> and total_price = #{totalPrice}</if>
+            <if test="eva != null "> and eva = #{eva}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessElectricAreaById" parameterType="Long" resultMap="BusinessElectricAreaResult">
+        <include refid="selectBusinessElectricAreaVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessElectricArea" parameterType="BusinessElectricArea" useGeneratedKeys="true" keyProperty="id">
+        insert into business_electric_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="generateCapacity != null">generate_capacity,</if>
+            <if test="generateCapacityFire != null">generate_capacity_fire,</if>
+            <if test="generateCapacityWind != null">generate_capacity_wind,</if>
+            <if test="generateCapacityWater != null">generate_capacity_water,</if>
+            <if test="generateCapacityLight != null">generate_capacity_light,</if>
+            <if test="heatSupply != null">heat_supply,</if>
+            <if test="price != null">price,</if>
+            <if test="totalPrice != null">total_price,</if>
+            <if test="eva != null">eva,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="generateCapacity != null">#{generateCapacity},</if>
+            <if test="generateCapacityFire != null">#{generateCapacityFire},</if>
+            <if test="generateCapacityWind != null">#{generateCapacityWind},</if>
+            <if test="generateCapacityWater != null">#{generateCapacityWater},</if>
+            <if test="generateCapacityLight != null">#{generateCapacityLight},</if>
+            <if test="heatSupply != null">#{heatSupply},</if>
+            <if test="price != null">#{price},</if>
+            <if test="totalPrice != null">#{totalPrice},</if>
+            <if test="eva != null">#{eva},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBusinessElectricArea" parameterType="BusinessElectricArea">
+        update business_electric_area
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="generateCapacity != null">generate_capacity = #{generateCapacity},</if>
+            <if test="generateCapacityFire != null">generate_capacity_fire = #{generateCapacityFire},</if>
+            <if test="generateCapacityWind != null">generate_capacity_wind = #{generateCapacityWind},</if>
+            <if test="generateCapacityWater != null">generate_capacity_water = #{generateCapacityWater},</if>
+            <if test="generateCapacityLight != null">generate_capacity_light = #{generateCapacityLight},</if>
+            <if test="heatSupply != null">heat_supply = #{heatSupply},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="totalPrice != null">total_price = #{totalPrice},</if>
+            <if test="eva != null">eva = #{eva},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessElectricAreaById" parameterType="Long">
+        delete from business_electric_area where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessElectricAreaByIds" parameterType="String">
+        delete from business_electric_area where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

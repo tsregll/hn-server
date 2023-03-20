@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentProjectConstructingMapper">
+    
+    <resultMap type="BusinessDevelopmentProjectConstructing" id="BusinessDevelopmentProjectConstructingResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="projectDevelopmentModalities"    column="project_development_modalities"    />
+        <result property="projectResponsibilityUnit"    column="project_responsibility_unit"    />
+        <result property="projectDate"    column="project_date"    />
+        <result property="endProjectDate"    column="end_project_date"    />
+        <result property="projectRegionDistrict"    column="project_region_district"    />
+        <result property="projectXAxis"    column="project_x_axis"    />
+        <result property="projectYAxis"    column="project_y_axis"    />
+        <result property="projectCapacity"    column="project_capacity"    />
+        <result property="constructionUnit"    column="construction_unit"    />
+        <result property="designUnit"    column="design_unit"    />
+        <result property="supervisionUnit"    column="supervision_unit"    />
+        <result property="projectIntroduction"    column="project_introduction"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="projectNode"    column="project_node"    />
+        <result property="remark"    column="remark"    />
+        <result property="accessory"    column="accessory"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentProjectConstructingVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, project_name, project_type, project_development_modalities, project_responsibility_unit, project_date, end_project_date, project_region_district, project_x_axis, project_y_axis, project_capacity, construction_unit, design_unit, supervision_unit, project_introduction, project_status, project_node, remark,accessory from business_development_project_constructing
+    </sql>
+
+    <select id="selectBusinessDevelopmentProjectConstructingListByqt" parameterType="BusinessDevelopmentProjectConstructing" resultMap="BusinessDevelopmentProjectConstructingResult">
+        <include refid="selectBusinessDevelopmentProjectConstructingVo"/>
+        <where>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectDevelopmentModalities != null  and projectDevelopmentModalities != ''"> and project_development_modalities = #{projectDevelopmentModalities}</if>
+            <if test="projectResponsibilityUnit != null  and projectResponsibilityUnit != ''"> and project_responsibility_unit = #{projectResponsibilityUnit}</if>
+            <if test="projectDate != null  and projectDate != ''"> and  project_date &lt;= #{projectDateTime} and (YEAR(end_project_date) &gt;= #{projectDate} or end_project_date is null or end_project_date = '')</if>
+            <if test="endProjectDate != null  and endProjectDate != ''"> and end_project_date like concat('%', #{endProjectDate}, '%')</if>
+            <if test="projectRegionDistrict != null  and projectRegionDistrict != ''"> and project_region_district like concat('%', #{projectRegionDistrict}, '%')</if>
+            <if test="projectXAxis != null  and projectXAxis != ''"> and project_x_axis = #{projectXAxis}</if>
+            <if test="projectYAxis != null  and projectYAxis != ''"> and project_y_axis = #{projectYAxis}</if>
+            <if test="projectCapacity != null  and projectCapacity != ''"> and project_capacity = #{projectCapacity}</if>
+            <if test="constructionUnit != null  and constructionUnit != ''"> and construction_unit like concat('%', #{constructionUnit}, '%')</if>
+            <if test="designUnit != null  and designUnit != ''"> and design_unit like concat('%', #{designUnit}, '%')</if>
+            <if test="supervisionUnit != null  and supervisionUnit != ''"> and supervision_unit like concat('%', #{supervisionUnit}, '%')</if>
+            <if test="projectIntroduction != null  and projectIntroduction != ''"> and project_introduction = #{projectIntroduction}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="projectNode != null  and projectNode != ''"> and project_node like concat('%', #{projectNode}, '%')</if>
+            <if test="accessory != null  and accessory != ''"> and accessory like concat('%', #{accessory}, '%')</if>
+        </where>
+    </select>
+    <select id="selectBusinessDevelopmentProjectConstructingList" parameterType="BusinessDevelopmentProjectConstructing" resultMap="BusinessDevelopmentProjectConstructingResult">
+        <include refid="selectBusinessDevelopmentProjectConstructingVo"/>
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectDevelopmentModalities != null  and projectDevelopmentModalities != ''"> and project_development_modalities = #{projectDevelopmentModalities}</if>
+            <if test="projectResponsibilityUnit != null  and projectResponsibilityUnit != ''"> and project_responsibility_unit = #{projectResponsibilityUnit}</if>
+            <if test="projectDate != null  and projectDate != ''"> and project_date like concat('%', #{projectDate}, '%')</if>
+            <if test="endProjectDate != null  and endProjectDate != ''"> and end_project_date like concat('%', #{endProjectDate}, '%')</if>
+            <if test="projectRegionDistrict != null  and projectRegionDistrict != ''"> and project_region_district like concat('%', #{projectRegionDistrict}, '%')</if>
+            <if test="projectXAxis != null  and projectXAxis != ''"> and project_x_axis = #{projectXAxis}</if>
+            <if test="projectYAxis != null  and projectYAxis != ''"> and project_y_axis = #{projectYAxis}</if>
+            <if test="projectCapacity != null  and projectCapacity != ''"> and project_capacity = #{projectCapacity}</if>
+            <if test="constructionUnit != null  and constructionUnit != ''"> and construction_unit like concat('%', #{constructionUnit}, '%')</if>
+            <if test="designUnit != null  and designUnit != ''"> and design_unit like concat('%', #{designUnit}, '%')</if>
+            <if test="supervisionUnit != null  and supervisionUnit != ''"> and supervision_unit like concat('%', #{supervisionUnit}, '%')</if>
+            <if test="projectIntroduction != null  and projectIntroduction != ''"> and project_introduction = #{projectIntroduction}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="projectNode != null  and projectNode != ''"> and project_node like concat('%', #{projectNode}, '%')</if>
+            <if test="accessory != null  and accessory != ''"> and accessory like concat('%', #{accessory}, '%')</if>
+        </where>
+        order by project_date
+    </select>
+
+    <resultMap type="java.lang.String" id="projectNameResult">
+        <result column="project_name"    />
+    </resultMap>
+
+    <select id="selectBusinessConstructingProjectNameList" parameterType="String" resultMap="projectNameResult">
+        select project_name from business_development_project_constructing
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectDate != null  and projectDate != ''"> and project_date like concat('%', #{projectDate}, '%')</if>
+        </where>
+    </select>
+
+    <resultMap type="java.lang.String" id="operatorResult">
+        <result column="operator"    />
+    </resultMap>
+
+    <select id="selectBusinessConstructingOperatorByGroupList" parameterType="BusinessDevelopmentProjectConstructing" resultMap="operatorResult">
+        select operator from business_development_project_constructing
+        <where>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectDate != null  and projectDate != ''"> and project_date like concat('%', #{projectDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 group by operator </if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessDevelopmentProjectConstructingById" parameterType="Long" resultMap="BusinessDevelopmentProjectConstructingResult">
+        <include refid="selectBusinessDevelopmentProjectConstructingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentProjectConstructing" parameterType="BusinessDevelopmentProjectConstructing" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_project_constructing
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number,</if>
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="projectType != null and projectType != ''">project_type,</if>
+            <if test="projectDevelopmentModalities != null and projectDevelopmentModalities != ''">project_development_modalities,</if>
+            <if test="projectResponsibilityUnit != null and projectResponsibilityUnit != ''">project_responsibility_unit,</if>
+            <if test="projectDate != null and projectDate != ''">project_date,</if>
+            <if test="endProjectDate != null and endProjectDate != ''">end_project_date,</if>
+            <if test="projectRegionDistrict != null and projectRegionDistrict != ''">project_region_district,</if>
+            <if test="projectXAxis != null and projectXAxis != ''">project_x_axis,</if>
+            <if test="projectYAxis != null and projectYAxis != ''">project_y_axis,</if>
+            <if test="projectCapacity != null and projectCapacity != ''">project_capacity,</if>
+            <if test="constructionUnit != null and constructionUnit != ''">construction_unit,</if>
+            <if test="designUnit != null and designUnit != ''">design_unit,</if>
+            <if test="supervisionUnit != null and supervisionUnit != ''">supervision_unit,</if>
+            <if test="projectIntroduction != null and projectIntroduction != ''">project_introduction,</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status,</if>
+            <if test="projectNode != null and projectNode != ''">project_node,</if>
+            <if test="accessory != null and accessory != ''">accessory,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">#{defaultTime},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">#{operatorNumber},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="projectDevelopmentModalities != null and projectDevelopmentModalities != ''">#{projectDevelopmentModalities},</if>
+            <if test="projectResponsibilityUnit != null and projectResponsibilityUnit != ''">#{projectResponsibilityUnit},</if>
+            <if test="projectDate != null and projectDate != ''">#{projectDate},</if>
+            <if test="endProjectDate != null and endProjectDate != ''">#{endProjectDate},</if>
+            <if test="projectRegionDistrict != null and projectRegionDistrict != ''">#{projectRegionDistrict},</if>
+            <if test="projectXAxis != null and projectXAxis != ''">#{projectXAxis},</if>
+            <if test="projectYAxis != null and projectYAxis != ''">#{projectYAxis},</if>
+            <if test="projectCapacity != null and projectCapacity != ''">#{projectCapacity},</if>
+            <if test="constructionUnit != null and constructionUnit != ''">#{constructionUnit},</if>
+            <if test="designUnit != null and designUnit != ''">#{designUnit},</if>
+            <if test="supervisionUnit != null and supervisionUnit != ''">#{supervisionUnit},</if>
+            <if test="projectIntroduction != null and projectIntroduction != ''">#{projectIntroduction},</if>
+            <if test="projectStatus != null and projectStatus != ''">#{projectStatus},</if>
+            <if test="projectNode != null and projectNode != ''">#{projectNode},</if>
+            <if test="accessory != null and accessory != ''">#{accessory},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentProjectConstructing" parameterType="BusinessDevelopmentProjectConstructing">
+        update business_development_project_constructing
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time = #{defaultTime},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number = #{operatorNumber},</if>
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="projectType != null and projectType != ''">project_type = #{projectType},</if>
+            <if test="projectDevelopmentModalities != null and projectDevelopmentModalities != ''">project_development_modalities = #{projectDevelopmentModalities},</if>
+            <if test="projectResponsibilityUnit != null and projectResponsibilityUnit != ''">project_responsibility_unit = #{projectResponsibilityUnit},</if>
+            <if test="projectDate != null and projectDate != ''">project_date = #{projectDate},</if>
+            <if test="endProjectDate != null">end_project_date = #{endProjectDate},</if>
+            <if test="projectRegionDistrict != null and projectRegionDistrict != ''">project_region_district = #{projectRegionDistrict},</if>
+            <if test="projectXAxis != null and projectXAxis != ''">project_x_axis = #{projectXAxis},</if>
+            <if test="projectYAxis != null and projectYAxis != ''">project_y_axis = #{projectYAxis},</if>
+            <if test="projectCapacity != null and projectCapacity != ''">project_capacity = #{projectCapacity},</if>
+            <if test="constructionUnit != null and constructionUnit != ''">construction_unit = #{constructionUnit},</if>
+            <if test="designUnit != null and designUnit != ''">design_unit = #{designUnit},</if>
+            <if test="supervisionUnit != null and supervisionUnit != ''">supervision_unit = #{supervisionUnit},</if>
+            <if test="projectIntroduction != null and projectIntroduction != ''">project_introduction = #{projectIntroduction},</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status = #{projectStatus},</if>
+            <if test="projectNode != null and projectNode != ''">project_node = #{projectNode},</if>
+            <if test="accessory != null and accessory != ''">accessory = #{accessory},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentProjectConstructingById" parameterType="Long">
+        delete from business_development_project_constructing where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentProjectConstructingByIds" parameterType="String">
+        delete from business_development_project_constructing where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

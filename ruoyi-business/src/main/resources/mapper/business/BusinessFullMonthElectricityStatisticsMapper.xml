@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessFullMonthElectricityStatisticsMapper">
+    
+    <resultMap type="BusinessFullMonthElectricityStatistics" id="BusinessFullMonthElectricityStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="enteringDate"    column="entering_date"    />
+        <result property="consumptionElectricityAll"    column="consumption_electricity_all"    />
+        <result property="generatingElectricityAll"    column="generating_electricity_all"    />
+        <result property="burthenMax"    column="burthen_max"    />
+        <result property="burthenMin"    column="burthen_min"    />
+        <result property="burthenAverage"    column="burthen_average"    />
+        <result property="burthenFire"    column="burthen_fire"    />
+        <result property="burthenCoal"    column="burthen_coal"    />
+        <result property="burthenWater"    column="burthen_water"    />
+        <result property="burthenWind"    column="burthen_wind"    />
+        <result property="burthenBiomass"    column="burthen_biomass"    />
+        <result property="burthenLight"    column="burthen_light"    />
+        <result property="outsourcingQszl"    column="outsourcing_qszl"    />
+        <result property="outsourcingSxgzb"    column="outsourcing_sxgzb"    />
+        <result property="launchLinkLine"    column="launch_link_line"    />
+    </resultMap>
+
+    <sql id="selectBusinessFullMonthElectricityStatisticsVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, entering_date, consumption_electricity_all, generating_electricity_all, burthen_max, burthen_min, burthen_average, burthen_fire, burthen_coal, burthen_water, burthen_wind, burthen_biomass, burthen_light, outsourcing_qszl, outsourcing_sxgzb, launch_link_line from business_full_month_electricity_statistics
+    </sql>
+
+    <select id="selectBusinessFullMonthElectricityStatisticsList" parameterType="BusinessFullMonthElectricityStatistics" resultMap="BusinessFullMonthElectricityStatisticsResult">
+        <include refid="selectBusinessFullMonthElectricityStatisticsVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 order by entering_date</if>
+        </where>
+    </select>
+    <select id="selectBusinessFullMonthElectricityStatisticsListOrderByDateTime" parameterType="BusinessFullMonthElectricityStatistics" resultMap="BusinessFullMonthElectricityStatisticsResult">
+        <include refid="selectBusinessFullMonthElectricityStatisticsVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc </if>
+        </where>
+    </select>
+
+    <select id="selectByTimeFullMonthElectricityStatisticsList" parameterType="BusinessFullMonthElectricityStatistics" resultMap="BusinessFullMonthElectricityStatisticsResult">
+        <include refid="selectBusinessFullMonthElectricityStatisticsVo"/>
+        <where>
+            <if test="beginTime != null  and beginTime != ''"> and entering_date >=#{beginTime}</if>
+            <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+                AND entering_date &lt;= #{endTime}
+            </if>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 order by entering_date desc </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessFullMonthElectricityStatisticsById" parameterType="Long" resultMap="BusinessFullMonthElectricityStatisticsResult">
+        <include refid="selectBusinessFullMonthElectricityStatisticsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessFullMonthElectricityStatistics" parameterType="BusinessFullMonthElectricityStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into business_full_month_electricity_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date,</if>
+            <if test="consumptionElectricityAll != null and consumptionElectricityAll != ''">consumption_electricity_all,</if>
+            <if test="generatingElectricityAll != null and generatingElectricityAll != ''">generating_electricity_all,</if>
+            <if test="burthenMax != null and burthenMax != ''">burthen_max,</if>
+            <if test="burthenMin != null and burthenMin != ''">burthen_min,</if>
+            <if test="burthenAverage != null and burthenAverage != ''">burthen_average,</if>
+            <if test="burthenFire != null and burthenFire != ''">burthen_fire,</if>
+            <if test="burthenCoal != null and burthenCoal != ''">burthen_coal,</if>
+            <if test="burthenWater != null and burthenWater != ''">burthen_water,</if>
+            <if test="burthenWind != null and burthenWind != ''">burthen_wind,</if>
+            <if test="burthenBiomass != null and burthenBiomass != ''">burthen_biomass,</if>
+            <if test="burthenLight != null and burthenLight != ''">burthen_light,</if>
+            <if test="outsourcingQszl != null and outsourcingQszl != ''">outsourcing_qszl,</if>
+            <if test="outsourcingSxgzb != null and outsourcingSxgzb != ''">outsourcing_sxgzb,</if>
+            <if test="launchLinkLine != null and launchLinkLine != ''">launch_link_line,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">#{enteringDate},</if>
+            <if test="consumptionElectricityAll != null and consumptionElectricityAll != ''">#{consumptionElectricityAll},</if>
+            <if test="generatingElectricityAll != null and generatingElectricityAll != ''">#{generatingElectricityAll},</if>
+            <if test="burthenMax != null and burthenMax != ''">#{burthenMax},</if>
+            <if test="burthenMin != null and burthenMin != ''">#{burthenMin},</if>
+            <if test="burthenAverage != null and burthenAverage != ''">#{burthenAverage},</if>
+            <if test="burthenFire != null and burthenFire != ''">#{burthenFire},</if>
+            <if test="burthenCoal != null and burthenCoal != ''">#{burthenCoal},</if>
+            <if test="burthenWater != null and burthenWater != ''">#{burthenWater},</if>
+            <if test="burthenWind != null and burthenWind != ''">#{burthenWind},</if>
+            <if test="burthenBiomass != null and burthenBiomass != ''">#{burthenBiomass},</if>
+            <if test="burthenLight != null and burthenLight != ''">#{burthenLight},</if>
+            <if test="outsourcingQszl != null and outsourcingQszl != ''">#{outsourcingQszl},</if>
+            <if test="outsourcingSxgzb != null and outsourcingSxgzb != ''">#{outsourcingSxgzb},</if>
+            <if test="launchLinkLine != null and launchLinkLine != ''">#{launchLinkLine},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessFullMonthElectricityStatistics" parameterType="BusinessFullMonthElectricityStatistics">
+        update business_full_month_electricity_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="enteringDate != null and enteringDate != ''">entering_date = #{enteringDate},</if>
+            <if test="consumptionElectricityAll != null and consumptionElectricityAll != ''">consumption_electricity_all = #{consumptionElectricityAll},</if>
+            <if test="generatingElectricityAll != null and generatingElectricityAll != ''">generating_electricity_all = #{generatingElectricityAll},</if>
+            <if test="burthenMax != null and burthenMax != ''">burthen_max = #{burthenMax},</if>
+            <if test="burthenMin != null and burthenMin != ''">burthen_min = #{burthenMin},</if>
+            <if test="burthenAverage != null and burthenAverage != ''">burthen_average = #{burthenAverage},</if>
+            <if test="burthenFire != null and burthenFire != ''">burthen_fire = #{burthenFire},</if>
+            <if test="burthenCoal != null and burthenCoal != ''">burthen_coal = #{burthenCoal},</if>
+            <if test="burthenWater != null and burthenWater != ''">burthen_water = #{burthenWater},</if>
+            <if test="burthenWind != null and burthenWind != ''">burthen_wind = #{burthenWind},</if>
+            <if test="burthenBiomass != null and burthenBiomass != ''">burthen_biomass = #{burthenBiomass},</if>
+            <if test="burthenLight != null and burthenLight != ''">burthen_light = #{burthenLight},</if>
+            <if test="outsourcingQszl != null and outsourcingQszl != ''">outsourcing_qszl = #{outsourcingQszl},</if>
+            <if test="outsourcingSxgzb != null and outsourcingSxgzb != ''">outsourcing_sxgzb = #{outsourcingSxgzb},</if>
+            <if test="launchLinkLine != null and launchLinkLine != ''">launch_link_line = #{launchLinkLine},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessFullMonthElectricityStatisticsById" parameterType="Long">
+        delete from business_full_month_electricity_statistics where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessFullMonthElectricityStatisticsByIds" parameterType="String">
+        delete from business_full_month_electricity_statistics where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectByMonth" parameterType="BusinessFullMonthElectricityStatistics" resultMap="BusinessFullMonthElectricityStatisticsResult">
+        <include refid="selectBusinessFullMonthElectricityStatisticsVo"/>
+        <where>
+            <if test="enteringDate != null  and enteringDate != ''"> and entering_date like concat('%', #{enteringDate}, '%')</if>
+            <if test="'' == ''"> and 1=1 order by entering_date </if>
+        </where>
+    </select>
+</mapper>

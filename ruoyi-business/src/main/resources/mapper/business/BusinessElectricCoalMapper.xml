@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessElectricCoalMapper">
+
+    <resultMap type="BusinessElectricCoal" id="BusinessElectricCoalResult">
+        <result property="id"    column="id"    />
+        <result property="year"    column="year"    />
+        <result property="generateCapacity"    column="generate_capacity"    />
+        <result property="generateCapacityFirst"    column="generate_capacity_first"    />
+        <result property="generateCapacitySecond"    column="generate_capacity_second"    />
+        <result property="generateCapacityThirdly"    column="generate_capacity_thirdly"    />
+        <result property="heatSupply"    column="heat_supply"    />
+        <result property="coalComsumer"    column="coal_comsumer"    />
+        <result property="rate"    column="rate"    />
+        <result property="integratedElectricity"    column="integrated_electricity"    />
+        <result property="price"    column="price"    />
+        <result property="totalPrice"    column="total_price"    />
+        <result property="eva"    column="eva"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessElectricCoalVo">
+        select id, year, generate_capacity, generate_capacity_first, generate_capacity_second, generate_capacity_thirdly, heat_supply, coal_comsumer, rate, integrated_electricity, price, total_price, eva, status, del_flag, create_by, create_time, update_by, update_time, remark from business_electric_coal
+    </sql>
+
+    <select id="selectBusinessElectricCoalList" parameterType="BusinessElectricCoal" resultMap="BusinessElectricCoalResult">
+        <include refid="selectBusinessElectricCoalVo"/>
+        <where>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="generateCapacity != null  and generateCapacity != ''"> and generate_capacity = #{generateCapacity}</if>
+            <if test="generateCapacityFirst != null  and generateCapacityFirst != ''"> and generate_capacity_first = #{generateCapacityFirst}</if>
+            <if test="generateCapacitySecond != null  and generateCapacitySecond != ''"> and generate_capacity_second = #{generateCapacitySecond}</if>
+            <if test="generateCapacityThirdly != null  and generateCapacityThirdly != ''"> and generate_capacity_thirdly = #{generateCapacityThirdly}</if>
+            <if test="heatSupply != null  and heatSupply != ''"> and heat_supply = #{heatSupply}</if>
+            <if test="coalComsumer != null  and coalComsumer != ''"> and coal_comsumer = #{coalComsumer}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="integratedElectricity != null  and integratedElectricity != ''"> and integrated_electricity = #{integratedElectricity}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="totalPrice != null "> and total_price = #{totalPrice}</if>
+            <if test="eva != null "> and eva = #{eva}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectBusinessElectricCoalById" parameterType="Long" resultMap="BusinessElectricCoalResult">
+        <include refid="selectBusinessElectricCoalVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBusinessElectricCoal" parameterType="BusinessElectricCoal" useGeneratedKeys="true" keyProperty="id">
+        insert into business_electric_coal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="generateCapacity != null">generate_capacity,</if>
+            <if test="generateCapacityFirst != null">generate_capacity_first,</if>
+            <if test="generateCapacitySecond != null">generate_capacity_second,</if>
+            <if test="generateCapacityThirdly != null">generate_capacity_thirdly,</if>
+            <if test="heatSupply != null">heat_supply,</if>
+            <if test="coalComsumer != null">coal_comsumer,</if>
+            <if test="rate != null">rate,</if>
+            <if test="integratedElectricity != null">integrated_electricity,</if>
+            <if test="price != null">price,</if>
+            <if test="totalPrice != null">total_price,</if>
+            <if test="eva != null">eva,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="generateCapacity != null">#{generateCapacity},</if>
+            <if test="generateCapacityFirst != null">#{generateCapacityFirst},</if>
+            <if test="generateCapacitySecond != null">#{generateCapacitySecond},</if>
+            <if test="generateCapacityThirdly != null">#{generateCapacityThirdly},</if>
+            <if test="heatSupply != null">#{heatSupply},</if>
+            <if test="coalComsumer != null">#{coalComsumer},</if>
+            <if test="rate != null">#{rate},</if>
+            <if test="integratedElectricity != null">#{integratedElectricity},</if>
+            <if test="price != null">#{price},</if>
+            <if test="totalPrice != null">#{totalPrice},</if>
+            <if test="eva != null">#{eva},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBusinessElectricCoal" parameterType="BusinessElectricCoal">
+        update business_electric_coal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="generateCapacity != null">generate_capacity = #{generateCapacity},</if>
+            <if test="generateCapacityFirst != null">generate_capacity_first = #{generateCapacityFirst},</if>
+            <if test="generateCapacitySecond != null">generate_capacity_second = #{generateCapacitySecond},</if>
+            <if test="generateCapacityThirdly != null">generate_capacity_thirdly = #{generateCapacityThirdly},</if>
+            <if test="heatSupply != null">heat_supply = #{heatSupply},</if>
+            <if test="coalComsumer != null">coal_comsumer = #{coalComsumer},</if>
+            <if test="rate != null">rate = #{rate},</if>
+            <if test="integratedElectricity != null">integrated_electricity = #{integratedElectricity},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="totalPrice != null">total_price = #{totalPrice},</if>
+            <if test="eva != null">eva = #{eva},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessElectricCoalById" parameterType="Long">
+        delete from business_electric_coal where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessElectricCoalByIds" parameterType="String">
+        delete from business_electric_coal where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

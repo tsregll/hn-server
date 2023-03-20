@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDisciplinaryManageMapper">
+    
+    <resultMap type="BusinessDisciplinaryManage" id="BusinessDisciplinaryManageResult">
+        <result property="id"    column="id"    />
+        <result property="time"    column="time"    />
+        <result property="branchUnit"    column="branch_unit"    />
+        <result property="conversationType"    column="conversation_type"    />
+        <result property="conversationForms"    column="conversation_forms"    />
+        <result property="position"    column="position"    />
+        <result property="conversationId"    column="conversation_id"    />
+        <result property="workerNumber"    column="worker_number"    />
+        <result property="workerName"    column="worker_name"    />
+        <result property="workerGender"    column="worker_gender"    />
+        <result property="conversationTopics"    column="conversation_topics"    />
+        <result property="conversation"    column="conversation"    />
+        <result property="problemType"    column="problem_type"    />
+        <result property="rectificationProblemType"    column="rectification_problem_type"    />
+        <result property="isRectification"    column="is_rectification"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessDisciplinaryManageVo">
+        select id, time, branch_unit, conversation_type, conversation_forms, position, conversation_id, worker_number, worker_name, worker_gender, conversation_topics, conversation, problem_type, rectification_problem_type, is_rectification, del_flag, status, create_by, create_time, update_by, update_time, remark from business_disciplinary_manage
+    </sql>
+
+    <select id="selectBusinessDisciplinaryManageList" parameterType="BusinessDisciplinaryManage" resultMap="BusinessDisciplinaryManageResult">
+        <include refid="selectBusinessDisciplinaryManageVo"/>
+        <where>  
+            <if test="time != null "> and time = #{time}</if>
+            <if test="workerName != null  and workerName != ''"> and worker_name like concat('%', #{workerName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessDisciplinaryManageById" parameterType="Long" resultMap="BusinessDisciplinaryManageResult">
+        <include refid="selectBusinessDisciplinaryManageVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDisciplinaryManage" parameterType="BusinessDisciplinaryManage" useGeneratedKeys="true" keyProperty="id">
+        insert into business_disciplinary_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">time,</if>
+            <if test="branchUnit != null">branch_unit,</if>
+            <if test="conversationType != null">conversation_type,</if>
+            <if test="conversationForms != null">conversation_forms,</if>
+            <if test="position != null">position,</if>
+            <if test="conversationId != null">conversation_id,</if>
+            <if test="workerNumber != null">worker_number,</if>
+            <if test="workerName != null">worker_name,</if>
+            <if test="workerGender != null">worker_gender,</if>
+            <if test="conversationTopics != null">conversation_topics,</if>
+            <if test="conversation != null">conversation,</if>
+            <if test="problemType != null">problem_type,</if>
+            <if test="rectificationProblemType != null">rectification_problem_type,</if>
+            <if test="isRectification != null">is_rectification,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">#{time},</if>
+            <if test="branchUnit != null">#{branchUnit},</if>
+            <if test="conversationType != null">#{conversationType},</if>
+            <if test="conversationForms != null">#{conversationForms},</if>
+            <if test="position != null">#{position},</if>
+            <if test="conversationId != null">#{conversationId},</if>
+            <if test="workerNumber != null">#{workerNumber},</if>
+            <if test="workerName != null">#{workerName},</if>
+            <if test="workerGender != null">#{workerGender},</if>
+            <if test="conversationTopics != null">#{conversationTopics},</if>
+            <if test="conversation != null">#{conversation},</if>
+            <if test="problemType != null">#{problemType},</if>
+            <if test="rectificationProblemType != null">#{rectificationProblemType},</if>
+            <if test="isRectification != null">#{isRectification},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDisciplinaryManage" parameterType="BusinessDisciplinaryManage">
+        update business_disciplinary_manage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="time != null">time = #{time},</if>
+            <if test="branchUnit != null">branch_unit = #{branchUnit},</if>
+            <if test="conversationType != null">conversation_type = #{conversationType},</if>
+            <if test="conversationForms != null">conversation_forms = #{conversationForms},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="conversationId != null">conversation_id = #{conversationId},</if>
+            <if test="workerNumber != null">worker_number = #{workerNumber},</if>
+            <if test="workerName != null">worker_name = #{workerName},</if>
+            <if test="workerGender != null">worker_gender = #{workerGender},</if>
+            <if test="conversationTopics != null">conversation_topics = #{conversationTopics},</if>
+            <if test="conversation != null">conversation = #{conversation},</if>
+            <if test="problemType != null">problem_type = #{problemType},</if>
+            <if test="rectificationProblemType != null">rectification_problem_type = #{rectificationProblemType},</if>
+            <if test="isRectification != null">is_rectification = #{isRectification},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDisciplinaryManageById" parameterType="Long">
+        delete from business_disciplinary_manage where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDisciplinaryManageByIds" parameterType="String">
+        delete from business_disciplinary_manage where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessAreaIndexMapper">
+    
+    <resultMap type="BusinessAreaIndex" id="BusinessAreaIndexResult">
+        <result property="id"    column="id"    />
+        <result property="year"    column="year"    />
+        <result property="installedCapacity"    column="installed_capacity"    />
+        <result property="avgCapacity"    column="avg_capacity"    />
+        <result property="generateCapacity"    column="generate_capacity"    />
+        <result property="runCapacity"    column="run_capacity"    />
+        <result property="netCapacity"    column="net_capacity"    />
+        <result property="outsourcingCapacity"    column="outsourcing_capacity"    />
+        <result property="otherCapacity"    column="other_capacity"    />
+        <result property="totalCapacity"    column="total_capacity"    />
+        <result property="heartCapacity"    column="heart_capacity"    />
+        <result property="totalRate"    column="total_rate"    />
+        <result property="powerRate"    column="power_rate"    />
+        <result property="industryCapacity"    column="industry_capacity"    />
+        <result property="powerCoal"    column="power_coal"    />
+        <result property="supplyCoal"    column="supply_coal"    />
+        <result property="totalCoal"    column="total_coal"    />
+        <result property="rawCoal"    column="raw_coal"    />
+        <result property="powerRawCoal"    column="power_raw_coal"    />
+        <result property="supplyRawCoal"    column="supply_raw_coal"    />
+        <result property="oilCapacity"    column="oil_capacity"    />
+        <result property="lowFever"    column="low_fever"    />
+        <result property="equalCoefficient"    column="equal_coefficient"    />
+        <result property="powerCoefficient"    column="power_coefficient"    />
+        <result property="runHour"    column="run_hour"    />
+        <result property="useHour"    column="use_hour"    />
+        <result property="supplyHeartRate"    column="supply_heart_rate"    />
+        <result property="nox"    column="nox"    />
+        <result property="so"    column="so"    />
+        <result property="powderLayer"    column="powder_layer"    />
+        <result property="fireWaterRate"    column="fire_water_rate"    />
+        <result property="waterPowerRate"    column="water_power_rate"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessAreaIndexVo">
+        select id, year, installed_capacity, avg_capacity, generate_capacity, run_capacity, net_capacity, outsourcing_capacity, other_capacity, total_capacity, heart_capacity, total_rate, power_rate, industry_capacity, power_coal, supply_coal, total_coal, raw_coal, power_raw_coal, supply_raw_coal, oil_capacity, low_fever, equal_coefficient, power_coefficient, run_hour, use_hour, supply_heart_rate, nox, so, powder_layer, fire_water_rate, water_power_rate, status, del_flag, create_by, create_time, update_by, update_time, remark from business_area_index
+    </sql>
+
+    <select id="selectBusinessAreaIndexList" parameterType="BusinessAreaIndex" resultMap="BusinessAreaIndexResult">
+        <include refid="selectBusinessAreaIndexVo"/>
+        <where>  
+            <if test="year != null "> and year = #{year}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessAreaIndexById" parameterType="Long" resultMap="BusinessAreaIndexResult">
+        <include refid="selectBusinessAreaIndexVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessAreaIndex" parameterType="BusinessAreaIndex" useGeneratedKeys="true" keyProperty="id">
+        insert into business_area_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="installedCapacity != null">installed_capacity,</if>
+            <if test="avgCapacity != null">avg_capacity,</if>
+            <if test="generateCapacity != null">generate_capacity,</if>
+            <if test="runCapacity != null">run_capacity,</if>
+            <if test="netCapacity != null">net_capacity,</if>
+            <if test="outsourcingCapacity != null">outsourcing_capacity,</if>
+            <if test="otherCapacity != null">other_capacity,</if>
+            <if test="totalCapacity != null">total_capacity,</if>
+            <if test="heartCapacity != null">heart_capacity,</if>
+            <if test="totalRate != null">total_rate,</if>
+            <if test="powerRate != null">power_rate,</if>
+            <if test="industryCapacity != null">industry_capacity,</if>
+            <if test="powerCoal != null">power_coal,</if>
+            <if test="supplyCoal != null">supply_coal,</if>
+            <if test="totalCoal != null">total_coal,</if>
+            <if test="rawCoal != null">raw_coal,</if>
+            <if test="powerRawCoal != null">power_raw_coal,</if>
+            <if test="supplyRawCoal != null">supply_raw_coal,</if>
+            <if test="oilCapacity != null">oil_capacity,</if>
+            <if test="lowFever != null">low_fever,</if>
+            <if test="equalCoefficient != null">equal_coefficient,</if>
+            <if test="powerCoefficient != null">power_coefficient,</if>
+            <if test="runHour != null">run_hour,</if>
+            <if test="useHour != null">use_hour,</if>
+            <if test="supplyHeartRate != null">supply_heart_rate,</if>
+            <if test="nox != null">nox,</if>
+            <if test="so != null">so,</if>
+            <if test="powderLayer != null">powder_layer,</if>
+            <if test="fireWaterRate != null">fire_water_rate,</if>
+            <if test="waterPowerRate != null">water_power_rate,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="installedCapacity != null">#{installedCapacity},</if>
+            <if test="avgCapacity != null">#{avgCapacity},</if>
+            <if test="generateCapacity != null">#{generateCapacity},</if>
+            <if test="runCapacity != null">#{runCapacity},</if>
+            <if test="netCapacity != null">#{netCapacity},</if>
+            <if test="outsourcingCapacity != null">#{outsourcingCapacity},</if>
+            <if test="otherCapacity != null">#{otherCapacity},</if>
+            <if test="totalCapacity != null">#{totalCapacity},</if>
+            <if test="heartCapacity != null">#{heartCapacity},</if>
+            <if test="totalRate != null">#{totalRate},</if>
+            <if test="powerRate != null">#{powerRate},</if>
+            <if test="industryCapacity != null">#{industryCapacity},</if>
+            <if test="powerCoal != null">#{powerCoal},</if>
+            <if test="supplyCoal != null">#{supplyCoal},</if>
+            <if test="totalCoal != null">#{totalCoal},</if>
+            <if test="rawCoal != null">#{rawCoal},</if>
+            <if test="powerRawCoal != null">#{powerRawCoal},</if>
+            <if test="supplyRawCoal != null">#{supplyRawCoal},</if>
+            <if test="oilCapacity != null">#{oilCapacity},</if>
+            <if test="lowFever != null">#{lowFever},</if>
+            <if test="equalCoefficient != null">#{equalCoefficient},</if>
+            <if test="powerCoefficient != null">#{powerCoefficient},</if>
+            <if test="runHour != null">#{runHour},</if>
+            <if test="useHour != null">#{useHour},</if>
+            <if test="supplyHeartRate != null">#{supplyHeartRate},</if>
+            <if test="nox != null">#{nox},</if>
+            <if test="so != null">#{so},</if>
+            <if test="powderLayer != null">#{powderLayer},</if>
+            <if test="fireWaterRate != null">#{fireWaterRate},</if>
+            <if test="waterPowerRate != null">#{waterPowerRate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessAreaIndex" parameterType="BusinessAreaIndex">
+        update business_area_index
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="installedCapacity != null">installed_capacity = #{installedCapacity},</if>
+            <if test="avgCapacity != null">avg_capacity = #{avgCapacity},</if>
+            <if test="generateCapacity != null">generate_capacity = #{generateCapacity},</if>
+            <if test="runCapacity != null">run_capacity = #{runCapacity},</if>
+            <if test="netCapacity != null">net_capacity = #{netCapacity},</if>
+            <if test="outsourcingCapacity != null">outsourcing_capacity = #{outsourcingCapacity},</if>
+            <if test="otherCapacity != null">other_capacity = #{otherCapacity},</if>
+            <if test="totalCapacity != null">total_capacity = #{totalCapacity},</if>
+            <if test="heartCapacity != null">heart_capacity = #{heartCapacity},</if>
+            <if test="totalRate != null">total_rate = #{totalRate},</if>
+            <if test="powerRate != null">power_rate = #{powerRate},</if>
+            <if test="industryCapacity != null">industry_capacity = #{industryCapacity},</if>
+            <if test="powerCoal != null">power_coal = #{powerCoal},</if>
+            <if test="supplyCoal != null">supply_coal = #{supplyCoal},</if>
+            <if test="totalCoal != null">total_coal = #{totalCoal},</if>
+            <if test="rawCoal != null">raw_coal = #{rawCoal},</if>
+            <if test="powerRawCoal != null">power_raw_coal = #{powerRawCoal},</if>
+            <if test="supplyRawCoal != null">supply_raw_coal = #{supplyRawCoal},</if>
+            <if test="oilCapacity != null">oil_capacity = #{oilCapacity},</if>
+            <if test="lowFever != null">low_fever = #{lowFever},</if>
+            <if test="equalCoefficient != null">equal_coefficient = #{equalCoefficient},</if>
+            <if test="powerCoefficient != null">power_coefficient = #{powerCoefficient},</if>
+            <if test="runHour != null">run_hour = #{runHour},</if>
+            <if test="useHour != null">use_hour = #{useHour},</if>
+            <if test="supplyHeartRate != null">supply_heart_rate = #{supplyHeartRate},</if>
+            <if test="nox != null">nox = #{nox},</if>
+            <if test="so != null">so = #{so},</if>
+            <if test="powderLayer != null">powder_layer = #{powderLayer},</if>
+            <if test="fireWaterRate != null">fire_water_rate = #{fireWaterRate},</if>
+            <if test="waterPowerRate != null">water_power_rate = #{waterPowerRate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessAreaIndexById" parameterType="Long">
+        delete from business_area_index where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessAreaIndexByIds" parameterType="String">
+        delete from business_area_index where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

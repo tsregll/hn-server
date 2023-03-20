@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessAdministrativeThreeFairsMapper">
+    
+    <resultMap type="BusinessAdministrativeThreeFairs" id="BusinessAdministrativeThreeFairsResult">
+        <result property="id"    column="id"    />
+        <result property="threeFundsMoney"    column="three_funds_money"    />
+        <result property="threeFundsContent"    column="three_funds_content"    />
+        <result property="time"    column="time"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessAdministrativeThreeFairsVo">
+        select id, three_funds_money, three_funds_content, time, status, del_flag, create_by, create_time, update_by, update_time, remark from business_administrative_three_fairs
+    </sql>
+
+    <select id="selectBusinessAdministrativeThreeFairsList" parameterType="BusinessAdministrativeThreeFairs" resultMap="BusinessAdministrativeThreeFairsResult">
+        <include refid="selectBusinessAdministrativeThreeFairsVo"/>
+        <where>  
+            <if test="threeFundsMoney != null  and threeFundsMoney != ''"> and three_funds_money = #{threeFundsMoney}</if>
+            <if test="threeFundsContent != null  and threeFundsContent != ''"> and three_funds_content = #{threeFundsContent}</if>
+            <if test="time != null "> and time = #{time}</if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessAdministrativeThreeFairsById" parameterType="Long" resultMap="BusinessAdministrativeThreeFairsResult">
+        <include refid="selectBusinessAdministrativeThreeFairsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessAdministrativeThreeFairs" parameterType="BusinessAdministrativeThreeFairs" useGeneratedKeys="true" keyProperty="id">
+        insert into business_administrative_three_fairs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="threeFundsMoney != null and threeFundsMoney != ''">three_funds_money,</if>
+            <if test="threeFundsContent != null and threeFundsContent != ''">three_funds_content,</if>
+            <if test="time != null">time,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="threeFundsMoney != null and threeFundsMoney != ''">#{threeFundsMoney},</if>
+            <if test="threeFundsContent != null and threeFundsContent != ''">#{threeFundsContent},</if>
+            <if test="time != null">#{time},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessAdministrativeThreeFairs" parameterType="BusinessAdministrativeThreeFairs">
+        update business_administrative_three_fairs
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="threeFundsMoney != null and threeFundsMoney != ''">three_funds_money = #{threeFundsMoney},</if>
+            <if test="threeFundsContent != null and threeFundsContent != ''">three_funds_content = #{threeFundsContent},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessAdministrativeThreeFairsById" parameterType="Long">
+        delete from business_administrative_three_fairs where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessAdministrativeThreeFairsByIds" parameterType="String">
+        delete from business_administrative_three_fairs where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

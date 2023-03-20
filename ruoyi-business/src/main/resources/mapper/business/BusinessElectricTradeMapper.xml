@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessElectricTradeMapper">
+    
+    <resultMap type="BusinessElectricTrade" id="BusinessElectricTradeResult">
+        <result property="id"    column="id"    />
+        <result property="electricTradeTime"    column="electric_trade_time"    />
+        <result property="electricTradeUnit"    column="electric_trade_unit"    />
+        <result property="electricTradeConsumption"    column="electric_trade_consumption"    />
+        <result property="electricTradeMonovalent"    column="electric_trade_monovalent"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessElectricTradeVo">
+        select id, electric_trade_time, electric_trade_unit, electric_trade_consumption, electric_trade_monovalent, status, del_flag, create_by, create_time, update_by, update_time, remark from business_electric_trade
+    </sql>
+
+    <select id="selectBusinessElectricTradeList" parameterType="BusinessElectricTrade" resultMap="BusinessElectricTradeResult">
+        <include refid="selectBusinessElectricTradeVo"/>
+        <where>
+            <if test="electricTradeUnit != null  and electricTradeUnit != ''"> and electric_trade_unit = #{electricTradeUnit}</if>
+            <if test="'' == ''"> and 1=1 order by electric_trade_time desc , electric_trade_unit desc </if>
+        </where>
+    </select>
+
+    <select id="selectByTimeElectricTradeList"  resultMap="BusinessElectricTradeResult">
+        <include refid="selectBusinessElectricTradeVo"/>
+        WHERE status='1'
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            AND electric_trade_time>= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            AND electric_trade_time&lt;= #{endTime}
+        </if>
+        <if test="bet.electricTradeUnit != null  and bet.electricTradeUnit != ''"> and electric_trade_unit = #{bet.electricTradeUnit}</if>
+        order by electric_trade_time desc , electric_trade_unit desc
+    </select>
+    <select id="selectByTimeTradeConsumptionList" parameterType="BusinessElectricTrade" resultMap="BusinessElectricTradeResult">
+        select electric_trade_unit, sum(electric_trade_consumption) as electric_trade_consumption
+        from business_electric_trade
+        WHERE status='1'
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            AND electric_trade_time>= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            AND electric_trade_time&lt;= #{endTime}
+        </if>
+        <if test="bet.electricTradeUnit != null  and bet.electricTradeUnit != ''"> and electric_trade_unit = #{bet.electricTradeUnit}</if>
+        order by electric_trade_time desc , electric_trade_unit desc
+    </select>
+    
+    <select id="selectBusinessElectricTradeById" parameterType="Long" resultMap="BusinessElectricTradeResult">
+        <include refid="selectBusinessElectricTradeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessElectricTrade" parameterType="BusinessElectricTrade" useGeneratedKeys="true" keyProperty="id">
+        insert into business_electric_trade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="electricTradeTime != null">electric_trade_time,</if>
+            <if test="electricTradeUnit != null and electricTradeUnit != ''">electric_trade_unit,</if>
+            <if test="electricTradeConsumption != null">electric_trade_consumption,</if>
+            <if test="electricTradeMonovalent != null">electric_trade_monovalent,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="electricTradeTime != null">#{electricTradeTime},</if>
+            <if test="electricTradeUnit != null and electricTradeUnit != ''">#{electricTradeUnit},</if>
+            <if test="electricTradeConsumption != null">#{electricTradeConsumption},</if>
+            <if test="electricTradeMonovalent != null">#{electricTradeMonovalent},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessElectricTrade" parameterType="BusinessElectricTrade">
+        update business_electric_trade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="electricTradeTime != null">electric_trade_time = #{electricTradeTime},</if>
+            <if test="electricTradeUnit != null and electricTradeUnit != ''">electric_trade_unit = #{electricTradeUnit},</if>
+            <if test="electricTradeConsumption != null">electric_trade_consumption = #{electricTradeConsumption},</if>
+            <if test="electricTradeMonovalent != null">electric_trade_monovalent = #{electricTradeMonovalent},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessElectricTradeById" parameterType="Long">
+        delete from business_electric_trade where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessElectricTradeByIds" parameterType="String">
+        delete from business_electric_trade where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

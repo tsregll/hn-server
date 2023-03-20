@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentGroupProjectMapper">
+    
+    <resultMap type="BusinessDevelopmentGroupProject" id="BusinessDevelopmentGroupProjectResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="groupName"    column="group_name"    />
+        <result property="groupLeaders"    column="group_leaders"    />
+        <result property="groupMembers"    column="group_members"    />
+        <result property="groupInformation"    column="group_information"    />
+        <result property="groupDuty"    column="group_duty"    />
+        <result property="groupStandard"    column="group_standard"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentGroupProjectVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, group_name, group_leaders, group_members, group_information, group_duty, group_standard, remark from business_development_group_project
+    </sql>
+
+    <select id="selectBusinessDevelopmentGroupProjectList" parameterType="BusinessDevelopmentGroupProject" resultMap="BusinessDevelopmentGroupProjectResult">
+        <include refid="selectBusinessDevelopmentGroupProjectVo"/>
+        <where>  
+            <if test="defaultTime != null  and defaultTime != ''"> and create_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number = #{operatorNumber}</if>
+            <if test="groupName != null  and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="groupLeaders != null  and groupLeaders != ''"> and group_leaders like concat('%', #{groupLeaders}, '%')</if>
+            <if test="groupMembers != null  and groupMembers != ''"> and group_members like concat('%', #{groupMembers}, '%')</if>
+            <if test="groupInformation != null  and groupInformation != ''"> and group_information = #{groupInformation}</if>
+            <if test="groupDuty != null  and groupDuty != ''"> and group_duty = #{groupDuty}</if>
+            <if test="groupStandard != null  and groupStandard != ''"> and group_standard = #{groupStandard}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+        </where>
+        order by create_time asc
+    </select>
+
+    <resultMap type="java.lang.String" id="operatorResult">
+        <result column="operator"    />
+    </resultMap>
+
+    <select id="selectBusinessDevelopmentGroupProjectByGroupList" parameterType="BusinessDevelopmentGroupProject" resultMap="operatorResult">
+        <include refid="selectBusinessDevelopmentGroupProjectVo"/>
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number = #{operatorNumber}</if>
+            <if test="groupName != null  and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="groupLeaders != null  and groupLeaders != ''"> and group_leaders like concat('%', #{groupLeaders}, '%')</if>
+            <if test="groupMembers != null  and groupMembers != ''"> and group_members like concat('%', #{groupMembers}, '%')</if>
+            <if test="groupInformation != null  and groupInformation != ''"> and group_information = #{groupInformation}</if>
+            <if test="groupDuty != null  and groupDuty != ''"> and group_duty = #{groupDuty}</if>
+            <if test="groupStandard != null  and groupStandard != ''"> and group_standard = #{groupStandard}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="'' == ''"> and 1=1 group by operator </if>
+        </where>
+        order by default_time desc
+    </select>
+    
+    <select id="selectBusinessDevelopmentGroupProjectById" parameterType="Long" resultMap="BusinessDevelopmentGroupProjectResult">
+        <include refid="selectBusinessDevelopmentGroupProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentGroupProject" parameterType="BusinessDevelopmentGroupProject" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_group_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="defaultTime != null">default_time,</if>
+            <if test="operator != null">operator,</if>
+            <if test="operatorNumber != null">operator_number,</if>
+            <if test="groupName != null">group_name,</if>
+            <if test="groupLeaders != null">group_leaders,</if>
+            <if test="groupMembers != null">group_members,</if>
+            <if test="groupInformation != null">group_information,</if>
+            <if test="groupDuty != null">group_duty,</if>
+            <if test="groupStandard != null">group_standard,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="defaultTime != null">#{defaultTime},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="operatorNumber != null">#{operatorNumber},</if>
+            <if test="groupName != null">#{groupName},</if>
+            <if test="groupLeaders != null">#{groupLeaders},</if>
+            <if test="groupMembers != null">#{groupMembers},</if>
+            <if test="groupInformation != null">#{groupInformation},</if>
+            <if test="groupDuty != null">#{groupDuty},</if>
+            <if test="groupStandard != null">#{groupStandard},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentGroupProject" parameterType="BusinessDevelopmentGroupProject">
+        update business_development_group_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="defaultTime != null">default_time = #{defaultTime},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="operatorNumber != null">operator_number = #{operatorNumber},</if>
+            <if test="groupName != null">group_name = #{groupName},</if>
+            <if test="groupLeaders != null">group_leaders = #{groupLeaders},</if>
+            <if test="groupMembers != null">group_members = #{groupMembers},</if>
+            <if test="groupInformation != null">group_information = #{groupInformation},</if>
+            <if test="groupDuty != null">group_duty = #{groupDuty},</if>
+            <if test="groupStandard != null">group_standard = #{groupStandard},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentGroupProjectById" parameterType="Long">
+        delete from business_development_group_project where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentGroupProjectByIds" parameterType="String">
+        delete from business_development_group_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

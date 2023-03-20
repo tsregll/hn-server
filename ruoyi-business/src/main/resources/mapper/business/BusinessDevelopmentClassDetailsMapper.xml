@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentClassDetailsMapper">
+    
+    <resultMap type="BusinessDevelopmentClassDetails" id="BusinessDevelopmentClassDetailsResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="specialityGroup"    column="speciality_group"    />
+        <result property="groupLeader"    column="group_leader"    />
+        <result property="background"    column="background"    />
+        <result property="progress"    column="progress"    />
+        <result property="questionSolution"    column="question_solution"    />
+        <result property="projectPlanningScheduling"    column="project_planning_scheduling"    />
+        <result property="operatorTime"    column="operator_time"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentClassDetailsVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, default_time, operator, operator_number, speciality_group, group_leader, background, progress, question_solution, project_planning_scheduling, operator_time from business_development_class_details
+    </sql>
+
+    <sql id="selectBusinessDevelopmentClassDetailsVo2">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, remark, default_time, operator, operator_number, speciality_group, group_leader,operator_time from business_development_class_details
+    </sql>
+
+    <select id="selectBusinessDevelopmentClassDetailsList" parameterType="BusinessDevelopmentClassDetails" resultMap="BusinessDevelopmentClassDetailsResult">
+        <include refid="selectBusinessDevelopmentClassDetailsVo2"/>
+        <where>  
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time = #{defaultTime}</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="specialityGroup != null  and specialityGroup != ''"> and speciality_group like concat('%', #{specialityGroup}, '%')</if>
+            <if test="groupLeader != null  and groupLeader != ''"> and group_leader like concat('%', #{groupLeader}, '%')</if>
+            <if test="background != null  and background != ''"> and background like concat('%', #{background}, '%')</if>
+            <if test="progress != null  and progress != ''"> and progress like concat('%', #{progress}, '%')</if>
+            <if test="questionSolution != null  and questionSolution != ''"> and question_solution like concat('%', #{questionSolution}, '%')</if>
+            <if test="projectPlanningScheduling != null  and projectPlanningScheduling != ''"> and project_planning_scheduling like concat('%', #{projectPlanningScheduling}, '%')</if>
+            <if test="operatorTime != null  and operatorTime != ''"> and operator_time like concat('%', #{operatorTime}, '%')</if>
+        </where>
+        order by default_time desc
+    </select>
+    <resultMap type="java.lang.String" id="groupLeaderResult">
+        <result column="group_leader"    />
+    </resultMap>
+    <!--<resultMap type="java.util.Map" id="groupLeaderResult2">-->
+        <!--<result property="groupLeader"    column="group_leader"    />-->
+    <!--</resultMap>-->
+    <select id="selectBusinessDevelopmentClassDetailsByGroupList" parameterType="BusinessDevelopmentClassDetails" resultMap="groupLeaderResult">
+        <include refid="selectBusinessDevelopmentClassDetailsVo2"/>
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time = #{defaultTime}</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="specialityGroup != null  and specialityGroup != ''"> and speciality_group like concat('%', #{specialityGroup}, '%')</if>
+            <if test="groupLeader != null  and groupLeader != ''"> and group_leader like concat('%', #{groupLeader}, '%')</if>
+            <if test="background != null  and background != ''"> and background like concat('%', #{background}, '%')</if>
+            <if test="progress != null  and progress != ''"> and progress like concat('%', #{progress}, '%')</if>
+            <if test="questionSolution != null  and questionSolution != ''"> and question_solution like concat('%', #{questionSolution}, '%')</if>
+            <if test="projectPlanningScheduling != null  and projectPlanningScheduling != ''"> and project_planning_scheduling like concat('%', #{projectPlanningScheduling}, '%')</if>
+            <if test="operatorTime != null  and operatorTime != ''"> and operator_time like concat('%', #{operatorTime}, '%')</if>
+            <if test="'' == ''"> and 1=1 group by group_leader </if>
+        </where>
+    </select>
+
+    <resultMap type="java.lang.String" id="operatorResult">
+        <result column="operator"    />
+    </resultMap>
+
+    <select id="selectBusinessDevelopmentClassOperatorDetailsByGroupList" parameterType="BusinessDevelopmentClassDetails" resultMap="operatorResult">
+        <include refid="selectBusinessDevelopmentClassDetailsVo2"/>
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time = #{defaultTime}</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="specialityGroup != null  and specialityGroup != ''"> and speciality_group like concat('%', #{specialityGroup}, '%')</if>
+            <if test="groupLeader != null  and groupLeader != ''"> and group_leader like concat('%', #{groupLeader}, '%')</if>
+            <if test="background != null  and background != ''"> and background like concat('%', #{background}, '%')</if>
+            <if test="progress != null  and progress != ''"> and progress like concat('%', #{progress}, '%')</if>
+            <if test="questionSolution != null  and questionSolution != ''"> and question_solution like concat('%', #{questionSolution}, '%')</if>
+            <if test="projectPlanningScheduling != null  and projectPlanningScheduling != ''"> and project_planning_scheduling like concat('%', #{projectPlanningScheduling}, '%')</if>
+            <if test="operatorTime != null  and operatorTime != ''"> and operator_time like concat('%', #{operatorTime}, '%')</if>
+            <if test="'' == ''"> and 1=1 group by operator </if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessDevelopmentClassDetailsById" parameterType="Long" resultMap="BusinessDevelopmentClassDetailsResult">
+        <include refid="selectBusinessDevelopmentClassDetailsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentClassDetails" parameterType="BusinessDevelopmentClassDetails" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_class_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="defaultTime != null">default_time,</if>
+            <if test="operator != null">operator,</if>
+            <if test="operatorNumber != null">operator_number,</if>
+            <if test="specialityGroup != null">speciality_group,</if>
+            <if test="groupLeader != null">group_leader,</if>
+            <if test="background != null">background,</if>
+            <if test="progress != null">progress,</if>
+            <if test="questionSolution != null">question_solution,</if>
+            <if test="projectPlanningScheduling != null">project_planning_scheduling,</if>
+            <if test="operatorTime != null">operator_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="defaultTime != null">#{defaultTime},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="operatorNumber != null">#{operatorNumber},</if>
+            <if test="specialityGroup != null">#{specialityGroup},</if>
+            <if test="groupLeader != null">#{groupLeader},</if>
+            <if test="background != null">#{background},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="questionSolution != null">#{questionSolution},</if>
+            <if test="projectPlanningScheduling != null">#{projectPlanningScheduling},</if>
+            <if test="operatorTime != null">#{operatorTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentClassDetails" parameterType="BusinessDevelopmentClassDetails">
+        update business_development_class_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="defaultTime != null">default_time = #{defaultTime},</if>
+            <if test="operator != null">operator = #{operator},</if>
+            <if test="operatorNumber != null">operator_number = #{operatorNumber},</if>
+            <if test="specialityGroup != null">speciality_group = #{specialityGroup},</if>
+            <if test="groupLeader != null">group_leader = #{groupLeader},</if>
+            <if test="background != null">background = #{background},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="questionSolution != null">question_solution = #{questionSolution},</if>
+            <if test="projectPlanningScheduling != null">project_planning_scheduling = #{projectPlanningScheduling},</if>
+            <if test="operatorTime != null">operator_time = #{operatorTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentClassDetailsById" parameterType="Long">
+        delete from business_development_class_details where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentClassDetailsByIds" parameterType="String">
+        delete from business_development_class_details where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

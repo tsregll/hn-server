@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.BusinessDevelopmentProjectIntroductionMapper">
+    
+    <resultMap type="BusinessDevelopmentProjectIntroduction" id="BusinessDevelopmentProjectIntroductionResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="defaultTime"    column="default_time"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatorNumber"    column="operator_number"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="projectTitle"    column="project_title"    />
+        <result property="projectContent"    column="project_content"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBusinessDevelopmentProjectIntroductionVo">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, project_type, project_title, project_content, remark from business_development_project_introduction
+    </sql>
+
+    <sql id="selectBusinessDevelopmentProjectIntroductionVo2">
+        select id, status, del_flag, create_by, create_time, update_by, update_time, default_time, operator, operator_number, project_type, project_title, remark from business_development_project_introduction
+    </sql>
+
+    <select id="selectBusinessDevelopmentProjectIntroductionList" parameterType="BusinessDevelopmentProjectIntroduction" resultMap="BusinessDevelopmentProjectIntroductionResult">
+        <include refid="selectBusinessDevelopmentProjectIntroductionVo"/>
+        <where>  
+            <if test="defaultTime != null  and defaultTime != ''"> and create_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectTitle != null  and projectTitle != ''"> and project_title like concat('%', #{projectTitle}, '%')</if>
+            <if test="projectContent != null  and projectContent != ''"> and project_content = #{projectContent}</if>
+        </where>
+        order by default_time desc
+    </select>
+
+    <resultMap type="java.lang.String" id="operatorResult">
+        <result column="operator"    />
+    </resultMap>
+
+    <select id="selectBusinessDevelopmentProjectIntroductionOperatorByGroupList" parameterType="BusinessDevelopmentProjectIntroduction" resultMap="operatorResult">
+        <include refid="selectBusinessDevelopmentProjectIntroductionVo2"/>
+        <where>
+            <if test="defaultTime != null  and defaultTime != ''"> and default_time like concat('%', #{defaultTime}, '%')</if>
+            <if test="operator != null  and operator != ''"> and operator like concat('%', #{operator}, '%')</if>
+            <if test="operatorNumber != null  and operatorNumber != ''"> and operator_number like concat('%', #{operatorNumber}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectTitle != null  and projectTitle != ''"> and project_title like concat('%', #{projectTitle}, '%')</if>
+            <if test="projectContent != null  and projectContent != ''"> and project_content = #{projectContent}</if>
+            <if test="'' == ''"> and 1=1 group by operator </if>
+        </where>
+    </select>
+    
+    <select id="selectBusinessDevelopmentProjectIntroductionById" parameterType="Long" resultMap="BusinessDevelopmentProjectIntroductionResult">
+        <include refid="selectBusinessDevelopmentProjectIntroductionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusinessDevelopmentProjectIntroduction" parameterType="BusinessDevelopmentProjectIntroduction" useGeneratedKeys="true" keyProperty="id">
+        insert into business_development_project_introduction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number,</if>
+            <if test="projectType != null and projectType != ''">project_type,</if>
+            <if test="projectTitle != null and projectTitle != ''">project_title,</if>
+            <if test="projectContent != null and projectContent != ''">project_content,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">#{defaultTime},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">#{operatorNumber},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="projectTitle != null and projectTitle != ''">#{projectTitle},</if>
+            <if test="projectContent != null and projectContent != ''">#{projectContent},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBusinessDevelopmentProjectIntroduction" parameterType="BusinessDevelopmentProjectIntroduction">
+        update business_development_project_introduction
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="defaultTime != null and defaultTime != ''">default_time = #{defaultTime},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatorNumber != null and operatorNumber != ''">operator_number = #{operatorNumber},</if>
+            <if test="projectType != null and projectType != ''">project_type = #{projectType},</if>
+            <if test="projectTitle != null and projectTitle != ''">project_title = #{projectTitle},</if>
+            <if test="projectContent != null and projectContent != ''">project_content = #{projectContent},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBusinessDevelopmentProjectIntroductionById" parameterType="Long">
+        delete from business_development_project_introduction where id = #{id}
+    </delete>
+
+    <delete id="deleteBusinessDevelopmentProjectIntroductionByIds" parameterType="String">
+        delete from business_development_project_introduction where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
